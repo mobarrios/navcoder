@@ -1,3 +1,7 @@
 test.txt
 que queres que modifique
+<<<<<<< HEAD
 toronjeamelagarlopa
+=======
+Que cara de nalga que tenes
+>>>>>>> FETCH_HEAD
