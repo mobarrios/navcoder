@@ -39,7 +39,7 @@
 		@yield('menu')
 		
 		<div class="container">
-
+		<h4>MASTER</h4>
 		@if(App::environment('dev'))
 			<span class="label label-danger">Development...</span>
 		@elseif(App::environment('local'))
