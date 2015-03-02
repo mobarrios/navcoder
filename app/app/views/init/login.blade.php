@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Configuracion</title>
+		<title>Title Page</title>
 
 		<!-- Bootstrap CSS -->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -18,28 +18,19 @@
 	</head>
 	<body>
 	<h3>ADMINISTRACION</h3>
-				<hr>
-				<form action="{{route('post_init')}}" method="POST" class="form-inline" role="form">
-				
-					<label class="form-label">Nombre Empresa</label>
-					<input class="form-control" type="text" name="nombre_empresa">
-					<br><br>
-					<label class="form-label">Nombre DB</label>
-					<input class="form-control" type="text" name="nombre_db">
-					<br><br>
-					<label class="form-label">User</label>
-					<input class="form-control" type="text" name="user">
-					<br><br>
-					<label class="form-label">pass</label>
-					<input class="form-control" type="password" name="pass">
-
-
-
-					<br><br>
-					<input type="submit" value="incializar">
-
-				</form>
+		<form action="{{route('post_loginit')}}" method="POST" class="form-inline" role="form">
+		
+			<div class="form-group">
+				<label class="sr-only" for="">User</label>
+				<input type="text" class="form-control" id="" placeholder="User" name="user">
+			</div>
 			
+			<div class="form-group">
+				<label class="sr-only" for="">Pass</label>
+				<input type="password" class="form-control" id="" placeholder="Pass" name="pass">
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
 
 		<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>

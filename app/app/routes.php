@@ -9,7 +9,8 @@
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the Closure to execute when that URI is requested.
 |I
-*/
+*/	
+		require(__DIR__ . '/routes/init/init.php');
 
 	
 		Route::get('provider_search',function()
@@ -51,7 +52,8 @@
 			return Response::json($res);
 		});
 
-
+		//route segun empresa
+		/*
 		Route::get('/{empresa}', function($empresa)
 		{
 			if($empresa  == 'update')
@@ -64,14 +66,15 @@
 
 			return Redirect::to($empresa.'/login');
 		});
-
-
+		*/
+	
 		Route::get('update',function()
 		{
 			return 	DBupdate::up();
 		});
 
-
+		// route con empresa
+		/* 
 		Route::group(array('prefix'=> Session::get('company') ),function()
 		{
 			Route::post('login',array('as'=>'post_login', 'uses'=>'LoginController@login'));
@@ -80,7 +83,23 @@
 				return View::make('login');
 			});
 
-			
+		*/
+
+			Route::post('login',array('as'=>'post_login', 'uses'=>'LoginController@login'));
+
+			Route::get('login/{empresa}',function($empresa){
+
+				Config::set('database.connections.mysql.database','admin_laregaleria');
+				Config::set('database.connections.mysql.username','root');
+				Config::set('database.connections.mysql.password','root');
+		
+				DB::setDefaultConnection('mysql');
+				DB::connection("mysql");
+
+				//return "la empresa es .".$empresa;
+
+				return View::make('login');
+			});
 
 			Route::group(array('before' => 'auth'), function()
 			{
@@ -120,7 +139,7 @@
 
 				});
 			});
-		});
+		//});
 
 
 

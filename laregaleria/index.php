@@ -1,4 +1,4 @@
 <?php
-header("Location: http://sistemas.datachost.com/laravel_test/public/home");
+header("Location: http://www.navcoder.net/app/public/login");
 die();
 ?>

@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'admin_prueba',
+			'database'  => 'admin_laregaleria',
 			'username'  => 'admin',
-			'password'  => 'CHOLITA2014',
+			'password'  => 'cholita',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
