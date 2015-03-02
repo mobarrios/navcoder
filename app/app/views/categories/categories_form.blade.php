@@ -1,1 +1,0 @@
-{{Form::texto('name','Nombre Categoria')}}
