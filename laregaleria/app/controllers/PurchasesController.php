@@ -14,6 +14,12 @@ class PurchasesController extends BaseController
 		$this->data['seccion']		= '';
 	}
 
+	public function getRemito()
+	{
+		$pdf = PDF::loadView('remito.index');
+
+		return $pdf->stream('invoice.pdf');
+	}
 	/*
 	public function newPurchase()
 	{

@@ -122,6 +122,10 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+		//DOMPDF
+		'Barryvdh\DomPDF\ServiceProvider',
+
+
 	),
 
 	/*
@@ -188,6 +192,9 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
+
+		//DOMPDF
+		'PDF' => 'Barryvdh\DomPDF\Facade',
 
 	),
 

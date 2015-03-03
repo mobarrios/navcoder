@@ -73,10 +73,9 @@
 					    		</tr>
 					    	</thead>
 					    	<tbody id='table_items_body'>
-					    	
 					    	</tbody>
 					    </table>
-					  
+					  <a href="{{route('purchases_remito')}}" target="self" class="btn btn-success">Procesar</a>
 					  </div>
 			  </div>
 		</div>

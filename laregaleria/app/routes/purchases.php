@@ -11,5 +11,6 @@
 	Route::post('compras_editar/{id?}', 		array('as' => 'purchases_post_edit', 	'uses' 	=> 'PurchasesController@postEdit'));
 
 	Route::post('additem', 'PurchasesController@postAdditem');
+	Route::get('remito', array('as'=>'purchases_remito', 'uses'=>'PurchasesController@getRemito'));
 
 ?>
