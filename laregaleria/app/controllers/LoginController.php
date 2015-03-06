@@ -15,6 +15,8 @@ class LoginController extends BaseController
 			//return Redirect::to( Auth::user()->company .'/inicio');
 			//return Redirect::to( Auth::user()->company .'/inicio');
 			//return Redirect::to(Session::get('company').'/inicio');
+
+			//Session::put('master_id',Crypt::encrypt(Auth::User()->master_id));
 			return Redirect::to('/inicio');
 			
 		}

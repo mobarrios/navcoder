@@ -9,6 +9,7 @@
 
 	Route::post('compras_nuevo', 				array('as' => 'purchases_post_new', 	'uses' 	=> 'PurchasesController@postNew'));
 	Route::post('compras_editar/{id?}', 		array('as' => 'purchases_post_edit', 	'uses' 	=> 'PurchasesController@postEdit'));
+	Route::post('cerrar_compra', 				array('as' => 'purchases_post_close', 	'uses'  => 'PurchasesController@postNewpurchase'));
 
 	Route::post('additem', 'PurchasesController@postAdditem');
 	Route::get('remito', array('as'=>'purchases_remito', 'uses'=>'PurchasesController@getRemito'));

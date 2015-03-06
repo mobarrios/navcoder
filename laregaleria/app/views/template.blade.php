@@ -37,11 +37,11 @@
 	<body>
 			@yield('menu')
 		<div class="container">
-
-@if(App::environment('dev'))
-	<span class="label label-danger">Development...</span>
-@endif
-			@yield('content')
+		
+			@if(App::environment('dev'))
+				<span class="label label-danger">Development...</span>
+			@endif
+		@yield('content')
 			
 		</div>
 

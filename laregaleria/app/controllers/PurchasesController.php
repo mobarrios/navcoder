@@ -16,9 +16,10 @@ class PurchasesController extends BaseController
 
 	public function getRemito()
 	{
-		$pdf = PDF::loadView('remito.index');
 
-		return $pdf->stream('invoice.pdf');
+		$pdf = PDF::loadView('remito.index')->setPaper('A4')->stream('remito.pdf');
+
+		return $pdf;
 	}
 	/*
 	public function newPurchase()
@@ -144,12 +145,12 @@ class PurchasesController extends BaseController
 		$model			  		= PurchasesTemporal::find($purchase_temporal_id);
 		$model->purchase_date 	= $input['date'];		
 		$model->amount    		= $amount;
-		$model->provider_id 		= $input['provider_id'];
+		$model->provider_id 	= $input['provider_id'];
 		
-		$purchase 			  	= new Purchases();
+		$purchase 			  		= new Purchases();
 		$purchase->purchase_date  	= $model->purchase_date;
 		$purchase->amount	  		= $model->amount;
-		$purchase->provider_id  		= $model->provider_id;
+		$purchase->provider_id  	= $model->provider_id;
 		$purchase->save();
 
 		$model->purchase_id   		= $purchase->id;

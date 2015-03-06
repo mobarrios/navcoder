@@ -95,6 +95,9 @@
 					Route::get('inicio', function()
 					{
 						//return Config::get('database');
+
+						//$data['master'] = Company::find(Crypt::decrypt(Session::get('master_id')));
+
 						return View::make('index');
 					});
 
