@@ -1,4 +1,3 @@
-
   {{Form::texto('code','Codigo', array('required'))}}
   {{Form::texto('name','Nombre')}}
   {{Form::texto('description','Descripcion')}}

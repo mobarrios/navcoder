@@ -11,45 +11,75 @@
 |I
 */
 
+
+Route::get('empresa/{company}',function($company){
+
+	switch ($company) {
+		
+		case 'laregaleria':
+				Session::put('db','admin_laregaleria');
+				return Redirect::to('login');
+			break;
+
+		case 'aclv':
+				Session::put('db','admin_aclv');
+				return Redirect::to('login');
+			break;
+		
+		default:
+			# code...
+			break;
+	}
+
+});
+
+// update database
+Route::get('update',function()
+	{
+		return 	DBupdate::create();
+	});
+
+
 	
-		Route::get('provider_search',function()
+// ajax search	
+Route::get('provider_search',function()
+	{
+		$data = Input::get('term');
+
+		$resp = Providers::where('name','like','%'.$data.'%')
+				->orWhere('last_name','like','%'.$data.'%')
+				->orWhere('dni','like','%'.$data.'%')
+				->get();
+
+		$res  = array();
+
+		foreach($resp as $r)
 		{
-			$data = Input::get('term');
+			array_push($res, $r->last_name.' , '.$r->name );
+		}
 
-			$resp = Providers::where('name','like','%'.$data.'%')
-					->orWhere('last_name','like','%'.$data.'%')
-					->orWhere('dni','like','%'.$data.'%')
-					->get();
-
-			$res  = array();
-
-			foreach($resp as $r)
-			{
-				array_push($res, $r->last_name.' , '.$r->name );
-			}
-
-			return Response::json($res);
-		});
+		return Response::json($res);
+	});
 
 
-		Route::post('item_search',function()
+Route::post('item_search',function()
+	{
+		$data = Input::get('search');
+
+		$resp = Items::where('code','like','%'.$data.'%')
+				->orWhere('name','like','%'.$data.'%')
+				->orWhere('description','like','%'.$data.'%')
+				->get();
+
+		$res =  array();
+
+		foreach($resp as $r)
 		{
-			$data = Input::get('search');
+			$res[] = array('id' => $r->id , 'label' => $r->name .' $ ' . $r->cost_price, 'value' =>$r->name .' $ ' . $r->cost_price);
+		}
 
-			$resp = Items::where('code','like','%'.$data.'%')
-					->orWhere('name','like','%'.$data.'%')
-					->orWhere('description','like','%'.$data.'%')
-					->get();
-
-			$res =  array();
-
-			foreach($resp as $r)
-			{
-				$res[] = array('id' => $r->id , 'label' => $r->name .' $ ' . $r->cost_price, 'value' =>$r->name .' $ ' . $r->cost_price);
-			}
-
-			return Response::json($res);
-		});
+		return Response::json($res);
+	});
 
 		/*
 		Route::get('/{empresa}', function($empresa)
@@ -66,22 +96,26 @@
 		});
 		*/
 
-		Route::get('update',function()
-		{
-			return 	DBupdate::create();
-		});
-
-
+		
 		//Route::group(array('prefix'=> Session::get('company') ),function()
 		//{
+			
+Route::group(array('before'=>'switchDB'),function(){
+
+		
+
+			Route::get('',function()
+			{
+				return Redirect::to('login');
+			});
+
 			Route::post('login',array('as'=>'post_login', 'uses'=>'LoginController@login'));
 
 			Route::get('login',function(){
 				return View::make('login');
 			});
 
-			
-
+		
 			Route::group(array('before' => 'auth'), function()
 			{
 				//Route::get('inicio', array('as'=>'index', 'uses'=>'HomeController@getInicio'));
@@ -122,7 +156,7 @@
 					require(__DIR__ . '/routes/config/users.php');
 
 				});
-			//});
+			});
 		});
 
 

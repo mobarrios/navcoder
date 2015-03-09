@@ -8,6 +8,10 @@
         <h1><img src="{{ URL::asset('assets/images/nav_stock_logo_little.png') }}" ></h1>        
       </div> 
         <div class="panel " >
+        
+            {{App::environment()}}
+            {{Config::get('database.connections.mysql.database')}}
+
             <div style="padding-top:30px" class="panel-body" >    
                 {{Form::open(array('route'=>'post_login','class'=>'form-horizontal'))}}
                     <div style="margin-bottom: 25px" class="input-group">
