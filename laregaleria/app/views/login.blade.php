@@ -10,7 +10,6 @@
         <div class="panel " >
         
             {{App::environment()}}
-            {{Config::get('database.connections.mysql.database')}}
 
             <div style="padding-top:30px" class="panel-body" >    
                 {{Form::open(array('route'=>'post_login','class'=>'form-horizontal'))}}
