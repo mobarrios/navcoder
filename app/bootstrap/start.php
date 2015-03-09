@@ -29,7 +29,6 @@ $env = $app->detectEnvironment(array(
 	'local' => array('homestead'),
 	'dev'	=> array('server.datachost.com'),
 	'nav'	=> array('*.aetva.com.ar'),
-
 ));
 
 /*

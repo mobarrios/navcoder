@@ -18,16 +18,21 @@ Route::get('empresa/{company}',function($company){
 		
 		case 'laregaleria':
 				Session::put('db','admin_laregaleria');
+
 				return Redirect::to('login');
+
 			break;
 
 		case 'aclv':
 				Session::put('db','admin_aclv');
+
 				return Redirect::to('login');
 			break;
 		
 		default:
-			# code...
+				Session::put('db','admin_stock');
+
+				return Redirect::to('login');
 			break;
 	}
 
