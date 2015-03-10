@@ -8,20 +8,22 @@
   <body>
     <header class="clearfix">
       <div id="logo">
-        <img align="left" src="assets/remito/logo.png">
+        <img align="left" src="assets/images/{{$company->logo}}">
       </div>
-      <h5 align="right">REMITO Nº 00001-000023</h5><br><br>
+      <h5 align="right">REMITO Nº {{$purchase->id}}</h5><br><br>
       <div id="company" class="clearfix">
-        <div>FECHA: 01/01/2015</div>
+        <div>FECHA: {{$purchase->purchases_date}}</div>
         <div>ING. BRUTOS: 20-25615885-5</div>
         <div>FECHA INICIO ACT.: 01/01/2015</div>
         <div>I.V.A. RESPONSABLE INSCRIPTO</a></div>
       </div>
       <div id="project">
         
-        <div><span>CLIENTE:</span> Alfonso Fernando</div>
-        <div><span>DIRECCION:</span> Av. Monroe Nº 2164</div>
-        <div><span>EMAIL:</span> <a href="mailto:john@example.com">fernando@keepers.com.ar</a></div>
+        <div><span>Proveedor:</span> {{$purchase->Providers->company_name}} </div>
+        <div><span>Dirección:</span> {{$purchase->Providers->address}}</div>
+        <div><span>Tel / Cel:</span> {{$purchase->Providers->phone}} / {{$purchase->Providers->cell_phone}} </div>
+        <div><span>Cuit:</span> {{$purchase->Providers->cuit}}</div>
+        <div><span>Mail:</span> {{$purchase->Providers->email}}</div>
         
       </div>
     </header>
@@ -29,53 +31,36 @@
       <table>
         <thead>
           <tr>
-            <th class="service">CANTIDAD</th>
-            <th class="desc">DESCRIPCION</th>
-            <th>PRECIO</th>
-            <th></th>
-            <th>TOTAL</th>
+            <th class="service">Cod.</th>
+            <th class="service">Cant.</th>
+            <th class="desc">Descripcion</th>
+            <th>P.Unitario</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
+        @foreach($purchase->PurchasesItems as $item)
           <tr>
-            <td class="service" align="center">1</td>
-            <td class="desc">Cartuchera MATEI </td>
-            <td class="unit">$40.00</td>
-            <td class="qty"></td>
-            <td class="total">$1,040.00</td>
+           <td class="qty" align="center">{{$item->Items->code}}</td>
+            <td class="service" align="center">{{$item->quantity}}</td>
+            <td class="desc">{{$item->Items->description}}</td>
+            <td class="unit">$ {{$item->Items->sell_price}}</td>
+          
+            <?php
+             $total = $total + $item->quantity * $item->Items->sell_price ;
+            
+            ?>
+            <td class="total">$ {{ $total }}</td>
           </tr>
-          <tr>
-            <td class="service" align="center">3</td>
-            <td class="desc">Carpetas tamaño oficio</td>
-            <td class="unit">$40.00</td>
-            <td class="qty"></td>
-            <td class="total">$3,200.00</td>
-          </tr>
-          <tr>
-            <td class="service" align="center">8</td>
-            <td class="desc">Lapices Negros A+</td>
-            <td class="unit">$40.00</td>
-            <td class="qty"></td>
-            <td class="total">$800.00</td>
-          </tr>
-          <tr>
-            <td class="service" align="center">6</td>
-            <td class="desc">Initial training sessions for staff responsible for uploading web content</td>
-            <td class="unit">$40.00</td>
-            <td class="qty"></td>
-            <td class="total">$160.00</td>
-          </tr>
+          @endforeach
+          
           <tr>
             <td colspan="4">SUBTOTAL</td>
-            <td class="total">$5,200.00</td>
-          </tr>
-          <tr>
-            <td colspan="4">IVA</td>
-            <td class="total">$1,300.00</td>
+            <td class="total">$ {{$total}}</td>
           </tr>
           <tr>
             <td colspan="4" class="grand total">TOTAL</td>
-            <td class="grand total">$6,500.00</td>
+            <td class="grand total">$ {{$total}}</td>
           </tr>
         </tbody>
       </table>

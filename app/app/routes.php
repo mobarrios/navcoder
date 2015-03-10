@@ -18,22 +18,18 @@ Route::get('empresa/{company}',function($company){
 		
 		case 'laregaleria':
 				Session::put('db','admin_laregaleria');
-
 				return Redirect::to('login');
-
-			break;
+				break;
 
 		case 'aclv':
 				Session::put('db','admin_aclv');
-
 				return Redirect::to('login');
-			break;
+				break;
 		
 		default:
 				Session::put('db','admin_stock');
-
 				return Redirect::to('login');
-			break;
+				break;
 	}
 
 });
@@ -41,15 +37,42 @@ Route::get('empresa/{company}',function($company){
 // update database
 Route::get('update',function()
 	{
-		return 	DBupdate::create();
+		//Config::set('database.connections.mysql.database','admin_aclv');
+		
+		//return 	DBupdate::create();
+		return DBupdate::update();
 	});
 
 
-	
+
+		/*
+		Route::get('/{empresa}', function($empresa)
+		{
+			if($empresa  == 'update')
+			{
+				DBupdate::up();
+				return "ok";
+			};
+
+			Session::put('company',$empresa);
+
+			return Redirect::to($empresa.'/login');
+		});
+		*/
+
+		
+		//Route::group(array('prefix'=> Session::get('company') ),function()
+		//{
+			
+Route::group(array('before'=>'switchDB'),function(){
+
+		
+
+
 // ajax search	
-Route::get('provider_search',function()
+Route::post('provider_search',function()
 	{
-		$data = Input::get('term');
+		$data = Input::get('search');
 
 		$resp = Providers::where('name','like','%'.$data.'%')
 				->orWhere('last_name','like','%'.$data.'%')
@@ -60,7 +83,9 @@ Route::get('provider_search',function()
 
 		foreach($resp as $r)
 		{
-			array_push($res, $r->last_name.' , '.$r->name );
+			//array_push($res, $r->last_name.' , '.$r->name );
+			$res[] = array('id' => $r->id , 'label' => $r->company_name );
+			//$res[] = array('id'=>$r->id, 'name'=>$r->company_name );
 		}
 
 		return Response::json($res);
@@ -86,28 +111,6 @@ Route::post('item_search',function()
 		return Response::json($res);
 	});
 
-		/*
-		Route::get('/{empresa}', function($empresa)
-		{
-			if($empresa  == 'update')
-			{
-				DBupdate::up();
-				return "ok";
-			};
-
-			Session::put('company',$empresa);
-
-			return Redirect::to($empresa.'/login');
-		});
-		*/
-
-		
-		//Route::group(array('prefix'=> Session::get('company') ),function()
-		//{
-			
-Route::group(array('before'=>'switchDB'),function(){
-
-		
 
 			Route::get('',function()
 			{
@@ -135,9 +138,9 @@ Route::group(array('before'=>'switchDB'),function(){
 					{
 						//return Config::get('database');
 
-						//$data['master'] = Company::find(Crypt::decrypt(Session::get('master_id')));
+						$data['master'] = Company::all()->first();
 
-						return View::make('index');
+						return View::make('index')->with($data);
 					});
 
 					Route::post('buscar/', function(){

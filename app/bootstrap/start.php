@@ -26,9 +26,10 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('homestead'),
+	//'local' => array('homestead'),
 	'dev'	=> array('server.datachost.com'),
 	'nav'	=> array('*.aetva.com.ar'),
+	'local' => array('*.local'),
 ));
 
 /*

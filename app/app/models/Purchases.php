@@ -22,6 +22,17 @@ class Purchases extends Eloquent
 		return $this->hasMany('PurchasesItems');
 	}
 
-}
+		public function getPurchasesDateAttribute($value)
+			{
+				$value = date("d-m-Y",strtotime($value)); 
+				return $value;
+			}
+
+		public function setPurchasesDateAttribute($value)
+			{
+				$fecha = date("Y-m-d",strtotime($value)); 
+				$this->attributes['purchases_date']	=	$fecha;
+
+			}}
 
 ?>

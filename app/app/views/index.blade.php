@@ -6,14 +6,18 @@
 
 	@section('content')
 		
-		<div class="jumbotron" style="background-color:white;">
-		  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+		<div class="jumbotron" style="background-color:white; height:400px ">
+			
+			<h2>{{$master->name}}</h2>
+		  <div class="col-xs-3">
 		  	<div class="thumbnail">
-		  		<img src="" alt="">
+		  		<img src="assets/images/{{$master->logo}}" alt="">
 		  	</div>
-		  </div>
 
+		  </div>
+	
 		</div>
+		
 
 	@endsection
 

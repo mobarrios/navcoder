@@ -6,6 +6,21 @@ class DBupdate
 	public static function create()
 	{
 		
+		Schema::create('company', function($table)
+		{
+			$table->increments('id');
+			$table->softDeletes();
+			$table->timestamps();
+
+			$table->string('name','200');
+			$table->string('razon_social','200');
+			$table->string('logo','200');
+			$table->string('web','200');
+			$table->string('phone','200');
+			$table->string('mail','200');
+			$table->string('iva_condition','200');
+		});
+
 		Schema::create('categories', function($table)
 		{
 			$table->increments('id');
@@ -329,6 +344,13 @@ class DBupdate
 	public static function update()
 	{
 
+		
+		Schema::table('items',fucntion($table)
+		{
+			$table->string('bodega','200');
+			$table->stirng('provincia');
+		});
+		
 	}	
 
 

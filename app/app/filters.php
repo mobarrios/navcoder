@@ -18,8 +18,8 @@
 		//$db = CompanyDb::where('company_name','=',Session::get('company'))->first();
 
 		Config::set('database.connections.mysql.database',Session::get('db'));
-		Config::set('database.connections.mysql.username','admin');
-		Config::set('database.connections.mysql.password','tadeom2475');
+		//Config::set('database.connections.mysql.username',Session::get('usr'));
+		//Config::set('database.connections.mysql.password',Session::get('psw'));
 
 		DB::setDefaultConnection('mysql');
 

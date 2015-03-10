@@ -4,8 +4,8 @@ class BaseModel extends Eloquent
 {
 
 //eventos en el model
+	
 	public static function boot()
-    {
       parent::boot();
 
         //when saving

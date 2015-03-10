@@ -59,7 +59,9 @@
 		$('document').ready(function(){
 
 			//datepicker en forms
-			$( ".datepicker" ).datepicker();
+			$( ".datepicker").datepicker({
+				dateFormat: "dd-mm-yy"
+			});
 
 			//confirm delete
 			$('.del_confirm').on('click',function()
