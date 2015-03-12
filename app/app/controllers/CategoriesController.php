@@ -6,6 +6,7 @@ class CategoriesController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modal'] 		= 'categories';
 		$this->data['ruta'] 		= 'categories';
 		$this->data['model'] 		= 'Categories';
 		$this->data['modulo'] 		= 'Categorias';

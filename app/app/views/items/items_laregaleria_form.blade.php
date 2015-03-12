@@ -1,13 +1,11 @@
-  {{Form::texto('code','Codigo', array('required'))}}
+{{Form::texto('code','Codigo', array('required'))}}
   {{Form::texto('name','Nombre')}}
   {{Form::texto('description','Descripcion')}}
   {{Form::providers('providers_id','Proveedor')}}
 
   {{ Form::texto('cost_price','Precio de compra','0.01', '0') }}      
   {{ Form::texto('sell_price','Precio de venta','0.01', '0') }} 
-  {{ Form::texto('rent_price_15_days','Precio de alquiler por 15 dias','0.01', '0') }} 
-  {{ Form::texto('rent_price_45_days','Precio de alquiler por 45 dias','0.01', '0') }}
-
+  
   <br/>
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
@@ -34,8 +32,6 @@
       </div>
       <div id="4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
         <div class="panel-body">
-              {{ Form::texto('total_weight','Peso total en Kg','0.01', '0') }}  
-              {{ Form::texto('maximun_weight','Peso Maximo en Kg','0.01', '0') }}  
               {{ Form::texto('color','Color') }}
               {{ Form::texto('size','Tamaño') }}
               {{ Form::texto('stock','Stock','1', '0') }}

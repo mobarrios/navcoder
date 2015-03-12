@@ -25,7 +25,10 @@
 					<li><a href="{{route('categories')}}">Categorias</a></li>
 					<li><a href="{{route('providers')}}">Proveedores</a></li>
 					<li class="divider"></li>
-					<li><a href="{{route('purchases')}}">Compras</a></li>
+					<li role="presentation" class="dropdown-header">Compras</li>
+					<li><a href="{{route('purchases')}}">Nueva Compra</a></li>
+					<li><a href="{{route('purchases_list')}}">Lista Compras</a></li>
+					<li class="divider"></li>
 					<li><a href="{{route('clients')}}">Ventas</a></li>
 				</ul>
 			</li>

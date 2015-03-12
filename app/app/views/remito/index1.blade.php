@@ -8,7 +8,7 @@
   <body>
     <header class="clearfix">
       <div id="logo">
-        <img src="assets/images/logo_aclv.png" width="176" align="left">
+        <img src="assets/images/logo.png" width="176" align="left">
       </div>
       <h5 align="right">REMITO Nº {{$purchase->id}}</h5>
       <p>&nbsp;</p>
@@ -26,8 +26,8 @@
         
         <div><span>Cliente:</span> {{$purchase->Providers->company_name}}</div>
         <div><span>Direccion:</span> {{$purchase->Providers->address}}</div>
-        <div><span>Tel.: {{$purchase->Providers->phone}} / {{$purchase->Providers->cell_phone}}</span> </div>
-        <div><span>E-mail: {{$purchase->Providers->email}}</span></div>
+        <div><span>Tel.:</span> {{$purchase->Providers->phone}} / {{$purchase->Providers->cell_phone}}</div>
+        <div><span>E-mail:</span> {{$purchase->Providers->email}}</div>
         
       </div>
     </header>
@@ -40,17 +40,17 @@
             <th class="desc">Descripcion</th>
             <th>P.Unitario</th>
             <th>Total</th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
         @foreach($purchase->PurchasesItems as $item)
           <tr>
-            <td class="qty" align="center">{{$item->Items->code}}</td>
+           <td class="qty" align="center">{{$item->Items->code}}</td>
             <td class="service" align="center">{{$item->quantity}}</td>
             <td class="desc"><strong>{{$item->Items->name}}</strong> . {{$item->Items->description}}</td>
             <td class="unit">$ {{$item->Items->sell_price}}</td>
-          </tr>
-          <?php
+          
+            <?php
              $total = $total + $item->quantity * $item->Items->sell_price ;
             
             ?>

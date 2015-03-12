@@ -8,10 +8,30 @@ class PurchasesController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modal'] 		= 'purchases';
 		$this->data['ruta'] 		= 'purchases';
 		$this->data['model'] 		= 'Purchases';
 		$this->data['modulo'] 		= 'Compras';
 		$this->data['seccion']		= '';
+	}
+
+	public function getList($model= null , $search = null)
+	{
+		$model 						= $this->data['model'];
+		
+		$this->data['seccion']		= 'Inicio';
+
+		if(isset($search))
+		{
+			$this->data['model'] 	= $model::where('id' ,'like','%'.$search.'%')->orderBy('id' ,'ASC')->paginate('10');
+		}
+		else
+		{
+			$this->data['model'] 	= $model::orderBy('id' ,'ASC')->paginate('10');
+		}
+
+			
+		return View::make('view')->with($this->data);		
 	}
 
 	public function getProcess()
@@ -55,8 +75,7 @@ class PurchasesController extends BaseController
 		$data['total']		= 0;
 		$data['totaltotal'] = 0;
 
-
-		$pdf = PDF::loadView('remito.index',$data)->setPaper('A4')->setOrientation('Portait')->stream('remito.pdf');
+		$pdf = PDF::loadView('remito.remito',$data)->stream('remito.pdf');
 
 		return $pdf;
 
@@ -96,7 +115,7 @@ class PurchasesController extends BaseController
 	{
 		$this->data['seccion']		= 'Nueva';
 		
-
+		/*
 		if(!Session::has('purchase_temporal_id'))
 		{
 			$purchase_temporal = new PurchasesTemporal();
@@ -104,6 +123,7 @@ class PurchasesController extends BaseController
 			// We must delete any temporal id saved, and set the session attribute again
 			Session::put('purchase_temporal_id',$purchase_temporal->id);
 		}
+		*/
 		
 		return View::make('purchases.purchases_new')->with($this->data);
 	}
@@ -118,8 +138,8 @@ class PurchasesController extends BaseController
 		//datos del remito
 			if(!Session::has('data'))
 			{	
-				$provider = Providers::find($provider_id_purchases);
-				$data = array('date'=>$date_purchases,'provider_id'=> $provider_id_purchases, 'provider_name'=> $provider->company_name);
+				$provider 	= Providers::find($provider_id_purchases);
+				$data 		= array('date'=>$date_purchases,'provider_id'=> $provider_id_purchases, 'provider_name'=> $provider->company_name);
 
 				Session::put('data',$data);
 			}

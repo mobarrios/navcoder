@@ -9,28 +9,35 @@ a {
   text-decoration: underline;
 }
 
-body {
-  position: relative;
-  margin: 0 auto; 
-  color: #001028;
-  background: #FFFFFF; 
+body 
+{
+
   font-family: Arial, sans-serif; 
   font-size: 12px; 
   font-family: Arial;
+  margin:-20px;
+
+  border: solid 0.1px color:black;
 }
 
-header {
+header 
+{
   padding: 10px 0;
   margin-bottom: 30px;
 }
 
-#logo {
-  text-align: center;
-  margin-bottom: 10px;
+#logo 
+{
+
+  margin: 10px;
+  width: 150px;
+
 }
 
-#logo img {
-  width: 250px;
+#logo img 
+{
+  margin: 10px;
+  width: 150px;
 }
 
 h1 {
@@ -73,6 +80,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   margin-bottom: 20px;
+   font-size: 12px; 
 }
 
 table tr:nth-child(2n-1) td {
@@ -82,6 +90,7 @@ table tr:nth-child(2n-1) td {
 table th,
 table td {
   text-align: center;
+   font-size: 12px; 
 }
 
 table th {

@@ -3,6 +3,7 @@
 
 	//Route::get('compras/{model?}/{search?}', 	array('as' => 'purchases', 				'uses'  => 'PurchasesController@getIndex'));
 	Route::get('compras', 						array('as' => 'purchases', 				'uses'  => 'PurchasesController@getNew'));
+	Route::get('compras Lista', 				array('as' => 'purchases_list', 		'uses'  => 'PurchasesController@getList'));
 	
 	Route::get('compras_nuevo_pagina', 			array('as' => 'purchase_new_page',		'uses'  => 'PurchasesController@getNew'));
 	Route::get('compras_nuevo', 				array('as' => 'purchases_new_form', 	'uses'  => 'PurchasesController@formModal'));

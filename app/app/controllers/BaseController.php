@@ -30,8 +30,8 @@ class BaseController extends Controller {
 		{
 			$this->data['model'] 	= $model::orderBy('id' ,'ASC')->paginate('10');
 		}
-			
 
+			
 		return View::make('view')->with($this->data);
 	}
 
@@ -39,6 +39,7 @@ class BaseController extends Controller {
 	public function formModal($id = null)
 	{
 		$model 					= $this->data['model'];
+
 		$this->data['seccion']	= 'Nuevo';
 
 		if(!is_null($id))

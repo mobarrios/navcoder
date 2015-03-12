@@ -23,7 +23,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'admin_aclv',
+			'database'  => 'admin_stock',
 			'username'  => 'admin',
 			'password'  => 'tadeom2475',
 			'charset'   => 'utf8',

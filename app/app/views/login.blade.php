@@ -10,6 +10,7 @@
         <div class="panel " >
         
             {{App::environment()}}
+            <h1>{{Session::get('company')}}</h1>
        
 
             <div style="padding-top:30px" class="panel-body" >    

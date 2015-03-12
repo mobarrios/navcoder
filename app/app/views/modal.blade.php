@@ -5,12 +5,14 @@
 
 	<div class="modal-body">
 		@if(isset($model_edit))
+
 			{{Form::model($model_edit,  array('route' => array($ruta.'_post_edit', $model_edit->id) , 'enctype' => 'multipart/form-data'))  }}
 		@else
 			{{Form::open(array('route'=> ($ruta.'_post_new') ,'class'=>'form-horizontal', 'enctype' => 'multipart/form-data'))}}
 		@endif
 
-			@include($ruta.'/'.$ruta.'_form')
+			@include($ruta.'/'.$modal.'_form')
+			
 		<hr>
 		
 			{{Form::submit('Guardar',array('class'=>'btn btn-primary'))}}	

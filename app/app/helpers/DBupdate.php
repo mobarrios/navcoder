@@ -19,6 +19,7 @@ class DBupdate
 			$table->string('phone','200');
 			$table->string('mail','200');
 			$table->string('iva_condition','200');
+			$table->string('address','200');
 		});
 
 		Schema::create('categories', function($table)
@@ -44,6 +45,7 @@ class DBupdate
 			$table->string('cell_phone','50');
 			$table->string('company_name','50');
 			$table->string('cuit','50');
+			$table->string('address','200');
 		});
 
 		Schema::create('doctors', function($table)
@@ -59,6 +61,7 @@ class DBupdate
 			$table->string('phone','50');
 			$table->string('cell_phone','50');
 			$table->string('license','50');
+			$table->string('address','200');
 		});
 
 		Schema::create('providers', function($table)
@@ -75,6 +78,7 @@ class DBupdate
 			$table->string('cell_phone','50');
 			$table->string('company_name','50');
 			$table->string('cuit','50');
+			$table->string('address','200');
 		});
 
 		Schema::create('items', function($table)
@@ -92,14 +96,16 @@ class DBupdate
 			$table->double('rent_price_45_days', 10,2);			
 			$table->date('expiration_date');
 			$table->integer('stock');
-			$table->string('image','250');
+			$table->string('image','250')->nullable();
 			$table->double('total_weight', 10,2);
 			$table->double('maximun_weight', 10,2);
 			$table->string('color', '50');
 			$table->string('size', '50');
 			$table->string('dimensions', '50');
 			$table->string('presentation', '50');
-
+			$table->string('bodega','200');
+			$table->string('provincia','200');
+			$table->string('observaciones','200');
 
 			//relations
 			$table->integer('providers_id')->unsigned()->nullable();
@@ -343,14 +349,6 @@ class DBupdate
 
 	public static function update()
 	{
-
-		
-		Schema::table('items',fucntion($table)
-		{
-			$table->string('bodega','200');
-			$table->stirng('provincia');
-		});
-		
 	}	
 
 
