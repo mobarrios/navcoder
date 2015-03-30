@@ -23,7 +23,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'admin_prueba',
+			'database'  => '',
 			'username'  => 'admin',
 			'password'  => 'CHOLITA2014',
 			'charset'   => 'utf8',

@@ -13,10 +13,10 @@
 				<div class="row">
 					{{Form::open(array('url'=> Session::get('company').'/buscar'))}}
 						<div class="col-xs-3">
-							<div class="input-group">
+							<div class="input-group input-group-sm">
 								<input type='hidden' name='model' value='{{$ruta}}'>
 								<input type="text" class="form-control" placeholder="Buscar" name="buscar">
-								<span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button></span>	
+								<span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>	
 							</div>
 						</div>
 					{{Form::close()}}
@@ -24,8 +24,10 @@
 						@yield('extra')
 
 					<div class="col-xs-2 pull-right text-center">
-						<a aria-label="Left Align" href="{{route($ruta.'_new_form')}}" class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#myModal"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> agregar
-						</a>
+						@if(Roles::validate('items','add'))
+							<a aria-label="Left Align" href="{{route($ruta.'_new_form')}}" class="btn  btn-warning btn-sm" data-toggle=	"modal" data-target="#myModal"> <span class="fa fa-plus" aria-hidden="true"></span> agregar
+							</a>
+						@endif
 					</div>
 				</div>
 				<hr>

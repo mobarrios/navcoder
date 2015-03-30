@@ -36,6 +36,7 @@
            	  {{ Form::texto('bodega','Bodega')}}
            	  {{ Form::texto('provincia','Provincia de Origen')}}
               {{ Form::texto('stock','Stock','1', '0') }}
+              {{ Form::um('um','Unidad de Medida')}}
               {{ Form::texto('observaciones','Observaciones')}}
         </div>
       </div>
@@ -55,3 +56,15 @@
       </div>
     </div>
   </div>
+
+   <script type="text/javascript">
+    
+    $('#form').on("keyup keypress", function(e) {
+      var code = e.keyCode || e.which; 
+        if (code  == 13) {               
+          e.preventDefault();
+          return false;
+        }
+    });
+    
+ </script>

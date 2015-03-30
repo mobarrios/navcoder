@@ -32,6 +32,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @return mixed
 	 */
 
+	public function Profiles()
+	{
+		return $this->belongsTo('Profiles');
+	}
 
 	public function getRememberToken()
 	{

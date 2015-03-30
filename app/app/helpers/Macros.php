@@ -1,9 +1,17 @@
 <?php
-    
+    Form::macro('pay_method',function($name,$label)
+    {
+             $method = array('1'=>'Efectivo','2'=>'Tarjeta de Credito','3'=>'Desposito','4'=>'Transferencia','5'=>'Cheque');
+
+             $input = Form::select($name, $method, null , array('class'=>'form-control')); 
+
+             return buildInput($input, $label);
+
+    });
     Form::macro('providers', function($name, $label)
         {
-            $prov = Providers::lists('name','id');
-            $input = Form::select($name , array('Ninguno') + $prov ,null, array('class'=>'form-control')); 
+            $prov   = Providers::lists('name','id');
+            $input  = Form::select($name , array('Ninguno') + $prov ,null, array('class'=>'form-control')); 
 
             return buildInput($input,$label);  
         });
@@ -21,6 +29,49 @@
             return Form::select($name,$areas,array('class'=>'form-control')); 
         });
 
+     Form::macro('um', function($name, $label)
+        {
+            //$areas  = Area::lists('area','id');
+            $value  = Form::getValueAttribute($name);
+
+            $um     = array('0'=>'Seleccionar','1'=>'Unidad','2'=>'Caja x 50','3'=>'Cm3','4'=>'Mt2');
+
+            $input  = Form::select($name , $um , $value , array('class'=>'form-control')); 
+
+            return buildInput($input,$label);
+        });
+
+     Form::macro('imagen',function($name)
+     {
+        $value = Form::getValueAttribute($name);
+        $img   = null; 
+
+        if(!is_null($value))
+        {
+            $img  = '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <a href="'.$value.'" class="thumbnail">
+                            <img src="'.$value.'" alt="">
+                        </a>
+                    </div>';
+        }
+        
+        $input = '  <div class="row">
+                    <div class="col-xs-12">
+                       '.$img.'
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-control">
+                        <input  type="file" name="'.$name.'" >
+                    </div>
+                    </div>
+                    </div>';
+                    
+
+
+        return buildInput($input);
+     });
+    
+
     Form::macro('edit', function($name)
         {
             $value = Form::getValueAttribute($name);
@@ -32,7 +83,7 @@
     Form::macro('texto', function($name, $label)
         {    
             $value = Form::getValueAttribute($name);
-            $input = '<input class="form-control" name="'.$name.'" value='.$value.'>';
+            $input = '<input class="form-control" name="'.$name.'" value="'.$value.'">';
     
             return buildInput($input,$label);         
           	
@@ -41,7 +92,7 @@
     Form::macro('pass', function($name, $label)
         {    
             $value = Form::getValueAttribute($name);
-            $input = '<input type="password" class="form-control" name="'.$name.'" value='.$value.'>';
+            $input = '<input type="password" class="form-control" name="'.$name.'" value="'.$value.'">';
     
             return buildInput($input,$label);         
             
@@ -50,7 +101,7 @@
     Form::macro('number', function($name, $label, $step, $minimum)
         {    
             $value = Form::getValueAttribute($name);
-            $input = '<input type="number" class="form-control" name="'.$name.'" value='.$value.' step="'.$step.'" min="'.$minimum.'">';
+            $input = '<input type="number" class="form-control" name="'.$name.'" value="'.$value.'" step="'.$step.'" min="'.$minimum.'">';
     
             return buildInput($input,$label);         
             
@@ -92,7 +143,7 @@
 
 //armamos el div con el label y el input
 
-function buildInput($input, $label)
+function buildInput($input = null , $label = null)
 {
 	$input = '		<div class="row">
 					<div class="col-xs-12">

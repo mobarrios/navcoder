@@ -96,7 +96,7 @@ class ItemsController extends BaseController
 
 			$item->categories()->sync($categories);
 
-			return Redirect::back();
+			return $this->getIndex();
 	
 	}
 
@@ -167,7 +167,15 @@ class ItemsController extends BaseController
 			$item->fill($input);
 			$item->save();
 			
-			return Redirect::back();
+			return $this->getIndex();
+	}
+
+	public function getDel($id = null)
+	{
+		$model = $this->data['model'];
+		$model::find($id)->delete();
+
+		return $this->getIndex();
 	}
 
 }

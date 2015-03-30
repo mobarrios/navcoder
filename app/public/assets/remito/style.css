@@ -9,35 +9,33 @@ a {
   text-decoration: underline;
 }
 
-body 
-{
-
+body {
+ 
+  
+  color: #001028;
+  background: #FFFFFF; 
   font-family: Arial, sans-serif; 
   font-size: 12px; 
   font-family: Arial;
-  margin:-20px;
-
-  border: solid 0.1px color:black;
 }
 
-header 
-{
+header {
   padding: 10px 0;
   margin-bottom: 30px;
 }
 
-#logo 
-{
-
-  margin: 10px;
-  width: 150px;
-
+#logo {
+  text-align: left;
+  margin-bottom: 10px;
 }
 
-#logo img 
-{
-  margin: 10px;
-  width: 150px;
+#logo img {
+  width: 250px;
+}
+
+#remito {
+  text-align: right;
+  margin-bottom: 10px;
 }
 
 h1 {
@@ -48,7 +46,6 @@ h1 {
   line-height: 1.4em;
   font-weight: normal;
   text-align: center;
-  margin: 0 0 20px 0;
   background: url(dimension.png);
 }
 
@@ -80,7 +77,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   margin-bottom: 20px;
-   font-size: 12px; 
 }
 
 table tr:nth-child(2n-1) td {
@@ -90,20 +86,22 @@ table tr:nth-child(2n-1) td {
 table th,
 table td {
   text-align: center;
-   font-size: 12px; 
 }
 
 table th {
-  padding: 5px 20px;
-  color: #5D6975;
-  border-bottom: 1px solid #C1CED9;
-  white-space: nowrap;        
-  font-weight: normal;
+	padding: 5px 20px;
+	color: #000000;
+	border-bottom: 1px solid #C1CED9;
+	white-space: nowrap;
+	font-weight: bold;
+	font-size: 16px;
 }
 
 table .service,
 table .desc {
-  text-align: left;
+	text-align: left;
+	font-weight: normal;
+	font-size: 12px;
 }
 
 table td {

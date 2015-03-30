@@ -129,7 +129,7 @@
 				{
 					$.ajax({
 						type: "GET",
-						url: "process",
+						url: "process_purchases",
 						dataType: "json",
 						  success: function(data){
 								if(data != null)

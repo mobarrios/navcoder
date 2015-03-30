@@ -11,6 +11,18 @@ class Clients extends Eloquent
 
 	protected $table	 = 'clients';
 	protected $guarded	 = array('');
+
+
+	public function Sales()
+	{
+		return $this->hasMany('Sales');
+	}
+
+	public function ClientsPayment()
+	{
+		return $this->hasMany('ClientsPayment');
+	}
+
 }
 
 ?>

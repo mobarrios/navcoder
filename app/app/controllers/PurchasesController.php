@@ -55,6 +55,12 @@ class PurchasesController extends BaseController
 			$items->purchases_id 	= $purchase->id;
 			$items->items_id 		=  $key['item_id'];
 			$items->save();
+
+			// suma la cantidad del stock del articulo
+			$item_stock 			= Items::find($key['item_id']);
+			$item_stock->stock 		= $item_stock->stock + $key['cantidad'];
+			$item_stock->save() ;
+
 		}
 
 		Session::forget('array_items');

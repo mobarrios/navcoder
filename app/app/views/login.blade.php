@@ -11,16 +11,15 @@
         
             {{App::environment()}}
             <h1>{{Session::get('company')}}</h1>
-       
-
+    
             <div style="padding-top:30px" class="panel-body" >    
                 {{Form::open(array('route'=>'post_login','class'=>'form-horizontal'))}}
                     <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
                         <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="usuario" required="required">                                        
                     </div>
                     <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                         <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required="required">
                     </div>
                     <div style="margin-top:10px" class="form-group">

@@ -1,6 +1,7 @@
 {{Form::texto('name','Nombre')}}
 {{Form::texto('last_name','Apellido')}}
 {{Form::texto('dni','DNI')}}
+{{Form::texto('address','Dirección')}}
 {{Form::texto('email','Email')}}
 {{Form::texto('phone','Teléfono')}}
 {{Form::texto('cell_phone','Celular')}}

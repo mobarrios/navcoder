@@ -2,6 +2,35 @@
 
 class DBupdate 
 {
+	public static function update()
+	{
+
+		/*Schema::table('sales_items',function($table){
+			$table->string('observations','200');
+		});*/
+
+		Schema::create('clients_payment',function($table)
+		{	
+			$table->increments('id');
+			$table->softDeletes();
+			$table->timestamps();
+
+			$table->date('date');
+			$table->string('detail','200');
+			$table->double('amount',10,2);
+			$table->integer('payment_method');
+
+			//relations
+			$table->integer('clients_id')->unsigned();
+			$table->foreign('clients_id')->references('id')->on('clients');
+
+			$table->integer('sales_id')->unsigned();
+			$table->foreign('sales_id')->references('id')->on('sales');
+
+		});
+			
+	}	
+
 
 	public static function create()
 	{
@@ -87,7 +116,7 @@ class DBupdate
 			$table->softDeletes();
 			$table->timestamps();
 
-			$table->string('code','200');
+			$table->string('code','200')->unique();
 			$table->string('name','50');
 			$table->text('description');
 			$table->double('cost_price', 10,2);
@@ -96,6 +125,7 @@ class DBupdate
 			$table->double('rent_price_45_days', 10,2);			
 			$table->date('expiration_date');
 			$table->integer('stock');
+			$table->string('um',20);
 			$table->string('image','250')->nullable();
 			$table->double('total_weight', 10,2);
 			$table->double('maximun_weight', 10,2);
@@ -133,7 +163,7 @@ class DBupdate
 			$table->softDeletes();
 			$table->timestamps();
 
-			$table->string('name','50');
+			$table->string('name','50')->unique();
 		});
 
 		Schema::create('menus', function($table)
@@ -145,11 +175,7 @@ class DBupdate
 			$table->string('name','50');
 			$table->string('icon','50');
 			$table->string('routes','50');
-		
-
-			//relations
-			$table->integer('modules_id')->unsigned()->nullable();
-			$table->foreign('modules_id')->references('id')->on('modules');
+			$table->boolean('available');
 		});
 
 		Schema::create('sub_menus', function($table)
@@ -160,11 +186,9 @@ class DBupdate
 
 			$table->string('name','50');
 			$table->string('icon','50');
+			$table->string('routes','50');
 		
-
-			//relations
-			$table->integer('modules_id')->unsigned()->nullable();
-			$table->foreign('modules_id')->references('id')->on('modules');
+			//relations	
 
 			$table->integer('menus_id')->unsigned()->nullable();
 			$table->foreign('menus_id')->references('id')->on('menus');
@@ -346,12 +370,6 @@ class DBupdate
 
 	}
 
-
-	public static function update()
-	{
-	}	
-
-
 	// create profile administrator , user admin
 	public static function createAdminUser()
 	{
@@ -369,7 +387,7 @@ class DBupdate
 	// create modules
 	public static function createModules()
 	{
-		$lists = array('items','categories','users','profiles','providers','clients','sales','purchases','doctors');
+		$lists = array('items','categories','users','profiles','providers','clients','sales','purchases','doctors','obras');
 
 		foreach($lists as $list)
 		{
@@ -379,36 +397,107 @@ class DBupdate
 		}
 	}
 
-	//create menues
+	
 	public static function createMenus()
-	{
-		$lists = array(
-						array('Articulos','items','items'),
-						array('Rubros','categories','categories'),
-						array('Usuarios','users','users'),
-						array('Perfiles','profiles','profiles'),
-						array('Proveedores','providers','providers'),
-						array('Clientes','clients','clients'),
-						array('Ventas','sales','sales'),
-						array('Compras','purchases','purchases'),
-						array('Doctores','doctors','doctors'),
-						);
-		
-
-		foreach($lists as $list => $a)
+	{	
+		$menu = self::menu();	
+	
+		foreach($menu as $m => $key)
 		{
-			//$menus = new Menus();
-			//$menus->name 		= 
-			//$menus->routes 		= 
-			dd(Modules::where('name','=',$a[2]));
+			$menu 			= new Menus();
+			$menu->name 	= $key['name'];
+			$menu->routes 	= $key['route'];
+			$menu->available= 1;
+			$menu->save();
 
-
+			if(!empty($key['sub']))
+			{
+				foreach($key['sub'] as $sub => $sub_key)
+				{
+					$sub 			= new SubMenus();
+					$sub->name 		= $sub_key['name'];
+					$sub->routes 	= $sub_key['route'];
+					$sub->menus_id 	= $menu->id;
+					$sub->save();
+				}
+			}
 		}
 
-		return;
 	}
 
 	
+	public static function menu()
+	{
+
+		$menu[] = [ 'name' => 'Articulos',
+					'route'=> '',
+					'sub' => [
+								[
+								'name' => 'Articulos',
+								'route' => 'items'
+								],
+								[
+								 'name' => 'Categorias',
+								 'route' => 'categories'
+								 ]
+					]];
+
+		$menu[] = [ 'name' => 'Compras',
+					'route'=> '',
+					'sub' => [
+								[
+								'name' => 'Nueva Compra',
+								'route' => 'purchases'
+								],
+								[
+								 'name' => 'Lista de Compras',
+								 'route' => 'purchases_list'
+								 ],
+								 [
+								 'name' => 'Proveedores',
+								 'route' => 'providers'
+								 ]
+					]];
+
+		$menu[] = [ 'name' => 'Ventas',
+					'route'=> '',
+					'sub' => [
+								[
+								'name' => 'Nueva Venta',
+								'route' => 'sales'
+								],
+								[
+								 'name' => 'Lista de Ventas',
+								 'route' => 'sales_list'
+								 ],
+								 [
+								 'name' => 'Clientes',
+								 'route' => 'clients'
+								 ]
+					]];
+
+		$menu[] = [ 'name' => 'Doctores',
+					'route'=> '',
+					'sub' => [
+								[
+								'name' => 'Doctores',
+								'route' => 'doctors'
+								]
+					]];
+
+		$menu[] = [ 'name' => 'Obras Sociales',
+					'route'=> '',
+					'sub' => [
+								[
+								'name' => 'Obras Sociales',
+								'route' => 'obras'
+								]
+					]];
+
+
+	return $menu;
+
+	}
 }
 
 ?>

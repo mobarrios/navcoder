@@ -11,6 +11,22 @@
 |I
 */
 
+/// WEB SERVICE API REST FULL
+Route::group(array('prefix' => 'api/v1'), function()
+{
+
+	Route::get('app/{search}',function($search){
+
+ 		 header('Access-Control-Allow-Origin: *');	
+		
+		$item = Items::where('code','like','%'.$search.'%')->orWhere('name','like','%'.$search.'%')->orWhere('description','like','%'.$search.'%')->get();
+
+		
+
+		return Response::json($item);
+
+	});
+});
 
 Route::get('empresa/{company}',function($company)
 {
@@ -43,27 +59,45 @@ Route::get('login',function()
 	return View::make('login');
 });
 
-
-// update database
-Route::get('update',function()
-{
-	//Config::set('database.connections.mysql.database','admin_laregaleria');
-	return 	DBupdate::create();
-	//return DBupdate::update();
-});
-
 			
 // todo lo que esta aca adentro previo cambio de DB
 
 Route::group(array('before'=>'switchDB'),function()
 {
-	
+		
+			Route::get('ajax',function(){
+
+				//$j = array('data'=> array(array('id'=>'2','name'=>'Tiger Nixon')));
+
+				$m = Items::all();
+
+				
+				$mod = array();
+
+				foreach($m as $model)
+				{
+					array_push($mod, array('id' => $model->id ,'name'=> $model->name));
+				}
+
+				$items['data'] = $mod;
+
+			
+			return Response::json($items);
+
+			});
+
+			Route::get('table',function(){
+			return View::make('table');
+			});
+
+
 		//postea el login 
 		Route::post('login',array('as'=>'post_login', 'uses'=>'LoginController@login'));
 
 		
 		Route::group(array('before' => 'auth'), function()
 		{
+
 				Route::get('salir',  array('as'=>'logout', 'uses'=>'LoginController@logOut'));
 
 				Route::get('inicio', function()
@@ -89,10 +123,12 @@ Route::group(array('before'=>'switchDB'),function()
 				require(__DIR__ . '/routes/categories.php');
 				require(__DIR__ . '/routes/providers.php');
 				require(__DIR__ . '/routes/obras.php');
+				require(__DIR__ . '/routes/sales.php');
 
 				//config 
 				require(__DIR__ . '/routes/config/users.php');
-
+				require(__DIR__ . '/routes/config/profiles.php');
+				require(__DIR__ . '/routes/config/permissions.php');
 		});
 
 		// ajax search	
@@ -101,6 +137,27 @@ Route::group(array('before'=>'switchDB'),function()
 				$data = Input::get('search');
 
 				$resp = Providers::where('name','like','%'.$data.'%')
+						->orWhere('last_name','like','%'.$data.'%')
+						->orWhere('dni','like','%'.$data.'%')
+						->get();
+
+				$res  = array();
+
+				foreach($resp as $r)
+				{
+					//array_push($res, $r->last_name.' , '.$r->name );
+					$res[] = array('id' => $r->id , 'label' => $r->company_name );
+					//$res[] = array('id'=>$r->id, 'name'=>$r->company_name );
+				}
+
+				return Response::json($res);
+		});
+
+		Route::post('client_search',function()
+		{
+				$data = Input::get('search');
+
+				$resp = Clients::where('name','like','%'.$data.'%')
 						->orWhere('last_name','like','%'.$data.'%')
 						->orWhere('dni','like','%'.$data.'%')
 						->get();
@@ -131,12 +188,24 @@ Route::group(array('before'=>'switchDB'),function()
 
 				foreach($resp as $r)
 				{
-					$res[] = array('id' => $r->id , 'label' => $r->name .' $ ' . $r->cost_price, 'value' =>$r->name .' $ ' . $r->cost_price);
+					$res[] = array(	'id' => $r->id , 
+									'label' => $r->name .'$ ' . $r->sell_price , 
+									'value' => $r->name ,
+									'sell_price' => $r->sell_price);
 				}
 
 				return Response::json($res);
 		});
-});
+
+		// update database
+
+		Route::get('update',function()
+		{
+			DBupdate::update();
+			return "updated OK";
+		});
+
+	});
 
 
 

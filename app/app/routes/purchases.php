@@ -17,9 +17,9 @@
 
 	Route::post('additem', 'PurchasesController@postAdditem');
 
-	Route::get('delitem/{id}', array('as'=>'purchases_delitem', 'uses'=>'PurchasesController@getDelitem'));
-	Route::get('process', 	   array('as'=>'purchases_process', 'uses'=>'PurchasesController@getProcess'));
+	Route::get('delitem/{id}',				 array('as'=>'purchases_delitem', 'uses'=>'PurchasesController@getDelitem'));
+	Route::get('process_purchases', 	   array('as'=>'purchases_process', 'uses'=>'PurchasesController@getProcess'));
 
-	Route::get('remito/{id}', array('as'=>'purchases_remito', 'uses'=>'PurchasesController@getRemito'));
+	Route::get('remito_purchase/{id}', array('as'=>'purchases_remito', 'uses'=>'PurchasesController@getRemito'));
 
 ?>

@@ -7,7 +7,9 @@
 				<th>Nombre</th>
 				<th>Descripcion</th>
 				<th>Precio al publico</th>
-				<th></th>
+				<th>Stock</th>
+				
+				<th class="action_row"></th>
 			</tr>
 		</thead>
 		<tbody>			
@@ -27,11 +29,19 @@
 					<td>{{$models->code}}</td>
 					<td>{{$models->name}}</td>
 					<td>{{$models->description}}</td>
-					<td>{{$models->sell_price}}</td>
+					<td>$ {{$models->sell_price}}</td>
+					<td>{{$models->stock}} {{$models->um}} </td>
 					<td>
 						<div class="btn-group btn-group-xs">
-							<a href="{{route($ruta.'_edit_form',$models->id)}}" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-edit"></i></a>
-							<a href="{{route($ruta.'_delete',$models->id)}}"type="button" class="del_confirm btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i></a>
+						
+								@if(Roles::validate('items','edit'))
+									<a href="{{route($ruta.'_edit_form',$models->id)}}" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a>
+								@endif
+
+								@if(Roles::validate('items','delete'))
+									<a href="{{route($ruta.'_delete',$models->id)}}" type="button" class="del_confirm btn btn-danger"><i class="fa fa-remove"></i></a>
+								@endif
+							
 						</div>
 					</td>
 				</tr>

@@ -24,6 +24,23 @@ class Items extends Eloquent
 		return $this->belongsToMany('Categories','items_categories','items_id','categories_id');
 	}
 
+	public function getUmAttribute($val)
+	{
+		switch ($val) {
+				case '1':
+					return 'Unidad';
+				break;
+				case '2':
+					return 'Caja x 50';
+				break;	
+				case '3':
+					return 'Cm3';
+				break;	
+				case '4':
+					return 'Mt2';
+				break;	
+		}
+	}
 	
 	/*
 	public function delete()

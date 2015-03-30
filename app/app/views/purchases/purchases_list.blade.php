@@ -20,9 +20,9 @@
 					<td>$ {{$models->amount}}</td>
 					<td>
 						<div class="btn-group btn-group-xs pull-right">
-							<a href="{{route($ruta.'_edit_form',$models->id)}}" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-edit"></i></a>
-							<a href="{{route($ruta.'_delete',$models->id)}}"type="button" class="del_confirm btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i></a>
 							<a href="{{route('purchases_remito',$models->id)}}" target="self" class="btn btn-default"><i class="glyphicon glyphicon-print"></i></a>
+							<a href="{{route($ruta.'_delete',$models->id)}}"type="button" class="del_confirm btn btn-danger"><i class="glyphicon glyphicon-remove-circle"></i></a>
+							
 						</div>
 					</td>
 				</tr>

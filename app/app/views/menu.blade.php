@@ -1,63 +1,66 @@
-<nav class="navbar navbar-static-top navbar-default" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top">
 	<!-- Brand and toggle get grouped for better mobile display -->
-	
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-			<span class="sr-only">Nav.</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand"> <img src="{{ URL::asset('assets/images/nav_stock_logo_little.png') }}" ></a>
-	</div>
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Nav.</span>
+				<span class="fa fa-bars"></span>
+			</button>
+			<a href="inicio" class="navbar-brand"> <img src="{{ URL::asset('assets/images/nav_stock_logo_little.png') }}" ></a>
+		</div>
+
+		
+			
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i>  Menu</a>
+					<ul class="dropdown-menu">
+							
+							@foreach(Menu::getMenus() as $menu)
+								@if($menu->available == 1)
+										<li role="presentation" class="dropdown-header">{{$menu->name}}</li>
+									@foreach($menu->SubMenus as $sub)
+										<li><a href="{{route($sub->routes)}}">{{$sub->name}}</a></li>
+									@endforeach
+									<li class="divider"></li>
+								@endif
+								
+							@endforeach
+						
+					</ul>
+				</li>
+			</ul>
 
 
-	<!-- Collect the nav links, forms, and other content for toggling -->
-	<div class="collapse navbar-collapse navbar-ex1-collapse">
-		<ul class="nav navbar-nav">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-list"></i> Menu</a>
-				<ul class="dropdown-menu">
-					<li><a href="inicio"><span class="glyphicon glyphicon-home"></span></a></li>
-					<li class="divider"></li>
-					<li><a href="{{route('items')}}">Articulos</a></li>
-					<li><a href="{{route('clients')}}">Clientes</a></li>
-					<li><a href="{{route('categories')}}">Categorias</a></li>
-					<li><a href="{{route('providers')}}">Proveedores</a></li>
-					<li class="divider"></li>
-					<li role="presentation" class="dropdown-header">Compras</li>
-					<li><a href="{{route('purchases')}}">Nueva Compra</a></li>
-					<li><a href="{{route('purchases_list')}}">Lista Compras</a></li>
-					<li class="divider"></li>
-					<li><a href="{{route('clients')}}">Ventas</a></li>
-				</ul>
-			</li>
-	
 
+						
+						
+							
+					
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name}} </a>
+					<ul class="dropdown-menu">
+						<li><a href="">Perfil</a></li>
+					</ul>
+				</li>
 
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="{{route('users')}}">Usuarios</a></li>
+						<li><a href="{{route('profiles')}}">Perfiles</a></li>
+						<li><a href="update">Update <span class="badge">1</span> </a></li>
+					</ul>
+				</li>
 
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name}} </a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Perfil</a></li>
-				</ul>
-			</li>
+				<li><a href="{{route('logout')}}"><i class="fa fa-sign-out"></i></a>
+				</li>
 
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i></a>
-				<ul class="dropdown-menu">
-					<li><a href="{{route('users')}}">Usuarios</a></li>
-					<li><a href="#">Perfiles</a></li>
-				</ul>
-			</li>
-
-			<li><a href="{{route('logout')}}"><i class="glyphicon glyphicon-log-out"></i></a>
-			</li>
-
-			<li><ul></ul>
-			</li>
-		</ul>
+			</ul>
+		</div>
 	</div><!-- /.navbar-collapse -->
 </nav>

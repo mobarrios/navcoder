@@ -6,74 +6,73 @@
     <link rel="stylesheet" href="assets/remito/style.css" media="all" />
   </head>
   <body>
+    <header class="clearfix">
+      <div id="logo">
 
-		<header class="clearfix">
-			<div id="logo">
-				<img src="assets/images/{{$company->logo}}" >
-			</div>
+        <table>
+          <thead>
+            <tr>
+              <th class="service"><img src="assets/images/{{$company->logo}}"></th>
+              <th >R</th>
+              <th></th>
+              <th></th>
+              <th class="service">N° 0000 - 00{{$purchase->id}}</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
 
-		<h5 align="right">REMITO Nº {{$purchase->id}}</h5>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p><br>
-    <hr>
-		<br>
-		</p>
-		<div id="project">
-		<div>FECHA: {{$purchase->purchases_date}}</div>
-		<div>ING. BRUTOS: 20-25615885-5</div>
-		<div>FECHA INICIO ACT.: 01/01/2015</div>
-		<div>I.V.A. RESPONSABLE INSCRIPTO</a></div>
-		</div>
-		<div id="company" class="clearfix">
+      </div>
+      <div id="company" class="clearfix">
+        <div>Proveedor: {{$purchase->Providers->last_name}}, {{$purchase->Providers->name}}</div>
+        <div>Dirección: {{$purchase->Providers->address}}</div>
+        <div>Tel: {{$purchase->Providers->phone}}</div>
+        <div></div>
+      </div>
+      <div id="project">
+        <div>{{$company->name}}</div>
+        <div>{{$company->address}}</div>
+        Tel: {{$company->phone}}
+        <div><a >{{$company->mail}}</a></div>
+        <div>{{$company->iva_condition}}</div>
+      </div>
 
-		<div><span>Cliente:</span> {{$purchase->Providers->company_name}}</div>
-		<div><span>Direccion:</span> {{$purchase->Providers->address}}</div>
-		<div><span>Tel.: {{$purchase->Providers->phone}} / {{$purchase->Providers->cell_phone}}</span> </div>
-		<div><span>E-mail: {{$purchase->Providers->email}}</span></div>
-
-		</div>
-		</header>
-
-		  <main>
+    </header>
+    <main>
       <table>
         <thead>
           <tr>
-            <th class="service">Cod.</th>
-            <th class="service">Cant.</th>
-            <th class="desc">Descripcion</th>
-            <th>P.Unitario</th>
-            <th>Total</th>
-           </tr>
+            <th class="grilla">Cant.</th>
+            <th class="grilla">Articulo</th>
+            <th class="grilla">P.Unit.</th>
+            <th class="grilla">S.Total</th>
+          </tr>
         </thead>
         <tbody>
-
-
-        @foreach($purchase->PurchasesItems as $item)
-          <tr>
-            <td class="qty" align="center">{{$item->Items->code}}</td>
-            <td class="service" align="center">{{$item->quantity}}</td>
-            <td class="desc"><strong>{{$item->Items->name}}</strong> . {{$item->Items->description}}</td>
-            <td class="unit">$ {{$item->Items->sell_price}}</td>
-            <td class="total">$ {{ $item->quantity * $item->Items->sell_price  }}</td>
-          </tr>
+          @foreach($purchase->PurchasesItems as $item )
+            <tr>
+              <td class="service">{{$item->quantity}}</td>
+              <td class="service">{{$item->Items->code}} : {{$item->Items->name}} {{$item->Items->description}}</td>
+              <td class="service"> $ {{$item->Items->sell_price}}</td>
+              <td class="service ">$ {{ $item->quantity * $item->Items->sell_price  }}</td>
+            </tr>
           @endforeach
-          
           <tr>
-            <td colspan="4">SUBTOTAL</td>
-            <td class="total">$ {{$purchase->amount}}</td>
+            <td colspan="3">SUBTOTAL</td>
+            <td class="service">$ {{$purchase->amount}}</td>
           </tr>
           <tr>
-            <td colspan="4" class="grand total">TOTAL</td>
-            <td class="grand total">$ {{$purchase->amount}}</td>
+            <td colspan="3" class="grand total">TOTAL</td>
+            <td class="service">$ {{$purchase->amount}}</td>
           </tr>
         </tbody>
       </table>
       <div id="notices">
-        <div>REMITO:</div>
-        <div class="notice">Documento no valido como Factura.</div>
+        <div>NOTA:</div>
+        <div class="notice">Documento no Valido como Factura.</div>
       </div>
     </main>
-
+    <footer></footer>
   </body>
-  </html>
+</html>

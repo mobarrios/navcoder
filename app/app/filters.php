@@ -10,6 +10,18 @@
 | application. Here you may also register your custom route filters.
 |
 */
+	Route::filter('validation',function($route, $request, $value)
+	{
+			
+			$valor 			= explode('-',$value); 
+			$module			= $valor[0];
+			$action 		= $valor[1];
+
+			if(Roles::validate($module,$action) == false)
+			{
+				return Redirect::back()->withErrors('Acceso no permitido!');		
+			}
+	});
 
 	Route::filter('switchDB',function(){
 
