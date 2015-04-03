@@ -3,7 +3,8 @@
 class ItemsController extends BaseController
 {
 	protected $data 	 =  array();
-	protected $img_path  =  "assets/items/images/";
+	protected $img_path ;
+	protected $search_by =  array();
 
 	public function __construct()
 	{
@@ -25,78 +26,60 @@ class ItemsController extends BaseController
 		$this->data['model'] 		= 'Items';
 		$this->data['modulo'] 		= 'Articulos';
 		$this->data['seccion']		= '';
+
+		//columnas de busqueda
+		$this->search_by =  array('code','name','description');
+
+		$this->img_path = Session::get('company')."/uploads/items/images/";
+
 	}
+
 
 	public function postNew()
 	{
+
+
+			$model = $this->data['model'];
+
+			$validator = Validator::make(Input::all(),array('code'=>'required|unique:items'));
+
+			if ($validator->fails())
+			{
+				return Redirect::back()->withErrors($validator)->withInput(Input::all());
+			}
+
 		// Receive data
 
 				$input 		= Input::all();
 
 				$categories = Input::has('chk_category') ? Input::get('chk_category') : array();
 
-				$up 		= new upload();
+				//$up 		= new upload();
 			
 				unset($input['chk_category']);
 
+
 		// Create the objet
+			
 
-				$item 		=  new Items();
-
-		// Populate the objet
-
-			// Input Data
-				//$input->fill($input);
-
-				/*
-				$item->code 				= $input['code'];
-				$item->name 				= $input['name'];
-				$item->description 			= $input['description'];
-				$item->providers_id 		= $input['provider_id'];
-				$item->cost_price  			= $input['cost_price'];
-				$item->sell_price  			= $input['sell_price'];
-				//$item->expiration_date = $input['expiration_date'];
-				$item->stock           		= $input['stock'];
-				//$item->image 		   = $input['image'];
-				$item->rent_price_15_days 	= $input['rent_price_15_days'];
-				$item->rent_price_45_days 	= $input['rent_price_45_days'];
-				$item->total_weight		  	= $input['total_weight'];
-				//$item->maximum_weight	  = $input['maximum_weight'];
-				$item->color 			  	= $input['color'];
-				$item->size 			  	= $input['size'];
-				//$item->dimensions 		  = $input['dimensions'];
-				//$item->presentation 	  = $input['presentation'];
-				*/
-				//$item->save();
-
-			// Input Categories
-
-				
+			//$item 		=  new Items();
 
 			// Input Image
-				if(isset($input['image']))
-				{
-					$up 				= $up->up($input['image'] , $this->img_path);
-					if( $up != false )
-					{
-						$input['image'] =  $this->img_path.$up;
-						$item->image    =  $input['image'];
-					}else
-					{
-						$item->image    =  "";
-					}
 
-				}
+				
 				
 		// Save the object
+						
 
+			//$item->fill($input);
+			//$item->save();
+		
 
-			$item->fill($input);
-			$item->save();
+			$model::create($input);
 
-			$item->categories()->sync($categories);
+			//$item->categories()->sync($categories);
 
-			return $this->getIndex();
+			return Redirect::back();
 	
 	}
 
@@ -114,68 +97,86 @@ class ItemsController extends BaseController
 			
 			unset($input['chk_category']);
 
-		// Create the objet
-
 			$item 		= Items::find($id);
-
-		// Populate the objet
-
-			// Input Data
-				/*
-				$item->code = $input['code'];
-				$item->name = $input['name'];
-				$item->description = $input['description'];
-				$item->providers_id = $input['provider_id'];
-				$item->cost_price  = $input['cost_price'];
-				$item->sell_price  = $input['sell_price'];
-				//$item->expiration_date = $input['expiration_date'];
-				$item->stock           = $input['stock'];
-				//$item->image 		   = $input['image'];
-				$item->rent_price_15_days = $input['rent_price_15_days'];
-				$item->rent_price_45_days = $input['rent_price_45_days'];
-				$item->total_weight		  = $input['total_weight'];
-				//$item->maximum_weight	  = $input['maximum_weight'];
-				$item->color 			  = $input['color'];
-				$item->size 			  = $input['size'];
-				//$item->dimensions 		  = $input['dimensions'];
-				//$item->presentation 	  = $input['presentation'];
-				*/
-			// Input Categories
-			//$item->fill($input);
 
 			$item->categories()->sync($categories);
 
-			// Input Image
-				if(isset($input['image']))
-				{
 
-					$up 				= $up->up($input['image'] , $this->img_path);
-
-					if( $up != false )
-					{						
-						$input['image'] =  $this->img_path."".$up;
-						$item->image   =  $input['image'];
-					}else
+				if (Input::hasFile('image'))
+				{	
+					if($item->image != NULL)
 					{
-						$item->image   =  "";
+						$up->del($item->image);
 					}
+						$up_file = $up->up($input['image'] , $this->img_path );
+					
+					if( $up_file != false)
+					{
+						$input['image']  = $up_file;
+					}
+
 				}
+				else
+				{
+					$input['image'] = $item->image;
+				}
+
+			// Input Image
+				/*
+				if (Input::hasFile('image'))
+				{					
+					if($item->image != null)
+					{
+						$up->del($item->image);	
+
+						return "aa".$item->image;
+					}
+
+					$up_file = $up->up($input['image'] , $this->img_path);
+
+					if( $up_file != false )
+					{					
+						
+
+						$input['image'] =  $this->img_path.$up_file;
+
+						$item->image    =  $input['image'];
+					}
+					else
+					{
+						$item['image'] = $item->image;
+					}
+
+				}
+				else
+				{
+					$item['image'] = $item->image;
+				}
+				*/
 				
 		// Save the object
-
 
 			$item->fill($input);
 			$item->save();
 			
-			return $this->getIndex();
+			return Redirect::back();
+
 	}
 
 	public function getDel($id = null)
 	{
-		$model = $this->data['model'];
-		$model::find($id)->delete();
+		$model 	= $this->data['model'];
+		$mod  	= $model::find($id);
+		$up 	= new upload();
 
-		return $this->getIndex();
+		if($mod->image != NULL)
+		{
+			$up->del($mod->image);
+		} 
+
+		$mod->delete();
+
+		return Redirect::back();
 	}
 
 }

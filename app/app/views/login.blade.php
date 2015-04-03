@@ -5,12 +5,15 @@
 <div class="container">    
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-xs-4 col-xs-offset-4 ">   
       <div class="text-center">
-        <h1><img src="{{ URL::asset('assets/images/nav_stock_logo_little.png') }}" ></h1>        
+        <h1>
+         <img src="{{ URL::asset('assets/images/nav_stock_logo_little.png') }}" >
+        </h1>        
       </div> 
-        <div class="panel " >
-        
+        <div class="panel panel-default " >
+            {{--
             {{App::environment()}}
             <h1>{{Session::get('company')}}</h1>
+            --}}
     
             <div style="padding-top:30px" class="panel-body" >    
                 {{Form::open(array('route'=>'post_login','class'=>'form-horizontal'))}}
@@ -37,7 +40,6 @@
                 {{Form::close()}}
             </div>               
         </div> 
-        @include('msg')
     </div>
 </div>
     

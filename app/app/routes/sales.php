@@ -3,7 +3,7 @@
 
 	//Route::get('compras/{model?}/{search?}', 	array('as' => 'purchases', 				'uses'  => 'PurchasesController@getIndex'));
 	Route::get('ventas', 						array('as' => 'sales', 				'uses'  => 'SalesController@getNew'));
-	Route::get('ventas Lista', 					array('as' => 'sales_list', 		'uses'  => 'SalesController@getList'));
+	Route::get('ventas_lista', 					array('as' => 'sales_list', 		'uses'  => 'SalesController@getList'));
 	
 	Route::get('ventas_nuevo_pagina', 			array('as' => 'sales_new_page',		'uses'  => 'SalesController@getNew'));
 	Route::get('ventas_nuevo', 					array('as' => 'sales_new_form', 	'uses'  => 'SalesController@formModal'));
@@ -21,5 +21,7 @@
 	Route::get('process_sales', 	   			array('as'=>'sales_process', 'uses'=>'SalesController@getProcess'));
 
 	Route::get('remito_sales/{id}', 			array('as'=>'sales_remito', 'uses'=>'SalesController@getRemito'));
+
+	Route::get('cancelar', 						array('as' => 'sales_cancel', 'uses' => 'SalesController@getCancel'));
 
 ?>

@@ -13,6 +13,27 @@ class ProfilesController extends BaseController
 		$this->data['seccion']		= '';
 	}
 
+	public function postNew()
+	{	
+		$model = $this->data['model'];
+	 	$profile = $model::create(Input::all());
+
+	 	$modules = Modules::all();
+	 	
+	 	foreach($modules as $module)
+	 	{
+	 		$permissions = new Permissions();
+	 		$permissions->read 			= 0;
+	 		$permissions->edit 			= 0;
+	 		$permissions->delete 		= 0;
+	 		$permissions->add 			= 0;
+	 		$permissions->modules_id 	= $module->id;
+	 		$permissions->profiles_id 	= $profile->id;
+	 		$permissions->save();	 			
+	 	}
+
+	 	return Redirect::back();
+	}
 }
 
 ?>

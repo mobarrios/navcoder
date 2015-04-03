@@ -1,4 +1,4 @@
-{{Form::texto('code','Codigo', array('required'))}}
+  {{Form::texto('code','Codigo')}}
   {{Form::texto('name','Nombre')}}
   {{Form::texto('description','Descripcion')}}
   {{Form::providers('providers_id','Proveedor')}}

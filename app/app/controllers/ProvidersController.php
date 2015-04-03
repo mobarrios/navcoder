@@ -3,6 +3,7 @@
 class ProvidersController extends BaseController
 {
 	protected $data = array();
+	protected $search_by 	=  array();
 
 	public function __construct()
 	{
@@ -20,6 +21,8 @@ class ProvidersController extends BaseController
 		
 		// Variable that tells where to go according to the function, edit, new, delete
 		$this->data['seccion']		= '';
+
+		$this->search_by = array('name','last_name','dni','email','company_name','cuit');
 	}
 }
 

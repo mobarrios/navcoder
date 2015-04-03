@@ -24,7 +24,32 @@ class BaseController extends Controller {
 
 		if(isset($search))
 		{
-			$this->data['model'] 	= $model::where('id' ,'like','%'.$search.'%')->orderBy('id' ,'ASC')->paginate('10');
+			/*
+			$model	= array();//$model::where('id' ,'like','%'.$search.'%')->orderBy('id' ,'ASC')->paginate('10');
+
+			foreach($this->search_by  as $columns)
+			{
+				//array_push($model , $model::where($columns ,'like','%'.$search.'%'));	
+				->where($columns,'like','%'.$search.'%');
+			}
+			*/
+			//$this->data['model'] 	= $model::where('id' ,'like','%'.$search.'%')->orderBy('id' ,'ASC')->paginate('10');
+			
+			
+			$mod  = $model::where('id','like','%'.$search.'%');
+			//$b 	  = array('code','name');
+			
+			foreach($this->search_by as $col)
+			{
+				$mod = $mod->orWhere($col,'like','%'.$search.'%');
+			}
+			
+			$mod  = $mod->paginate('10');
+		
+
+
+			$this->data['model'] = $mod;
+			
 		}
 		else
 		{
@@ -33,7 +58,11 @@ class BaseController extends Controller {
 
 			
 		return View::make('view')->with($this->data);
+
+
 	}
+
+
 
 	//open form modal
 	public function formModal($id = null)

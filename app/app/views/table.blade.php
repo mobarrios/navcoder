@@ -7,19 +7,9 @@
 	
 	@section('content')
 
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
+	<div id="table">
 
+	</div>
 
 	@endsection
 
@@ -28,18 +18,18 @@
 
 	<script>
 		$(document).ready(function(){
- 
 
-    		$('#example').DataTable(
-    			{
-        			  "ajax": "ajax",
-        			   "columns": [
-           							 {"title": "id", 	"data": "id" },
-           							 {"title": "nombre", "data": "name" },
-           							 {"title": "" , "data" : "id"},
-      							   ]
-    			});
-		});
+					$.ajax({
+							url : 'ajax',
+							dataType: 'json',
+							}).done(function (data) {
+								$('#table').html(data);
+								console.log(data);
+								
+							}).fail(function () {
+								alert('Posts could not be loaded.');
+					});
+			});
 	</script>
 
 	@endsection

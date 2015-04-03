@@ -3,7 +3,7 @@
  class Upload 
 {
 	
-	public static function up($file = null ,$path = null)
+	public static function up($file = null , $path = null)
 	{
 
 		if($file)
@@ -15,11 +15,11 @@
 				$date 	  		=  new DateTime();	
 				$filename 		=  $date->getTimestamp().".".$file->getClientOriginalExtension();
 			
-				$upload_success =  $file->move(public_path().'/'.$path , $filename);
+				$upload_success =  $file->move(public_path($path) , $filename);
 
 				if( $upload_success ) {
 
-					return $filename;
+					return $path.$filename;
 					//$novedad->imagen = $filename ;
 
 				} else {
@@ -37,7 +37,8 @@
 
 	public static function del($file = null, $path = null)
 	{
-		File::delete($path.$file);				
+		//File::delete($path.$file);	
+		File::delete(public_path($file));			
 	}
 }
 

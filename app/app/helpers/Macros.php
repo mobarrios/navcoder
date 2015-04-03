@@ -1,7 +1,32 @@
 <?php
+
+    Form::macro('profiles', function($name, $label)
+        {
+            //$areas  = Area::lists('area','id');
+            $value  = Form::getValueAttribute($name);
+
+            $profiles     = Profiles::lists('profile','id');
+
+            $input  = Form::select($name , $profiles , $value , array('class'=>'form-control')); 
+
+            return buildInput($input,$label);
+        });
+
+
+    Form::macro('caja_type',function($name,$label)
+    {
+             $method = array('0' => 'Ninguno', '1'=>'Gastos Varios','2'=>'Ingresos Varios','3'=>'Retiro de Caja','4'=>'Gastos Fijos');
+
+             $input = Form::select($name, $method, null , array('class'=>'form-control')); 
+
+             return buildInput($input, $label);
+
+    });
+
+
     Form::macro('pay_method',function($name,$label)
     {
-             $method = array('1'=>'Efectivo','2'=>'Tarjeta de Credito','3'=>'Desposito','4'=>'Transferencia','5'=>'Cheque');
+             $method = array('0' => 'Ninguno', '1'=>'Efectivo','2'=>'Tarjeta de Credito','3'=>'Desposito','4'=>'Transferencia','5'=>'Cheque');
 
              $input = Form::select($name, $method, null , array('class'=>'form-control')); 
 
@@ -34,7 +59,7 @@
             //$areas  = Area::lists('area','id');
             $value  = Form::getValueAttribute($name);
 
-            $um     = array('0'=>'Seleccionar','1'=>'Unidad','2'=>'Caja x 50','3'=>'Cm3','4'=>'Mt2');
+            $um     = array('0'=>'Ninguno', '1'=>'Unidad','2'=>'Caja x 50','3'=>'Cm3','4'=>'Mt2');
 
             $input  = Form::select($name , $um , $value , array('class'=>'form-control')); 
 

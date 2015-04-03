@@ -26,12 +26,12 @@
 					      <div id="2" class="panel-collapse collapse in " role="tabpanel" aria-labelledby="headingTwo">
 					        <div class="panel-body">    
 					        	@if(Session::has('data'))
-					        		{{ Form::date('date') }} 
+					        		<input type="text" value="{{Session::get('data')['date']}}" class="form-control" disabled>
 					        	@else
 					          		{{ Form::date('date') }}   
 					          	@endif
 					           <br>
-					         	<input class="form-control" placeholder='Cliente' id="client_name" value="{{Session::get('data')['client_name']}}" >
+					         	<input class="form-control" placeholder='Cliente' id="client_name" value="{{Session::get('data')['client_name']}}"  >
 					         	<input type="hidden" name="client_id" id="client_id" data-id="">
 					        </div>
 					      </div>
@@ -69,14 +69,16 @@
 
 
 								<div class="col-xs-12">
-									<a id='add_item' class='btn btn-success'> Agregar </a>
+									<a id='add_item' class='btn btn-xs btn-success'><span class="fa fa-plus"></span> Agregar </a>
 								</div>
 								{{Form::close()}}
 					        </div>
 					      </div>
 					    </div>
 					    <br>
-					     <table class="table table-hover">
+					    <table class="table table-striped table-hover  table-responsive">
+					    	
+					    
 					    	<thead>
 					    		<tr>
 					    			<th>Cod.</th>
@@ -87,23 +89,7 @@
 					    			<th></th>
 					    		</tr>
 					    	</thead>
-					    	<tbody id='table_items_body'>
-					    		@if(Session::has('array_items'))
-					    			@foreach(Session::get('array_items') as $item => $key)
-					    			<tr>
-					    				<td>{{$key['code']}} </td> 
-					    				<td>{{$key['cantidad']}}</td>	
-					    				<td>{{$key['description']}}</td>
-					    				<td> $ {{$key['$']}}</td>
-					    				<td> $ {{$key['subtotal'] }}</td>	
-					    				<td><a href="{{route('sales_delitem', $item )}}" class="del_confirm pull-right"><i class="glyphicon glyphicon-remove-circle"></i></a>
-					    				
-					    				</td>	    			
-					    			</tr>
-					    			@endforeach
-					    		@endif
-					    	</tbody>
-
+					    	<tfoot>
 					    		<tr>
 					    			<td></td>
 					    			<td></td>
@@ -112,10 +98,29 @@
 					    			<td> $ <strong>{{Session::get('array_total')}}</strong></td>
 					    			<td></td>
 					    		</tr>
-					    	
+					    	</tfoot>
+					    	<tbody id='table_items_body'>
+					    		@if(Session::has('array_items'))
+
+					    			@foreach(Session::get('array_items') as $item => $key)
+					    			<tr>
+					    				<td>{{$key['code']}} </td> 
+					    				<td>{{$key['cantidad']}}</td>	
+					    				<td>{{$key['description']}}</td>
+					    				<td> $ {{$key['$']}}</td>
+					    				<td> $ {{$key['subtotal'] }}</td>	
+					    				<td><a href="{{route('sales_delitem', $item )}}" class="del_confirm pull-right"><i class="fa fa-remove"></i></a>
+					    				</td>	    			
+					    			</tr>
+					    			@endforeach
+					    		@endif
+					    	</tbody>
+	    	
 					    </table>
-					  <a id="process" class="btn btn-success">Procesar</a>
-	
+			
+			<hr>		 
+					  <a href="{{route('sales_cancel')}}" id="cancel" class="del btn btn-danger">Cancelar</a>
+					 <a id="process" class="btn btn-success">Procesar</a>
 					  </div>
 			  </div>
 		</div>
@@ -150,7 +155,10 @@
 									window.open('remito_sales/'+data , '_blank');	
 									
 								}
-						 	},                            
+						 	},
+						 	error: function() {
+                                alert('Error Procesando Pedido.');
+                             }   
 						});
 				});
 
@@ -220,7 +228,16 @@
 				});
 
  				$('#add_item').on('click',function(){
-			  		$('#form_add_item').submit();
+
+ 					if($('#client_id').val() == "")
+ 					{
+ 						alert('Completar Cliente');
+ 					}
+ 					else
+ 					{
+ 						$('#form_add_item').submit();
+ 					}
+			  		
 
  				});
 				//post by ajax add item

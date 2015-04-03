@@ -11,8 +11,14 @@ class Modules extends Eloquent
 
 	public function Permissions()
 	{
-		return $this->belongsTo('Permissions');
+		return $this->hasMany('Permissions');
 	}
+
+	public function PermissionsProfiles($id_profiles = null)
+	{
+		return $this->hasMany('Permissions')->where('profiles_id','=',$id_profiles)->get();
+	}
+	
 	
 }
 

@@ -3,7 +3,7 @@
 	
 	Route::group(array('before'=>'validation:items-read'),function()
 	{
-		Route::get('articulos/{model?}/{search?}', 	array('as' => 'items', 			'uses'  => 'ItemsController@getIndex'));
+		Route::get('articulos/{model?}/{search?}', 	array('as' => 'items', 	'uses'  => 'ItemsController@getIndex'));
 	});
 
 	Route::group(array('before'=>'validation:items-edit'),function()
@@ -22,6 +22,7 @@
 		Route::get('articulos_nuevo', 				array('as' => 'items_new_form', 'uses'  => 'ItemsController@formModal'));
 		Route::post('articulos_nuevo', 				array('as' => 'items_post_new', 'uses' 	=> 'ItemsController@postNew'));
 	});
+
 
 
 	

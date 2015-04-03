@@ -64,27 +64,6 @@ Route::get('login',function()
 
 Route::group(array('before'=>'switchDB'),function()
 {
-		
-			Route::get('ajax',function(){
-
-				//$j = array('data'=> array(array('id'=>'2','name'=>'Tiger Nixon')));
-
-				$m = Items::all();
-
-				
-				$mod = array();
-
-				foreach($m as $model)
-				{
-					array_push($mod, array('id' => $model->id ,'name'=> $model->name));
-				}
-
-				$items['data'] = $mod;
-
-			
-			return Response::json($items);
-
-			});
 
 			Route::get('table',function(){
 			return View::make('table');
@@ -107,15 +86,6 @@ Route::group(array('before'=>'switchDB'),function()
 					return View::make('index')->with($data);
 				});
 
-				Route::post('buscar/', function()
-				{				
-					$input 	= Input::all();
-					$model  = $input['model'];
-					$search = $input['buscar'];
-
-					return Redirect::route($input['model'],array($model,$search));
-				});
-
 				require(__DIR__ . '/routes/items.php');
 				require(__DIR__ . '/routes/doctors.php');
 				require(__DIR__ . '/routes/clients.php');
@@ -124,14 +94,48 @@ Route::group(array('before'=>'switchDB'),function()
 				require(__DIR__ . '/routes/providers.php');
 				require(__DIR__ . '/routes/obras.php');
 				require(__DIR__ . '/routes/sales.php');
+				require(__DIR__ . '/routes/caja.php');
 
 				//config 
 				require(__DIR__ . '/routes/config/users.php');
 				require(__DIR__ . '/routes/config/profiles.php');
 				require(__DIR__ . '/routes/config/permissions.php');
+
+
+				//require(__DIR__ . '/routes/config/ajax.php');
 		});
 
 		// ajax search	
+
+		Route::post('buscar', function()
+		{				
+			$input 	= Input::all();
+			$model  = $input['model'];
+			$search = $input['buscar'];
+
+			return Redirect::route($input['model'],array($model,$search));
+		});
+
+		Route::post('buscar_sales', function()
+		{				
+			$input 	= Input::all();
+			$data['modulo'] 	= 'Ventas';
+			$data['ruta'] 		= 'sales';
+			$data['seccion']	= 'Inicio';
+
+			if($input['from'] != "" || $input['to'] != "")
+			{
+				$data['model']		=  Sales::whereBetween('sales_date', array( date("Y-m-d",strtotime($input['from'])), date("Y-m-d",strtotime($input['to'])) ))->paginate(10);	
+			
+			}else{
+
+				$data['model']		=  Sales::paginate(10);
+			}
+			
+			return View::make('sales.sales_view')->with($data);
+		});
+
+
 		Route::post('provider_search',function()
 		{
 				$data = Input::get('search');
@@ -146,7 +150,7 @@ Route::group(array('before'=>'switchDB'),function()
 				foreach($resp as $r)
 				{
 					//array_push($res, $r->last_name.' , '.$r->name );
-					$res[] = array('id' => $r->id , 'label' => $r->company_name );
+					$res[] = array('id' => $r->id , 'label' => $r->name .' '.$r->last_name . ' - '.$r->company_name );
 					//$res[] = array('id'=>$r->id, 'name'=>$r->company_name );
 				}
 
@@ -167,7 +171,7 @@ Route::group(array('before'=>'switchDB'),function()
 				foreach($resp as $r)
 				{
 					//array_push($res, $r->last_name.' , '.$r->name );
-					$res[] = array('id' => $r->id , 'label' => $r->company_name );
+					$res[] = array('id' => $r->id , 'label' => $r->name .' '.$r->last_name.' - '.$r->company_name );
 					//$res[] = array('id'=>$r->id, 'name'=>$r->company_name );
 				}
 
@@ -188,10 +192,13 @@ Route::group(array('before'=>'switchDB'),function()
 
 				foreach($resp as $r)
 				{
+					
+
 					$res[] = array(	'id' => $r->id , 
 									'label' => $r->name .'$ ' . $r->sell_price , 
 									'value' => $r->name ,
 									'sell_price' => $r->sell_price);
+					
 				}
 
 				return Response::json($res);

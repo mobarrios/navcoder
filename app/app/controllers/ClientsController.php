@@ -2,7 +2,8 @@
 
 class ClientsController extends BaseController
 {
-	protected $data = array();
+	protected $data		 = array();
+	protected $search_by =  array();
 
 	public function __construct()
 	{
@@ -11,6 +12,8 @@ class ClientsController extends BaseController
 		$this->data['model'] 		= 'Clients';
 		$this->data['modulo'] 		= 'Clientes';
 		$this->data['seccion']		= '';
+
+		$this->search_by = array('name','last_name','dni','company_name','cuit');
 	}
 
 	public function getCc($id)
@@ -23,10 +26,23 @@ class ClientsController extends BaseController
 
 	public function postPayment()
 	{
+		$input = Input::all();
 
 		$payment = new ClientsPayment();
 		$payment->fill(Input::all());
 		$payment->save();
+
+		// ingreso en caja diaria el pago efectivo
+		if($input['payment_method'] == '1')
+		{
+			$caja  				= new Caja();
+			$caja->date 		= $input['date'];
+			$caja->description 	= 'Pago Remito Nro.'.$input['sales_id'] .': '.$input['detail'];
+			$caja->in 			= $input['amount'];
+			$caja->save();
+		}
+		
+
 
 		return Redirect::back(); 
 	}

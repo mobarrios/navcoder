@@ -2,7 +2,8 @@
 
 class ObrasController extends BaseController
 {
-	protected $data = array();
+	protected $data 		= array();
+	protected $search_by 	=  array();
 
 	public function __construct()
 	{
@@ -11,6 +12,8 @@ class ObrasController extends BaseController
 		$this->data['model'] 		= 'Obras';
 		$this->data['modulo'] 		= 'Obras';
 		$this->data['seccion']		= '';
+
+		$this->search_by = array('name','cuit');
 	}
 }
 

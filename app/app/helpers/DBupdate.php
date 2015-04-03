@@ -8,26 +8,21 @@ class DBupdate
 		/*Schema::table('sales_items',function($table){
 			$table->string('observations','200');
 		});*/
+		
+		Schema::create('caja', function($table){
 
-		Schema::create('clients_payment',function($table)
-		{	
 			$table->increments('id');
 			$table->softDeletes();
 			$table->timestamps();
 
 			$table->date('date');
-			$table->string('detail','200');
-			$table->double('amount',10,2);
-			$table->integer('payment_method');
-
-			//relations
-			$table->integer('clients_id')->unsigned();
-			$table->foreign('clients_id')->references('id')->on('clients');
-
-			$table->integer('sales_id')->unsigned();
-			$table->foreign('sales_id')->references('id')->on('sales');
+			$table->string('description','200');
+			$table->double('in', 10,2);
+			$table->double('out',  10,2);
+			$table->integer('type');
 
 		});
+	
 			
 	}	
 
@@ -35,6 +30,7 @@ class DBupdate
 	public static function create()
 	{
 		
+
 		Schema::create('company', function($table)
 		{
 			$table->increments('id');
@@ -362,6 +358,26 @@ class DBupdate
 			$table->foreign('profiles_id')->references('id')->on('profiles');	
 		});
 		
+
+		Schema::create('clients_payment',function($table)
+		{	
+			$table->increments('id');
+			$table->softDeletes();
+			$table->timestamps();
+
+			$table->date('date');
+			$table->string('detail','200');
+			$table->double('amount',10,2);
+			$table->integer('payment_method');
+
+			//relations
+			$table->integer('clients_id')->unsigned();
+			$table->foreign('clients_id')->references('id')->on('clients');
+
+			$table->integer('sales_id')->unsigned();
+			$table->foreign('sales_id')->references('id')->on('sales');
+
+		});
 	
 		self::createAdminUser();
 		self::createModules();

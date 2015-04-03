@@ -11,6 +11,8 @@ class UsersController extends BaseController
 		$this->data['model'] 		= 'User';
 		$this->data['modulo'] 		= 'Usuarios';
 		$this->data['seccion']		= '';
+
+		$this->search_by =  array('email','name','last_name');
 	}
 
 	//post nuevo
@@ -34,9 +36,14 @@ class UsersController extends BaseController
 	 	$model = $model::find($id);
 
 	 	$input = Input::all();
-		$pass  = Hash::make(Input::get('password'));
-		$input['password'] = $pass;
+		$pass  = Input::get('password');
 
+		if (Hash::needsRehash($pass))
+            {
+                $pass = Hash::make($pass);
+            }
+
+		$input['password'] = $pass;
 
 	 	$model->fill($input);
 	 	$model->save();

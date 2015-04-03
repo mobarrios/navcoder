@@ -44,10 +44,11 @@
 		<div class="container" style="margin-top:70px">
 				
 				@include('msg')
-
+				{{--
 				@if(App::environment('dev'))
 					<span class="label label-danger">Development...</span>
 				@endif
+				--}}
 
 				@yield('content')
 

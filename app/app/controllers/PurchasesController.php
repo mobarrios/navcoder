@@ -5,6 +5,7 @@ class PurchasesController extends BaseController
 	protected $data 	= array();
 	protected $module 	= 'purchase';
     //protected $moduleId ;
+    protected $search_by 	=  array();
 
 	public function __construct()
 	{
@@ -13,6 +14,8 @@ class PurchasesController extends BaseController
 		$this->data['model'] 		= 'Purchases';
 		$this->data['modulo'] 		= 'Compras';
 		$this->data['seccion']		= '';
+
+		$this->search_by = array('purchases_date','providers_id');
 	}
 
 	public function getList($model= null , $search = null)

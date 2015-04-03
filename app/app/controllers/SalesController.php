@@ -4,6 +4,7 @@ class SalesController extends BaseController
 	protected $data 	= array();
 
     //protected $moduleId ;
+	protected $search_by 	=  array();
 
 	public function __construct()
 	{
@@ -12,17 +13,39 @@ class SalesController extends BaseController
 		$this->data['model'] 		= 'Sales';
 		$this->data['modulo'] 		= 'Ventas';
 		$this->data['seccion']		= '';
+
+		$this->search_by = array('sales_date','clients_id');
+	}
+
+	public function getCancel()
+	{
+		Session::forget('array_items');
+		Session::forget('array_total');
+		Session::forget('data');
+
+		return Redirect::back()->with('success',"Venta Cancelada");
 	}
 
 	public function getList($model= null , $search = null)
 	{
 		$model 						= $this->data['model'];
-		
 		$this->data['seccion']		= 'Inicio';
 
 		if(isset($search))
 		{
-			$this->data['model'] 	= $model::where('id' ,'like','%'.$search.'%')->orderBy('id' ,'ASC')->paginate('10');
+			
+			$mod  = $model::where('id','like','%'.$search.'%');
+			
+			foreach($this->search_by as $col)
+			{
+				$mod = $mod->orWhere($col,'like','%'.$search.'%');
+			
+			}
+
+			$mod  = $mod->paginate('10');
+
+			$this->data['model'] = $mod;
+			
 		}
 		else
 		{
@@ -30,7 +53,8 @@ class SalesController extends BaseController
 		}
 
 			
-		return View::make('view')->with($this->data);		
+		//return View::make('view')->with($this->data);		
+		return View::make('sales.sales_view')->with($this->data);
 	}
 
 	public function getProcess()
@@ -146,14 +170,15 @@ class SalesController extends BaseController
 				$client 	= Clients::find($client_id_sales);
 				$data 		= array('date'			=> $date_sales,
 									'client_id'		=> $client_id_sales, 
-									'client_name'	=> $client->name.','. $client->las_name
+									'client_name'	=> $client->name.' '. $client->last_name .' - '.$client->company_name
 									);
 
 				Session::put('data',$data);
 			}
 			
 
-		//items de remito
+			//items de remito
+			
 			$item 			= Items::find(Input::get('item_id'));
 
 			if(!Session::has('array_items'))
@@ -168,7 +193,7 @@ class SalesController extends BaseController
 
 			$item 	= array('item_id'		=> Input::get('item_id'),
 							'code'			=> $item->code, 
-							'description' 	=> $item->description, 
+							'description' 	=> $item->name .' '.$item->description, 
 							'$' 			=> Input::get('price_per_unit'),
 							'cantidad' 		=> Input::get('cantidad'), 
 							'observations'	=> Input::get('observations'), 

@@ -3,15 +3,17 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Items extends Eloquent
 {
+
+
+	protected $table 		= 'items';
+	protected $guarded 		= array('');
+
 	/** 
      * Soft Delete
 	 */
-	use SoftDeletingTrait;
+	//use SoftDeletingTrait;
+  	//protected $dates 		= ['deleted_at'];
 
-  	protected $dates 		= ['deleted_at'];
-    //protected $softDelete 	= true; 
-	protected $table 		= 'items';
-	protected $guarded 		= array('');
 
 		
 	public function PurchasesItems()

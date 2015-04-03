@@ -2,18 +2,22 @@
 
 class PermissionsController extends BaseController
 {
-	public function getEdit($id = null)
+	public function getEdit($profiles_id = null)
 	{
-		$m		= Modules::all();
-		//$p		= Permissions::where('profiles_id','=',$id)->get();
+		$data['modules'] 		= Modules::where('available','=',1)->orderBy('name','ASC')->get();
+		$data['profiles_id'] 	= $profiles_id;
 
-		foreach($m as $a)
-		{
-			echo($a->Permissions);
-		}
-
-		return;
 		return View::make('permissions.form')->with($data);
+	}
+
+	public function getUpdate($permissions_id = null , $permissions_value = null , $bool)
+	{
+
+			$permissions 					 = Permissions::find($permissions_id);
+			$permissions->$permissions_value = $bool ;
+			$permissions->save();
+
+		return Response::json(true);
 	}
 }
 
