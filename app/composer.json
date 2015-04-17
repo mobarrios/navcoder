@@ -6,7 +6,9 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"barryvdh/laravel-dompdf": "0.4.*"
+		"barryvdh/laravel-dompdf": "0.4.*",
+		"Dinesh/barcode" : "dev-master",
+		"intervention/image": "~2.1"
 
 	},
 	"autoload": {

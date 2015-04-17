@@ -7,6 +7,7 @@ class DoctorsController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modules_id']	= 9;
 		$this->data['modal'] 		= 'doctors';
 		$this->data['ruta'] 		= 'doctors';
 		$this->data['model'] 		= 'Doctors';

@@ -25,7 +25,7 @@
 
 					<div class="col-xs-2 pull-right text-center">
 						
-						@if(Roles::validate('items','add'))
+						@if(Roles::validate($modules_id,'add'))
 							<a aria-label="Left Align" href="{{route($ruta.'_new_form')}}" class="btn  btn-warning btn-sm" data-toggle=	"modal" data-target="#myModal" data-backdrop="false"> <span class="fa fa-plus" aria-hidden="true"></span> agregar
 							</a>
 						@endif

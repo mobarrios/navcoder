@@ -25,8 +25,12 @@
 					<td>{{$models->license}}</td>
 					<td>
 						<div class="btn-group btn-group-xs">
+						@if(Roles::validate($modules_id,'edit'))
 							<a href="{{route($ruta.'_edit_form',$models->id)}}" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-edit"></i></a>
+						@endif
+						@if(Roles::validate($modules_id,'delete'))
 							<a href="{{route($ruta.'_delete',$models->id)}}"type="button" class="del_confirm btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i></a>
+						@endif
 						</div>
 					</td>
 				</tr>

@@ -10,8 +10,5 @@ class Menus extends Eloquent
 		return $this->belongsTo('Modules');
 	}
 
-	public function SubMenus()
-	{
-		return $this->hasMany('SubMenus');
-	}
+
 }

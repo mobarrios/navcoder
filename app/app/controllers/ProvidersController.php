@@ -7,6 +7,7 @@ class ProvidersController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modules_id']	= 5;
 		//Route for modal include
 		$this->data['modal'] 		= 'providers';
 		

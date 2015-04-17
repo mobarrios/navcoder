@@ -7,6 +7,7 @@ class CajaController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modal'] 		= 11;
 		$this->data['modal'] 		= 'caja';
 		$this->data['ruta'] 		= 'caja';
 		$this->data['model'] 		= 'Caja';

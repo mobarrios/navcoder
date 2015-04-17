@@ -6,6 +6,7 @@ class ProfilesController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modules_id']	= 4;
 		$this->data['modal'] 		= 'profiles';
 		$this->data['ruta'] 		= 'profiles';
 		$this->data['model'] 		= 'Profiles';

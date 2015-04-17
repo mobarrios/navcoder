@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -124,6 +124,12 @@ return array(
 
 		//DOMPDF
 		'Barryvdh\DomPDF\ServiceProvider',
+		
+		//Barcode
+		'Dinesh\Barcode\BarcodeServiceProvider',
+
+		//images
+		'Intervention\Image\ImageServiceProvider',
 
 
 	),
@@ -195,6 +201,14 @@ return array(
 
 		//DOMPDF
 		'PDF' => 'Barryvdh\DomPDF\Facade',
+
+		//barcode
+		'DNS1D' => 'Dinesh\Barcode\Facades\DNS1DFacade',
+        'DNS2D' => 'Dinesh\Barcode\Facades\DNS2DFacade',
+
+        //images
+        'Image' => 'Intervention\Image\Facades\Image',
+
 
 	),
 

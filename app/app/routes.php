@@ -11,6 +11,22 @@
 |I
 */
 
+Route::get('image', function()
+{
+    $img = Image::make('assets/images/logo_aclv.png');
+
+    return $img->response('jpg');
+});
+
+
+Route::get('barcode',function(){
+
+echo DNS1D::getBarcodeHTML("444511111111", "EAN13");
+echo DNS2D::getBarcodeHTML("4445645656", "QRCODE");
+
+return ;
+});
+
 /// WEB SERVICE API REST FULL
 Route::group(array('prefix' => 'api/v1'), function()
 {
@@ -209,6 +225,8 @@ Route::group(array('before'=>'switchDB'),function()
 		Route::get('update',function()
 		{
 			DBupdate::update();
+				
+			//DBupdate::update();
 			return "updated OK";
 		});
 

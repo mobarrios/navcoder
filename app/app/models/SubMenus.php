@@ -8,4 +8,10 @@ class SubMenus extends Eloquent
 	{
 		return $this->belongsTo('Menus');
 	}	
+	
+	public function Modules()
+	{
+		return $this->belongsTo('Modules');
+	}
+
 }

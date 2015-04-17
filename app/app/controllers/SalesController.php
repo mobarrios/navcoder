@@ -8,6 +8,7 @@ class SalesController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modules_id']	= 7;
 		$this->data['modal'] 		= 'sales';
 		$this->data['ruta'] 		= 'sales';
 		$this->data['model'] 		= 'Sales';

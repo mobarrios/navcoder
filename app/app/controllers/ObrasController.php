@@ -7,6 +7,7 @@ class ObrasController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modules_id']	= 10;
 		$this->data['modal'] 		= 'obras';
 		$this->data['ruta'] 		= 'obras';
 		$this->data['model'] 		= 'Obras';

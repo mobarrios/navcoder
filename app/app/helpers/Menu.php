@@ -10,9 +10,6 @@ class Menu
 		return $menus;
 	}	
 
-	public static function build()
-	{
+	
 
-
-	}
 }

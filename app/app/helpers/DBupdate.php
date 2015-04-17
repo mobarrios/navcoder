@@ -4,13 +4,16 @@ class DBupdate
 {
 	public static function update()
 	{
-
-		/*Schema::table('sales_items',function($table){
-			$table->string('observations','200');
-		});*/
 		
-		Schema::create('caja', function($table){
+	
+	}	
 
+
+	public static function create()
+	{
+		
+		Schema::create('caja', function($table)
+		{
 			$table->increments('id');
 			$table->softDeletes();
 			$table->timestamps();
@@ -20,16 +23,8 @@ class DBupdate
 			$table->double('in', 10,2);
 			$table->double('out',  10,2);
 			$table->integer('type');
-
 		});
-	
-			
-	}	
 
-
-	public static function create()
-	{
-		
 
 		Schema::create('company', function($table)
 		{
@@ -171,23 +166,14 @@ class DBupdate
 			$table->string('name','50');
 			$table->string('icon','50');
 			$table->string('routes','50');
+
 			$table->boolean('available');
-		});
+			$table->integer('main');
+			$table->string('action','20');
 
-		Schema::create('sub_menus', function($table)
-		{
-			$table->increments('id');
-			$table->softDeletes();
-			$table->timestamps();
+			$table->integer('modules_id')->unsigned()->nullable();
+			$table->foreign('modules_id')->references('id')->on('modules');
 
-			$table->string('name','50');
-			$table->string('icon','50');
-			$table->string('routes','50');
-		
-			//relations	
-
-			$table->integer('menus_id')->unsigned()->nullable();
-			$table->foreign('menus_id')->references('id')->on('menus');
 		});
 
 		Schema::create('obras_sociales', function($table)
@@ -251,23 +237,7 @@ class DBupdate
 			$table->foreign('providers_id')->references('id')->on('providers');
 		});
 
-		Schema::create('purchases_temporal', function($table)
-		{
-			$table->increments('id');
-			$table->softDeletes();
-			$table->timestamps();
-
-			$table->date('purchases_date');
-			$table->double('amount', 10,2);
-
-			//relations
-			$table->integer('providers_id')->unsigned()->nullable();
-			$table->foreign('providers_id')->references('id')->on('providers');
-
-			$table->integer('purchases_id')->unsigned()->nullable();
-			$table->foreign('purchases_id')->references('id')->on('purchases');
-		});
-
+	
 		Schema::create('purchases_items', function($table)
 		{
 			$table->increments('id');
@@ -303,22 +273,7 @@ class DBupdate
 			$table->foreign('clients_id')->references('id')->on('clients');
 		});
 
-		Schema::create('sales_temporal', function($table)
-		{
-			$table->increments('id');
-			$table->softDeletes();
-			$table->timestamps();
-
-			$table->date('sales_date');
-			$table->double('amount', 10,2);
-
-			//relations
-			$table->integer('clients_id')->unsigned()->nullable();
-			$table->foreign('clients_id')->references('id')->on('clients');
-
-			$table->integer('sales_id')->unsigned()->nullable();
-			$table->foreign('sales_id')->references('id')->on('sales');
-		});
+		
 
 		Schema::create('sales_items', function($table)
 		{
@@ -329,6 +284,7 @@ class DBupdate
 			$table->integer('quantity');
 			$table->double('discount', 10,2);
 			$table->double('price_per_unit', 10,2);
+			$table->string('observations','200');
 
 			//relations
 			$table->integer('sales_id')->unsigned()->nullable();
@@ -381,7 +337,8 @@ class DBupdate
 	
 		self::createAdminUser();
 		self::createModules();
-		//self::createMenus();
+		self::createMenus();
+		self::createAdminPermissions();
 
 
 	}
@@ -389,26 +346,62 @@ class DBupdate
 	// create profile administrator , user admin
 	public static function createAdminUser()
 	{
-		$profiles = new Profiles();
-		$profiles->profile = 'administrator';
+		$profiles 			= new Profiles();
+		$profiles->id 		= 1;
+		$profiles->profiles = 'administrator';
 		$profiles->save();
 
 		$user 				= new User();
+		$user->id 			= 1;
 		$user->email 		= 'admin';
 		$user->profiles_id	= $profiles->id;
 		$user->password 	= Hash::make('cholita');
 		$user->save();
 	}
 
+
+	//create admin permissions
+	public static function createAdminPermissions()
+	{
+		$modules = Modules::all();
+
+		foreach($modules as $module)
+		{
+			$permissions 				= new Permissions();
+			$permissions->read 			= 1;
+			$permissions->edit 			= 1;
+			$permissions->delete 		= 1;
+			$permissions->add 			= 1;
+			$permissions->modules_id 	= $module->id;
+			$permissions->profiles_id 	= 1;
+			$permissions->save();
+		}
+
+	}
+
 	// create modules
 	public static function createModules()
 	{
-		$lists = array('items','categories','users','profiles','providers','clients','sales','purchases','doctors','obras');
+		$modules =  [
+						['id'=>'1','name'=>'items'],
+						['id'=>'2','name'=>'categories'],
+						['id'=>'3','name'=>'users'],
+						['id'=>'4','name'=>'profiles'],
+						['id'=>'5','name'=>'providers'],
+						['id'=>'6','name'=>'clients'],
+						['id'=>'7','name'=>'sales'],
+						['id'=>'8','name'=>'purchases'],
+						['id'=>'9','name'=>'doctors'],
+						['id'=>'10','name'=>'obras'],
+						['id'=>'11','name'=>'cajas']
+					];
 
-		foreach($lists as $list)
+		foreach($modules as $list => $key  )
 		{
-			$modules = new Modules();
-			$modules->name = $list;
+			$modules 			= new Modules();
+			$modules->id   		= $key['id'];
+			$modules->name 		= $key['name'];
+			$modules->available = 1;
 			$modules->save();
 		}
 	}
@@ -416,99 +409,180 @@ class DBupdate
 	
 	public static function createMenus()
 	{	
-		$menu = self::menu();	
-	
-		foreach($menu as $m => $key)
+		$menus = self::menu();	
+
+		foreach($menus as $menu => $key)
 		{
-			$menu 			= new Menus();
-			$menu->name 	= $key['name'];
-			$menu->routes 	= $key['route'];
-			$menu->available= 1;
+			$menu 				= new Menus();
+			$menu->id 			= $key['id'];
+			$menu->name 		= $key['name'];
+			$menu->icon 		= $key['icon'];
+			$menu->modules_id	= $key['modules_id'];
+			$menu->routes 		= $key['routes'];
+			$menu->main 		= $key['main'];
+			$menu->action 		= $key['action'];
+			$menu->available 	= 1;
 			$menu->save();
-
-			if(!empty($key['sub']))
-			{
-				foreach($key['sub'] as $sub => $sub_key)
-				{
-					$sub 			= new SubMenus();
-					$sub->name 		= $sub_key['name'];
-					$sub->routes 	= $sub_key['route'];
-					$sub->menus_id 	= $menu->id;
-					$sub->save();
-				}
-			}
-		}
-
+		}	
 	}
 
 	
 	public static function menu()
 	{
 
-		$menu[] = [ 'name' => 'Articulos',
-					'route'=> '',
-					'sub' => [
-								[
-								'name' => 'Articulos',
-								'route' => 'items'
-								],
-								[
-								 'name' => 'Categorias',
-								 'route' => 'categories'
-								 ]
-					]];
+		$menu = [	[ 
+					'id'		=> '1',
+					'name' 		=> 'Articulos',
+					'icon' 		=> '',
+					'modules_id'=> '1',
+					'routes'	=> '',
+					'available'	=> '',
+					'main'		=> '',
+					'action'	=> ''
+					],
+						[ 
+						'id'		=> '10',
+						'name' 		=> 'Lista de Articulos',
+						'icon' 		=> '',
+						'modules_id'=> '1',
+						'routes'	=> 'items',
+						'available'	=> '',
+						'main'		=> '1',
+						'action'	=> 'read'
+						],
+						[ 
+						'id'		=> '11',
+						'name' 		=> 'Categorias',
+						'icon' 		=> '',
+						'modules_id'=> '2',
+						'routes'	=> 'categories',
+						'available'	=> '',
+						'main'		=> '1',
+						'action'	=> 'read'
+						],
+					[ 
+					'id'		=> '2',
+					'name' 		=> 'Compras',
+					'icon' 		=> '',
+					'modules_id'=> '8',
+					'routes'	=> '',
+					'available'	=> '',
+					'main'		=> '',
+					'action'	=> ''
+					],
+						[ 
+						'id'		=> '20',
+						'name' 		=> 'Nueva Compra',
+						'icon' 		=> '',
+						'modules_id'=> '8',
+						'routes'	=> 'purchases',
+						'available'	=> '',
+						'main'		=> '2',
+						'action'	=> 'add'
+						],
+						[ 
+						'id'		=> '21',
+						'name' 		=> 'Lista de Compras',
+						'icon' 		=> '',
+						'modules_id'=> '8',
+						'routes'	=> 'purchases_list',
+						'available'	=> '',
+						'main'		=> '2',
+						'action'	=> 'read'
+						],
+						[ 
+						'id'		=> '22',
+						'name' 		=> 'Proveedores',
+						'icon' 		=> '',
+						'modules_id'=> '5',
+						'routes'	=> 'providers',
+						'available'	=> '',
+						'main'		=> '2',
+						'action'	=> 'read'
+						],
+					[ 
+					'id'		=> '3',
+					'name' 		=> 'Ventas',
+					'icon' 		=> '',
+					'modules_id'=> '7',
+					'routes'	=> '',
+					'available'	=> '',
+					'main'		=> '',
+					'action'	=> ''
+					],
+						[ 
+						'id'		=> '30',
+						'name' 		=> 'Nueva Venta',
+						'icon' 		=> '',
+						'modules_id'=> '7',
+						'routes'	=> 'sales',
+						'available'	=> '',
+						'main'		=> '3',
+						'action'	=> 'add'
+						],
+						[ 
+						'id'		=> '31',
+						'name' 		=> 'Lista de Ventas',
+						'icon' 		=> '',
+						'modules_id'=> '7',
+						'routes'	=> 'sales_list',
+						'available'	=> '',
+						'main'		=> '3',
+						'action'	=> 'read'
+						],
+						[ 
+						'id'		=> '32',
+						'name' 		=> 'Clientes',
+						'icon' 		=> '',
+						'modules_id'=> '6',
+						'routes'	=> 'clients',
+						'available'	=> '',
+						'main'		=> '3',
+						'action'	=> 'read'
+						],
 
-		$menu[] = [ 'name' => 'Compras',
-					'route'=> '',
-					'sub' => [
-								[
-								'name' => 'Nueva Compra',
-								'route' => 'purchases'
-								],
-								[
-								 'name' => 'Lista de Compras',
-								 'route' => 'purchases_list'
-								 ],
-								 [
-								 'name' => 'Proveedores',
-								 'route' => 'providers'
-								 ]
-					]];
+					[ 
+					'id'		=> '4',
+					'name' 		=> 'Doctores',
+					'icon' 		=> '',
+					'modules_id'=> '9',
+					'routes'	=> 'doctors',
+					'available'	=> '',
+					'main'		=> '',
+					'action'	=> 'read'
+					],
+					[ 
+					'id'		=> '5',
+					'name' 		=> 'Obras Sociales',
+					'icon' 		=> '',
+					'modules_id'=> '10',
+					'routes'	=> 'obras',
+					'available'	=> '',
+					'main'		=> '',
+					'action'	=> 'read'
+					],
+					[ 
+					'id'		=> '6',
+					'name' 		=> 'Movimientos',
+					'icon' 		=> '',
+					'modules_id'=> '11',
+					'routes'	=> '',
+					'available'	=> '',
+					'main'		=> '',
+					'action'	=> ''
+					],
+						[ 
+						'id'		=> '60',
+						'name' 		=> 'Caja Diaria',
+						'icon' 		=> '',
+						'modules_id'=> '11',
+						'routes'	=> 'caja',
+						'available'	=> '',
+						'main'		=> '6',
+						'action'	=> 'read'
+						],
 
-		$menu[] = [ 'name' => 'Ventas',
-					'route'=> '',
-					'sub' => [
-								[
-								'name' => 'Nueva Venta',
-								'route' => 'sales'
-								],
-								[
-								 'name' => 'Lista de Ventas',
-								 'route' => 'sales_list'
-								 ],
-								 [
-								 'name' => 'Clientes',
-								 'route' => 'clients'
-								 ]
-					]];
-
-		$menu[] = [ 'name' => 'Doctores',
-					'route'=> '',
-					'sub' => [
-								[
-								'name' => 'Doctores',
-								'route' => 'doctors'
-								]
-					]];
-
-		$menu[] = [ 'name' => 'Obras Sociales',
-					'route'=> '',
-					'sub' => [
-								[
-								'name' => 'Obras Sociales',
-								'route' => 'obras'
-								]
-					]];
+				];
 
 
 	return $menu;

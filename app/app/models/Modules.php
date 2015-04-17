@@ -9,6 +9,11 @@ class Modules extends Eloquent
 		return $this->hasMany('Menus');
 	}
 
+	public function SubMenus()
+	{
+		return $this->hasMany('SubMenus');
+	}
+
 	public function Permissions()
 	{
 		return $this->hasMany('Permissions');

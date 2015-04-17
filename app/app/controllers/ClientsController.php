@@ -7,6 +7,7 @@ class ClientsController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modules_id'] 	= 6;
 		$this->data['modal'] 		= 'clients';
 		$this->data['ruta'] 		= 'clients';
 		$this->data['model'] 		= 'Clients';

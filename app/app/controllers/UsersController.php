@@ -6,6 +6,7 @@ class UsersController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modules_id']	= 3;
 		$this->data['modal'] 		= 'users';
 		$this->data['ruta'] 		= 'users';
 		$this->data['model'] 		= 'User';

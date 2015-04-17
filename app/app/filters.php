@@ -14,10 +14,10 @@
 	{
 			
 			$valor 			= explode('-',$value); 
-			$module			= $valor[0];
+			$module_id			= $valor[0];
 			$action 		= $valor[1];
 
-			if(Roles::validate($module,$action) == false)
+			if(Roles::validate($module_id,$action) == false)
 			{
 				return Redirect::back()->withErrors('Acceso no permitido!');		
 			}

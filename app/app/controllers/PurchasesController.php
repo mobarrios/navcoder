@@ -9,6 +9,7 @@ class PurchasesController extends BaseController
 
 	public function __construct()
 	{
+		$this->data['modules_id']	= 8;
 		$this->data['modal'] 		= 'purchases';
 		$this->data['ruta'] 		= 'purchases';
 		$this->data['model'] 		= 'Purchases';

@@ -22,6 +22,7 @@ class ItemsController extends BaseController
 			$this->data['modal'] 		= 'items';
 		}
 
+		$this->data['modules_id']	= 1;
 		$this->data['ruta'] 		= 'items';
 		$this->data['model'] 		= 'Items';
 		$this->data['modulo'] 		= 'Articulos';
