@@ -21,10 +21,10 @@
 					<td>
 						<div class="btn-group btn-group-xs pull-right">
 						@if(Roles::validate($modules_id,'edit'))
-							<a href="{{route('purchases_remito',$models->id)}}" target="self" class="btn btn-default"><i class="glyphicon glyphicon-print"></i></a>
+							<a href="{{route('purchases_remito',$models->id)}}" target="self" class="btn btn-default"><i class="fa fa-print"></i></a>
 						@endif
 						@if(Roles::validate($modules_id,'delete'))
-							<a href="{{route($ruta.'_delete',$models->id)}}"type="button" class="del_confirm btn btn-danger"><i class="glyphicon glyphicon-remove-circle"></i></a>
+							<a href="{{route($ruta.'_delete',$models->id)}}"type="button" class="del_confirm btn btn-danger"><i class="fa fa-remove"></i></a>
 						@endif
 							
 						</div>

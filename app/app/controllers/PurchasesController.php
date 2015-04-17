@@ -56,9 +56,10 @@ class PurchasesController extends BaseController
 		{
 			$items 					= new PurchasesItems();
 			$items->quantity 		= $key['cantidad'];	
-			$items->discount 		= $key['dto'];
+			$items->observations 	= $key['observations'];
+			$items->price_per_unit  = $key['$'];
 			$items->purchases_id 	= $purchase->id;
-			$items->items_id 		=  $key['item_id'];
+			$items->items_id 		= $key['item_id'];
 			$items->save();
 
 			// suma la cantidad del stock del articulo

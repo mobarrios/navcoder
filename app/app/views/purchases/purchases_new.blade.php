@@ -66,7 +66,7 @@
 								<br>
 
 								<div class="col-xs-8">
-									<a id='add_item' class='btn btn-success'> Agregar </a>
+									<a id='add_item' class='btn btn-xs btn-success'><span class="fa fa-plus"></span> Agregar </a>
 								</div>
 								{{Form::close()}}
 					        </div>
@@ -84,7 +84,16 @@
 					    			<th></th>
 					    		</tr>
 					    	</thead>
-
+					    	<tfoot>
+					    		<tr>
+					    			<td></td>
+					    			<td></td>
+					    			<td></td>
+					    			<td><strong>Total</strong></td>
+					    			<td> $ <strong>{{Session::get('array_total')}}</strong></td>
+					    			<td></td>
+					    		</tr>
+					    	</tfoot>
 					    	<tbody id='table_items_body'>
 					    		@if(Session::has('array_items'))
 					    			@foreach(Session::get('array_items') as $item => $key)
@@ -94,7 +103,7 @@
 					    				<td>{{$key['description']}}</td>
 					    				<td> $ {{$key['$']}}</td>
 					    				<td> $ {{$key['subtotal'] }}</td>	
-					    				<td><a href="{{route('purchases_delitem', $item )}}" class="del_confirm pull-right"><i class="glyphicon glyphicon-remove-circle"></i></a>
+					    				<td><a href="{{route('purchases_delitem', $item )}}" class="del_confirm pull-right"><i class="fa fa-remove"></i></a>
 					    				
 					    				</td>	    			
 					    			</tr>
@@ -137,10 +146,14 @@
 								if(data != null)
 								{
 									window.location.href = "inicio";
-									window.open('remito/'+data , '_blank');	
+									window.open('remito_purchase/'+data , '_blank');	
 									
 								}
-						 	},                            
+						 	},
+							error: function (xhr, ajaxOptions, thrownError) {
+								alert('Error:'+ xhr.status + thrownError );
+
+							}                         
 						});
 				});
 
@@ -214,7 +227,7 @@
 
  					if($('#provider_id').val() == "")
  					{
- 						alert('Completar Cliente');
+ 						alert('Completar Proveedor');
  					}
  					else
  					{

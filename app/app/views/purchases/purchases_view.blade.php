@@ -11,7 +11,7 @@
 			  </div>
 			  <div class="panel-body">				
 				<div class="row">
-					{{Form::open(array('url'=> 'buscar_sales'))}}
+					{{Form::open(array('url'=> 'buscar_purchases'))}}
 						<div class="col-xs-12">
 							<div class="col-xs-2"> {{Form::date('from')}}</div>		
 							<div class="col-xs-2"> {{Form::date('to')}}</div>

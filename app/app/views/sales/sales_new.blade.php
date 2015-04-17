@@ -46,15 +46,13 @@
 					      </div>
 					      <div id="4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
 					        <div class="panel-body">
-
 								<div class="col-xs-12">
 									<input class="form-control" placeholder='Articulo' id="item" data-id="">
 									<input type="hidden" id="item_id" name="item_id" data-id="">
 								</div>
 								<hr>
 
-							
-									<div class="col-xs-2">
+								<div class="col-xs-2">
 										<input class="form-control" placeholder='Cantidad' id='cantidad' name="cantidad">
 									</div>
 									<div class="col-xs-2">
@@ -76,9 +74,7 @@
 					      </div>
 					    </div>
 					    <br>
-					    <table class="table table-striped table-hover  table-responsive">
-					    	
-					    
+					    <table class="table table-striped table-hover  table-responsive">				
 					    	<thead>
 					    		<tr>
 					    			<th>Cod.</th>
@@ -101,7 +97,6 @@
 					    	</tfoot>
 					    	<tbody id='table_items_body'>
 					    		@if(Session::has('array_items'))
-
 					    			@foreach(Session::get('array_items') as $item => $key)
 					    			<tr>
 					    				<td>{{$key['code']}} </td> 
@@ -148,7 +143,6 @@
 						url: "process_sales",
 						dataType: "json",
 						  success: function(data){
-
 								if(data != null)
 								{
 									window.location.href = "inicio";
@@ -156,9 +150,10 @@
 									
 								}
 						 	},
-						 	error: function() {
-                                alert('Error Procesando Pedido.');
-                             }   
+						 	error: function (xhr, ajaxOptions, thrownError) {
+								alert('Error:'+ xhr.status + thrownError );
+
+							}           
 						});
 				});
 

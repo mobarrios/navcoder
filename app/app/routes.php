@@ -49,6 +49,13 @@ Route::get('empresa/{company}',function($company)
 
 	switch ($company) 
 	{
+		case 'sancus':
+				Session::put('db','admin_sancus');
+				Session::put('company','sancus');
+
+				return Redirect::to('login');
+				break;
+
 		case 'laregaleria':
 				Session::put('db','admin_laregaleria');
 				Session::put('company','laregaleria');
@@ -135,6 +142,7 @@ Route::group(array('before'=>'switchDB'),function()
 		Route::post('buscar_sales', function()
 		{				
 			$input 	= Input::all();
+			$data['modules_id'] = 7;
 			$data['modulo'] 	= 'Ventas';
 			$data['ruta'] 		= 'sales';
 			$data['seccion']	= 'Inicio';
@@ -150,6 +158,27 @@ Route::group(array('before'=>'switchDB'),function()
 			
 			return View::make('sales.sales_view')->with($data);
 		});
+
+		Route::post('buscar_purchases', function()
+		{				
+			$input 	= Input::all();
+			$data['modules_id'] = 8;
+			$data['modulo'] 	= 'Compras';
+			$data['ruta'] 		= 'purchases';
+			$data['seccion']	= 'Inicio';
+
+			if($input['from'] != "" || $input['to'] != "")
+			{
+				$data['model']		=  Purchases::whereBetween('purchases_date', array( date("Y-m-d",strtotime($input['from'])), date("Y-m-d",strtotime($input['to'])) ))->paginate(10);	
+			
+			}else{
+
+				$data['model']		=  Purchases::paginate(10);
+			}
+			
+			return View::make('purchases.purchases_view')->with($data);
+		});
+
 
 
 		Route::post('provider_search',function()
@@ -221,6 +250,14 @@ Route::group(array('before'=>'switchDB'),function()
 		});
 
 		// update database
+
+	Route::get('create',function()
+		{
+			DBupdate::create();
+				
+			//DBupdate::update();
+			return "created OK";
+		});
 
 		Route::get('update',function()
 		{

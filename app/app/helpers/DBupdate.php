@@ -4,7 +4,10 @@ class DBupdate
 {
 	public static function update()
 	{
-		
+		Schema::table('purchases_items',function($table)
+		{
+			$table->string('observations',200);
+		});
 	
 	}	
 
@@ -155,6 +158,7 @@ class DBupdate
 			$table->timestamps();
 
 			$table->string('name','50')->unique();
+			$table->boolean('available');
 		});
 
 		Schema::create('menus', function($table)
@@ -247,6 +251,7 @@ class DBupdate
 			$table->integer('quantity');
 			$table->double('discount', 10,2);
 			$table->double('price_per_unit', 10,2);
+			$table->string('observations',200);
 
 			//relations
 			$table->integer('purchases_id')->unsigned()->nullable();
@@ -335,20 +340,31 @@ class DBupdate
 
 		});
 	
-		self::createAdminUser();
+		
 		self::createModules();
+		self::createAdminUser();
 		self::createMenus();
 		self::createAdminPermissions();
+		self::createCompany();
 
 
 	}
+
+	// create profile administrator , user admin
+	public static function createCompany()
+	{
+		$company 				= new Company();
+		$company->id 			= 1;
+		$company->save();
+	}
+
 
 	// create profile administrator , user admin
 	public static function createAdminUser()
 	{
 		$profiles 			= new Profiles();
 		$profiles->id 		= 1;
-		$profiles->profiles = 'administrator';
+		$profiles->profile = 'administrator';
 		$profiles->save();
 
 		$user 				= new User();
