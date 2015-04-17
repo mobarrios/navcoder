@@ -14,7 +14,7 @@
 	{
 			
 			$valor 			= explode('-',$value); 
-			$module_id			= $valor[0];
+			$module_id		= $valor[0];
 			$action 		= $valor[1];
 
 			if(Roles::validate($module_id,$action) == false)

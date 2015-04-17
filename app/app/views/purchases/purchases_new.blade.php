@@ -26,7 +26,7 @@
 					      <div id="2" class="panel-collapse collapse in " role="tabpanel" aria-labelledby="headingTwo">
 					        <div class="panel-body">    
 					        	@if(Session::has('data'))
-					        		{{ Form::date('date') }} 
+					        		<input type="text" value="{{Session::get('data')['date']}}" class="form-control" disabled>
 					        	@else
 					          		{{ Form::date('date') }}   
 					          	@endif
@@ -51,12 +51,20 @@
 									<input type="hidden" id="item_id" name="item_id" data-id="">
 								</div>
 								<hr>
+								
 								<div class="col-xs-2">
-									<input class="form-control" placeholder='Cantidad' id='cantidad' name="cantidad">
-								</div>
-								<div class="col-xs-2">
-									<input class="form-control" placeholder='Dto %' id='dto' name="dto">
-								</div>
+										<input class="form-control" placeholder='Cantidad' id='cantidad' name="cantidad">
+									</div>
+									<div class="col-xs-2">
+										  <input class="form-control" placeholder='$' id='price' name="price_per_unit">
+									</div>
+
+									<div class="col-xs-8">
+										<input class="form-control" placeholder='Observaciones' id='observations' name="observations">
+									</div>
+								<br>
+								<br>
+
 								<div class="col-xs-8">
 									<a id='add_item' class='btn btn-success'> Agregar </a>
 								</div>
@@ -65,7 +73,7 @@
 					      </div>
 					    </div>
 					    <br>
-					     <table class="table  table-hover">
+					      <table class="table table-striped table-hover  table-responsive">
 					    	<thead>
 					    		<tr>
 					    			<th>Cod.</th>
@@ -76,6 +84,7 @@
 					    			<th></th>
 					    		</tr>
 					    	</thead>
+
 					    	<tbody id='table_items_body'>
 					    		@if(Session::has('array_items'))
 					    			@foreach(Session::get('array_items') as $item => $key)
@@ -92,19 +101,12 @@
 					    			@endforeach
 					    		@endif
 					    	</tbody>
-
-					    		<tr>
-					    			<td></td>
-					    			<td></td>
-					    			<td></td>
-					    			<td><strong>Total</strong></td>
-					    			<td> $ <strong>{{Session::get('array_total')}}</strong></td>
-					    			<td></td>
-					    		</tr>
 					    	
 					    </table>
+					 
+					 	 <hr>		 
+					  <a href="{{route('sales_cancel')}}" id="cancel" class="del btn btn-danger">Cancelar</a>
 					  <a id="process" class="btn btn-success">Procesar</a>
-	
 					  </div>
 			  </div>
 		</div>
@@ -192,6 +194,9 @@
                    		//setea el id al attr data-id del input  item
                    		$('#item_id').val(ui.item.id);
                    		$('#item_id').attr('data-id',ui.item.id);
+                   		$('#price').val(ui.item.sell_price);
+                   		$('#cantidad').val(1);
+
                 	}
                 });
 
@@ -204,8 +209,18 @@
 					console.log(arr_item);
 				});
 
+ 			
  				$('#add_item').on('click',function(){
-			  		$('#form_add_item').submit();
+
+ 					if($('#provider_id').val() == "")
+ 					{
+ 						alert('Completar Cliente');
+ 					}
+ 					else
+ 					{
+ 						$('#form_add_item').submit();
+ 					}
+			  		
 
  				});
 				//post by ajax add item

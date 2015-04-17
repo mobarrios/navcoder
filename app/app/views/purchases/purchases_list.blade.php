@@ -7,7 +7,7 @@
 				<th>Fecha</th>
 				<th>Proveedor</th>
 				<th>Total</th>
-				<th></th>
+				<th class="action_row"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -16,7 +16,7 @@
 				<tr>
 					<td><p class="btn btn-xs btn-link">{{$models->id}}</p></td>
 					<td>{{$models->purchases_date}}</td>
-					<td>{{$models->Providers->name}}</td>
+					<td>{{$models->Providers->company_name}} : {{$models->Providers->last_name}} {{$models->Providers->name}}</td>
 					<td>$ {{$models->amount}}</td>
 					<td>
 						<div class="btn-group btn-group-xs pull-right">

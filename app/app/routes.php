@@ -22,7 +22,7 @@ Route::get('image', function()
 Route::get('barcode',function(){
 
 echo DNS1D::getBarcodeHTML("444511111111", "EAN13");
-echo DNS2D::getBarcodeHTML("4445645656", "QRCODE");
+echo DNS2D::getBarcodeHTML("alejandro", "QRCODE");
 
 return ;
 });

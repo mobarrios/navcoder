@@ -35,7 +35,8 @@ class PurchasesController extends BaseController
 		}
 
 			
-		return View::make('view')->with($this->data);		
+		//return View::make('view')->with($this->data);
+		return View::make('purchases.purchases_view')->with($this->data);		
 	}
 
 	public function getProcess()
@@ -149,13 +150,16 @@ class PurchasesController extends BaseController
 			if(!Session::has('data'))
 			{	
 				$provider 	= Providers::find($provider_id_purchases);
-				$data 		= array('date'=>$date_purchases,'provider_id'=> $provider_id_purchases, 'provider_name'=> $provider->company_name);
+				$data 		= array('date'			=> $date_purchases,
+									'provider_id'	=> $provider_id_purchases, 
+									'provider_name'	=> $provider->name.' '. $provider->last_name .' - '.$provider->company_name);
 
 				Session::put('data',$data);
 			}
 			
 
-		//items de remito
+			//items de remito
+
 			$item 			= Items::find(Input::get('item_id'));
 
 			if(!Session::has('array_items'))
@@ -168,7 +172,14 @@ class PurchasesController extends BaseController
 			}
 
 
-			$item 	= array('item_id' => Input::get('item_id'),'code' => $item->code, 'description' => $item->description, '$' => $item->sell_price, 'cantidad' => Input::get('cantidad'), 'dto'=>Input::get('dto'), 'subtotal' => $item->sell_price * Input::get('cantidad'));
+			$item 	= array('item_id' 		=> Input::get('item_id'),
+							'code' 			=> $item->code, 
+							'description' 	=> $item->name .' '.$item->description, 
+							'$' 			=> Input::get('price_per_unit'),
+							'cantidad'		=> Input::get('cantidad'),
+							'observations'	=> Input::get('observations'), 
+							'subtotal'		=> Input::get('price_per_unit') * Input::get('cantidad')
+							);
 
 			array_push($array_items, $item);
 

@@ -118,9 +118,9 @@
 	    	
 					    </table>
 			
-			<hr>		 
+					<hr>		 
 					  <a href="{{route('sales_cancel')}}" id="cancel" class="del btn btn-danger">Cancelar</a>
-					 <a id="process" class="btn btn-success">Procesar</a>
+					  <a id="process" class="btn btn-success">Procesar</a>
 					  </div>
 			  </div>
 		</div>
