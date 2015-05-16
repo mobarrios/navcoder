@@ -96,14 +96,18 @@ class BaseController extends Controller {
 	{	
 		$input = Input::all();
 
-		if (Input::hasFile('image'))
-		{	
-			$up 	 = new upload();
-			$up_file = $up->up($input['image'] , $this->img_path );
+		if(isset($input['image']))
+	 	{
+		
+			if (Input::hasFile('image'))
+			{	
+				$up 	 = new upload();
+				$up_file = $up->up($input['image'] , $this->img_path );
 
-			if( $up_file != false)
-			{
-				$input['image']  = $up_file;
+				if( $up_file != false)
+				{
+					$input['image']  = $up_file;
+				}
 			}
 		}
 
@@ -120,25 +124,29 @@ class BaseController extends Controller {
 	 	$model = $model::find($id);
 	 	$input = Input::all();
 
-		if (Input::hasFile('image'))
-		{	
-			$up 	 = new upload();
+	 	if(isset($input['image']))
+	 	{
+		
+			if (Input::hasFile('image'))
+			{	
+				$up 	 = new upload();
 
-			if($model->image != NULL)
-			{
-				$up->del($model->image);
-			}
-				$up_file = $up->up($input['image'] , $this->img_path );
-			
-			if( $up_file != false)
-			{
-				$input['image']  = $up_file;
-			}
+				if($model->image != NULL)
+				{
+					$up->del($model->image);
+				}
+					$up_file = $up->up($input['image'] , $this->img_path );
+				
+				if( $up_file != false)
+				{
+					$input['image']  = $up_file;
+				}
 
-		}
-		else
-		{
-			$input['image'] = $model->image;
+			}
+			else
+			{
+				$input['image'] = $model->image;
+			}
 		}
 
 	 	$model->fill($input);

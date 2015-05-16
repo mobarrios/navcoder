@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Bootstrap CSS -->
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+  		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+
+<div class="content">
+
+	<div class="row">
+	<div class="col-xs-12">
+		<form action="booking/public/api/search/availables" method="POST" role="form">	
+		<div class="col-xs-2 form-group">
+
+				<label for="">Desde</label>
+				<input name="from" type="text" class="form-control" id="date_from" placeholder="Input field">
+
+		</div>
+		<div class="col-xs-2 form-group">
+
+				<label for="">Hasta</label>
+				<input name="to" type="text" class="form-control" id="date_to" placeholder="Input field">
+
+		</div>
+		<div class="col-xs-2 form-group">
+			<label for="">Tipo de Habitacion</label>
+			<select id="type" name="type" id="input" class="form-control" required="required">
+				<option value="">Seleccionar</option>
+			</select>
+		</div>
+
+		<div class="col-xs-12">
+			<button type="submit" id="search" class="btn btn-primary">Buscar</button>
+		</div>
+
+		</form>
+		</div>
+	</div>
+
+</div>
+		<!-- jQuery -->
+	  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  
+		<!-- Bootstrap JavaScript -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+		<script>
+
+		/*
+		$('#search').on('click',function()
+		{
+			var from = $('#date_from').val();
+			var to 	 = $('#date_to').val();
+			var type = "Doble";
+			// Busca Disponibilidad
+			$.ajax({
+			
+					url: 'booking/public/api/search/availables/'+from+'/'+to+'/'+type,
+
+					}).done(function(datas) {
+
+						console.log(datas);
+
+						$.each(datas, function(i, item) 
+						{
+							$('#search_body').append('<tr><td>'+item['rooms']['name']+'</td><td>'+item['rooms']['types']['name']+'</td><td>'+item['currency']+' '+item['price']+'</td></tr>');
+						});
+					
+			});
+		});
+		*/
+
+
+			// completa select de tipos
+			$.ajax({
+			
+					url: 'booking/public/api/search/types',
+					
+					}).done(function(datas) {
+
+						$.each(datas, function(i, item) 
+						{
+								$('#type').append('<option>'+item['name']+'</option>');
+						});
+			});
+
+
+
+
+			//date picker relacionados
+			$(function() {
+				$( "#date_from" ).datepicker({
+					dateFormat : "dd-mm-yy",
+					numberOfMonths: 1,
+					onClose: function( selectedDate ) {
+						$( "#date_to" ).datepicker( "option", "minDate", selectedDate );
+					}
+				});
+				$( "#date_to" ).datepicker({
+					dateFormat : "dd-mm-yy",
+					numberOfMonths: 1,
+					onClose: function( selectedDate ) {
+						$( "#date_from" ).datepicker( "option", "maxDate", selectedDate );
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

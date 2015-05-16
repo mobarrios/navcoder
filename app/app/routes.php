@@ -11,6 +11,34 @@
 |I
 */
 
+Route::get('excel/{a}/{b}/{c}',function($a = null , $b = null, $c = null)
+{
+		$arr = Excel::load('public/lista.xls')->get();
+
+		foreach($arr as $ar => $val)
+		{
+			  echo "codigo : ".$val[$a] ." Precio : ". $val[$b]." publico :".$val[$c]." <br>";
+
+		}
+
+		/*
+		Excel::create('Filename', function($excel) {
+
+		$excel->sheet('Sheetname', function($sheet) {
+
+		$sheet->fromArray(array(
+		    array('data1', 'data2'),
+		    array('data3', 'data4')
+		));
+
+		});
+
+		})->export('xls');
+		*/
+
+
+});
+
 Route::get('image', function()
 {
     $img = Image::make('assets/images/logo_aclv.png');
@@ -256,7 +284,7 @@ Route::group(array('before'=>'switchDB'),function()
 						
 						if(is_null($cost))
 						{
-							$cost = 0;
+							$cost = $r->cost_price;
 						}
 						else
 						{
@@ -265,17 +293,17 @@ Route::group(array('before'=>'switchDB'),function()
 					
 
 						$res[] = array(	'id' => $r->id , 
-									'label' => $r->name .'$ ' . $cost , 
-									'value' => $r->name ,
-									'cost_price' => $cost
+										'label' => $r->name .'$ ' . $cost , 
+										'value' => $r->name ,
+										'cost_price' => $cost
 									);
 					}
 					else
 					{
 						$res[] = array(	'id' => $r->id , 
-									'label' => $r->name .'$ ' . $r->sell_price , 
-									'value' => $r->name ,
-									'sell_price' => $r->sell_price
+										'label' => $r->name .'$ ' . $r->sell_price , 
+										'value' => $r->name ,
+										'sell_price' => $r->sell_price
 									);
 					}
 				}

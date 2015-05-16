@@ -131,6 +131,9 @@ return array(
 		//images
 		'Intervention\Image\ImageServiceProvider',
 
+		//excel
+        'Maatwebsite\Excel\ExcelServiceProvider',
+
 
 	),
 
@@ -208,6 +211,10 @@ return array(
 
         //images
         'Image' => 'Intervention\Image\Facades\Image',
+
+        //Excel
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+
 
 
 	),

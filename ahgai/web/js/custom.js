@@ -307,7 +307,7 @@ if ($('#map-canvas').length) {
 
     jQuery(function($) {
         $(document).ready(function() {
-            var latlng = new google.maps.LatLng(40.7564971, -73.9743277);
+            var latlng = new google.maps.LatLng(-25.6059458, -54.575505899999996);
             var myOptions = {
                 zoom: 16,
                 center: latlng,

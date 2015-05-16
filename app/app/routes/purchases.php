@@ -4,19 +4,19 @@
 	Route::group(array('before'=>'validation:8-read'),function()
 	{	
 		
-	}):
+	});
 
 	Route::group(array('before'=>'validation:8-edit'),function()
 	{
-	}):
+	});
 
 	Route::group(array('before'=>'validation:8-delete'),function()
 	{
-	}):
+	});
 
 	Route::group(array('before'=>'validation:8-add'),function()
 	{
-	}):
+	});
 
 	//Route::get('compras/{model?}/{search?}', 	array('as' => 'purchases', 				'uses'  => 'PurchasesController@getIndex'));
 	Route::get('compras', 						array('as' => 'purchases', 				'uses'  => 'PurchasesController@getNew'));

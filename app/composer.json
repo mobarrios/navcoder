@@ -8,7 +8,9 @@
 		"laravel/framework": "4.2.*",
 		"barryvdh/laravel-dompdf": "0.4.*",
 		"Dinesh/barcode" : "dev-master",
-		"intervention/image": "~2.1"
+		"intervention/image": "~2.1",
+		"maatwebsite/excel": "~1.3.0"
+
 
 	},
 	"autoload": {
