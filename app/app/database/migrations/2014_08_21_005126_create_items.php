@@ -22,8 +22,7 @@ class CreateItems extends Migration {
 		   $newtable->date('expiration_date');
 		   $newtable->integer('stock');
 		   $newtable->string('image', 500)->nullable();
-		   $newtable->float('rent_price_15_days');
-		   $newtable->float('rent_price_45_days');
+		   $newtable->float('rent_price_per_day');
 		   $newtable->float('total_weight');
 		   $newtable->float('maximun_weight');
 		   $newtable->string('color', 100);

@@ -132,7 +132,7 @@
             
         });
 
-    Form::macro('categories', function($name)
+    Form::macro('categories', function()
     {
         
         // Retrieves the id from the model when it comes from the edit side

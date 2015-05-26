@@ -17,7 +17,7 @@ return array(
 	'name' 					=> 'Nombre',
 	'description' 			=> 'Descripción',
 	'provider' 				=> 'Proveedor',
-	'buy_price' 			=> 'Precio de compra',
+	'cost_price' 			=> 'Precio de compra',
 	'sell_price' 			=> 'Precio de venta',
 	'rent_price_per_day' 	=> 'Precio de alquiler por día',
 	'categories' 			=> 'Categorias',
@@ -28,5 +28,6 @@ return array(
 	'size' 					=> 'Tamaño',
 	'stock' 				=> 'Stock',
 	'images' 				=> 'Imagenes',
+	'measure' 				=> 'Unidad de medida',
 
 );

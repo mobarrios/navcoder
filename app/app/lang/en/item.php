@@ -17,7 +17,7 @@ return array(
 	'name' 					=> 'Name',
 	'description' 			=> 'Description',
 	'provider' 				=> 'Provider',
-	'buy_price' 			=> 'Buy price',
+	'cost_price' 			=> 'Buy price',
 	'sell_price' 			=> 'Sell price',
 	'rent_price_per_day' 	=> 'Rent price per day',
 	'categories' 			=> 'Categories',
@@ -28,5 +28,6 @@ return array(
 	'size' 					=> 'Size',
 	'stock' 				=> 'Stock',
 	'images' 				=> 'Images',
+	'measure' 				=> 'Measure',
 
 );
