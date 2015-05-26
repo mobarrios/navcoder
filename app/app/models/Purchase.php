@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Purchases extends Eloquent
+class Purchase extends Eloquent
 {
 	/** 
      * Soft Delete

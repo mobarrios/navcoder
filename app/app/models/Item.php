@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Items extends Eloquent
+class Item extends Eloquent
 {
 
 
@@ -43,20 +43,6 @@ class Items extends Eloquent
 				break;	
 		}
 	}
-	
-	/*
-	public function delete()
-    {
-        // delete all related photos 
-        $this->categories()->detach();
-        // as suggested by Dirk in comment,
-        // it's an uglier alternative, but faster
-        // Photo::where("user_id", $this->id)->delete()
-
-        // delete the user
-        return parent::delete();
-    }
-    */
 
 }
 ?>

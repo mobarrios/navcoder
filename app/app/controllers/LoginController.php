@@ -8,17 +8,9 @@ class LoginController extends BaseController
 		$remember = Input::has('remember') ? true : false ;
 	
 
-		if(Auth::attempt(array('email' => $input['username'], 'password' => $input['password']),$remember))
+		if(Auth::attempt(array('name' => $input['username'], 'password' => $input['password']),$remember))
 		{
-			//Session::put('company',Auth::user()->company);
-
-			//return Redirect::to( Auth::user()->company .'/inicio');
-			//return Redirect::to( Auth::user()->company .'/inicio');
-			//return Redirect::to(Session::get('company').'/inicio');
-
-			//Session::put('master_id',Crypt::encrypt(Auth::User()->master_id));
-			return Redirect::to('/inicio');
-			
+			return Redirect::to('/inicio');	
 		}
 		else
 		{

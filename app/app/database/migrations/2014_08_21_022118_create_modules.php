@@ -15,7 +15,7 @@ class CreateModules extends Migration {
         {
 		   $newtable->increments('id');
 		   $newtable->string('name', 200);
-
+		   $newtable->string('path', 200);
 		   $newtable->timestamps();
 		   $newtable->softDeletes();
 		   

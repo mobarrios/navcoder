@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Categories  extends Eloquent
+class Category extends Eloquent
 {
 	/** 
      * Soft Delete

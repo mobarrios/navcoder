@@ -5,10 +5,6 @@ class DBupdate
 	public static function update()
 	{
 
-		/*Schema::table('sales_items',function($table){
-			$table->string('observations','200');
-		});*/
-		
 		Schema::create('caja', function($table){
 
 			$table->increments('id');
@@ -21,11 +17,15 @@ class DBupdate
 			$table->double('out',  10,2);
 			$table->integer('type');
 
-		});
-	
-			
+		});			
 	}	
 
+	public static function init()
+	{			
+			//self::createModules();
+			self::createAdminUser();
+			//self::createMenus();
+	}
 
 	public static function create()
 	{

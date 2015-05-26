@@ -1,13 +1,8 @@
 <?php
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Sales extends Eloquent
+class Sale extends Eloquent
 {
-	/** 
-     * Soft Delete
-	 */
-	//use SoftDeletingTrait;
-    //protected $dates = ['deleted_at'];
 
 	protected $table	 = 'sales';
 	protected $guarded	 = array('');

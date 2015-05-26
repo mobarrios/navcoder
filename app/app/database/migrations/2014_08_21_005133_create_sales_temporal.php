@@ -32,9 +32,7 @@ class CreateSalesTemporal extends Migration {
 	 */
 	public function down()
 	{
-		DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-		Schema::drop('sales_temporal');		
-		DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+		Schema::drop('sales_temporal');
 	}
 
 }

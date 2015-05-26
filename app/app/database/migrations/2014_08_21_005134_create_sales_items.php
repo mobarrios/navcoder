@@ -36,9 +36,7 @@ class CreateSalesItems extends Migration {
 	 */
 	public function down()
 	{
-		DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 		Schema::drop('sales_items');
-		DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}
 
 }

@@ -11,47 +11,9 @@
 |I
 */
 
-/// WEB SERVICE API REST FULL
-Route::group(array('prefix' => 'api/v1'), function()
+Route::get('/',function()
 {
-
-	Route::get('app/{search}',function($search){
-
- 		 header('Access-Control-Allow-Origin: *');	
-		
-		$item = Items::where('code','like','%'.$search.'%')->orWhere('name','like','%'.$search.'%')->orWhere('description','like','%'.$search.'%')->get();
-
-		
-
-		return Response::json($item);
-
-	});
-});
-
-Route::get('empresa/{company}',function($company)
-{
-
-	switch ($company) 
-	{
-		case 'laregaleria':
-				Session::put('db','admin_laregaleria');
-				Session::put('company','laregaleria');
-
-				return Redirect::to('login');
-				break;
-
-		case 'aclv':
-				Session::put('db','admin_aclv');
-				Session::put('company','aclv');
-
-				return Redirect::to('login');
-				break;
-		
-		default:
-				Session::put('db','admin_stock');
-				return Redirect::to('login');
-				break;
-	}
+	return Redirect::to('login');
 });
 
 Route::get('login',function()
@@ -59,160 +21,28 @@ Route::get('login',function()
 	return View::make('login');
 });
 
-			
-// todo lo que esta aca adentro previo cambio de DB
+Route::post('login', array('as'=>'post_login', 'uses'=>'LoginController@login'));
 
-Route::group(array('before'=>'switchDB'),function()
-{
-
-			Route::get('table',function(){
-			return View::make('table');
-			});
+Route::get('inicio', function()
+{	
+	return View::make('index');
+});
 
 
-		//postea el login 
-		Route::post('login',array('as'=>'post_login', 'uses'=>'LoginController@login'));
+Route::get('salir',  array('as'=>'logout', 'uses'=>'LoginController@logOut'));
 
-		
-		Route::group(array('before' => 'auth'), function()
-		{
+require(__DIR__ . '/routes/items.php');
+require(__DIR__ . '/routes/doctors.php');
+require(__DIR__ . '/routes/clients.php');
+require(__DIR__ . '/routes/purchases.php');
+require(__DIR__ . '/routes/categories.php');
+require(__DIR__ . '/routes/providers.php');
+require(__DIR__ . '/routes/obras.php');
+require(__DIR__ . '/routes/sales.php');
+require(__DIR__ . '/routes/caja.php');
 
-				Route::get('salir',  array('as'=>'logout', 'uses'=>'LoginController@logOut'));
-
-				Route::get('inicio', function()
-				{
-					$data['master'] = Company::all()->first();
-
-					return View::make('index')->with($data);
-				});
-
-				require(__DIR__ . '/routes/items.php');
-				require(__DIR__ . '/routes/doctors.php');
-				require(__DIR__ . '/routes/clients.php');
-				require(__DIR__ . '/routes/purchases.php');
-				require(__DIR__ . '/routes/categories.php');
-				require(__DIR__ . '/routes/providers.php');
-				require(__DIR__ . '/routes/obras.php');
-				require(__DIR__ . '/routes/sales.php');
-				require(__DIR__ . '/routes/caja.php');
-
-				//config 
-				require(__DIR__ . '/routes/config/users.php');
-				require(__DIR__ . '/routes/config/profiles.php');
-				require(__DIR__ . '/routes/config/permissions.php');
-
-
-				//require(__DIR__ . '/routes/config/ajax.php');
-		});
-
-		// ajax search	
-
-		Route::post('buscar', function()
-		{				
-			$input 	= Input::all();
-			$model  = $input['model'];
-			$search = $input['buscar'];
-
-			return Redirect::route($input['model'],array($model,$search));
-		});
-
-		Route::post('buscar_sales', function()
-		{				
-			$input 	= Input::all();
-			$data['modulo'] 	= 'Ventas';
-			$data['ruta'] 		= 'sales';
-			$data['seccion']	= 'Inicio';
-
-			if($input['from'] != "" || $input['to'] != "")
-			{
-				$data['model']		=  Sales::whereBetween('sales_date', array( date("Y-m-d",strtotime($input['from'])), date("Y-m-d",strtotime($input['to'])) ))->paginate(10);	
-			
-			}else{
-
-				$data['model']		=  Sales::paginate(10);
-			}
-			
-			return View::make('sales.sales_view')->with($data);
-		});
-
-
-		Route::post('provider_search',function()
-		{
-				$data = Input::get('search');
-
-				$resp = Providers::where('name','like','%'.$data.'%')
-						->orWhere('last_name','like','%'.$data.'%')
-						->orWhere('dni','like','%'.$data.'%')
-						->get();
-
-				$res  = array();
-
-				foreach($resp as $r)
-				{
-					//array_push($res, $r->last_name.' , '.$r->name );
-					$res[] = array('id' => $r->id , 'label' => $r->name .' '.$r->last_name . ' - '.$r->company_name );
-					//$res[] = array('id'=>$r->id, 'name'=>$r->company_name );
-				}
-
-				return Response::json($res);
-		});
-
-		Route::post('client_search',function()
-		{
-				$data = Input::get('search');
-
-				$resp = Clients::where('name','like','%'.$data.'%')
-						->orWhere('last_name','like','%'.$data.'%')
-						->orWhere('dni','like','%'.$data.'%')
-						->get();
-
-				$res  = array();
-
-				foreach($resp as $r)
-				{
-					//array_push($res, $r->last_name.' , '.$r->name );
-					$res[] = array('id' => $r->id , 'label' => $r->name .' '.$r->last_name.' - '.$r->company_name );
-					//$res[] = array('id'=>$r->id, 'name'=>$r->company_name );
-				}
-
-				return Response::json($res);
-		});
-
-
-		Route::post('item_search',function()
-		{
-				$data = Input::get('search');
-
-				$resp = Items::where('code','like','%'.$data.'%')
-						->orWhere('name','like','%'.$data.'%')
-						->orWhere('description','like','%'.$data.'%')
-						->get();
-
-				$res =  array();
-
-				foreach($resp as $r)
-				{
-					
-
-					$res[] = array(	'id' => $r->id , 
-									'label' => $r->name .'$ ' . $r->sell_price , 
-									'value' => $r->name ,
-									'sell_price' => $r->sell_price);
-					
-				}
-
-				return Response::json($res);
-		});
-
-		// update database
-
-		Route::get('update',function()
-		{
-			DBupdate::update();
-			return "updated OK";
-		});
-
-	});
-
-
+//config 
+require(__DIR__ . '/routes/config/users.php');
+require(__DIR__ . '/routes/config/profiles.php');
+require(__DIR__ . '/routes/config/permissions.php');
 

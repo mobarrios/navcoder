@@ -10,9 +10,9 @@
 			<div class="row">
 		  		<div class="col-xs-4">
 		  			<div class="thumbnail">
-		  				<img src="assets/images/{{$master->logo}}" alt="">
+		  				<img src="assets/images/nav_stock_logo.png" alt="">
 		  			</div>
-		  			<h2 class="text-center">{{$master->name}}</h2>
+		  			<h2 class="text-center">Stock</h2>
 		 		 </div>
 		 	</div>
 		</div>

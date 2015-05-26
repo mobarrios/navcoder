@@ -39,6 +39,6 @@ class CreateObrassociales extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('obras_sociales');
+		Schema::drop('obrassociales');
 	}
 }

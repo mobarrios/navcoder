@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Obras extends Eloquent
+class Doctor extends Eloquent
 {
 	/** 
      * Soft Delete
@@ -9,7 +9,7 @@ class Obras extends Eloquent
 	//use SoftDeletingTrait;
     //protected $dates = ['deleted_at'];
 
-	protected $table 	= 'obras_sociales';
+	protected $table 	= 'doctors';
 	protected $guarded 	= array('');
 }
 ?>

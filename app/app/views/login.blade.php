@@ -10,11 +10,8 @@
         </h1>        
       </div> 
         <div class="panel panel-default " >
-            {{--
-            {{App::environment()}}
-            <h1>{{Session::get('company')}}</h1>
-            --}}
-    
+            {{--  {{App::environment()}} <h1>{{Session::get('company')}}</h1> --}}
+                
             <div style="padding-top:30px" class="panel-body" >    
                 {{Form::open(array('route'=>'post_login','class'=>'form-horizontal'))}}
                     <div style="margin-bottom: 25px" class="input-group">

@@ -14,7 +14,7 @@ class CreateProfiles extends Migration {
 		Schema::create('profiles', function($newtable)
 		{
 			$newtable->increments('id');
-			$newtable->string('profile', 500);
+			$newtable->string('name', 500);
 			
 			$newtable->timestamps();
 			$newtable->softDeletes();

@@ -7,39 +7,21 @@
 				<span class="fa fa-bars"></span>
 			</button>
 			<a href="inicio" class="navbar-brand"> <img src="{{ URL::asset('assets/images/nav_stock_logo_little.png') }}" ></a>
-		</div>
-
-		
-			
+		</div>			
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i>  Menu</a>
-					<ul class="dropdown-menu">
-							
-							@foreach(Menu::getMenus() as $menu)
-								@if($menu->available == 1)
-										<li role="presentation" class="dropdown-header">{{$menu->name}}</li>
-									@foreach($menu->SubMenus as $sub)
-										<li><a href="{{route($sub->routes)}}">{{$sub->name}}</a></li>
-									@endforeach
-									<li class="divider"></li>
-								@endif
-								
-							@endforeach
-						
+					<ul class="dropdown-menu">							
+							@foreach(Roles::availableModules() as $availableModule)							
+								<li role="presentation"><a href="{{route($availableModule->path)}}">{{$availableModule->name}}</a></li>																
+							@endforeach						
 					</ul>
 				</li>
 			</ul>
-
-
-
-						
-						
-							
-					
+			
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name}} </a>

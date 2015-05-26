@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Providers extends Eloquent
+class Provider extends Eloquent
 {
 	/** 
      * Soft Delete
