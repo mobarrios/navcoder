@@ -16,7 +16,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i>  Menu</a>
 					<ul class="dropdown-menu">							
 							@foreach(Roles::availableModules() as $availableModule)							
-								<li role="presentation"><a href="{{route($availableModule->path)}}">{{$availableModule->name}}</a></li>																
+								<li role="presentation"><a href="{{$availableModule->path}}">{{ Lang::get("module.$availableModule->name") }}</a></li>																
 							@endforeach						
 					</ul>
 				</li>

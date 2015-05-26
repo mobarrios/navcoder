@@ -13,7 +13,12 @@
 
 Route::get('/',function()
 {
-	return Redirect::to('login');
+	if(Auth::check()){
+		return View::make('index');
+	}else{
+		return Redirect::to('login');
+	}
+	
 });
 
 Route::get('login',function()
@@ -28,6 +33,10 @@ Route::get('inicio', function()
 	return View::make('index');
 });
 
+Route::get('items', function()
+{
+	return "Hola";
+});
 
 Route::get('salir',  array('as'=>'logout', 'uses'=>'LoginController@logOut'));
 
@@ -37,7 +46,7 @@ require(__DIR__ . '/routes/clients.php');
 require(__DIR__ . '/routes/purchases.php');
 require(__DIR__ . '/routes/categories.php');
 require(__DIR__ . '/routes/providers.php');
-require(__DIR__ . '/routes/obras.php');
+require(__DIR__ . '/routes/medicalinsurances.php');
 require(__DIR__ . '/routes/sales.php');
 require(__DIR__ . '/routes/caja.php');
 

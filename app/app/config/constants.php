@@ -34,6 +34,6 @@ return [
     'DOCTOR_MODULE_NAME' => 'doctors',
     'DOCTOR_MODULE_PATH' => 'doctors',
     
-    'MEDICAL_INSURANCE_MODULE_NAME' => 'obras',
-    'MEDICAL_INSURANCE_MODULE_PATH' => 'obras'
+    'MEDICAL_INSURANCE_MODULE_NAME' => 'medicalinsurances',
+    'MEDICAL_INSURANCE_MODULE_PATH' => 'medicalinsurances'
 ];

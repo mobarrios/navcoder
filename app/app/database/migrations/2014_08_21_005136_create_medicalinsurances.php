@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateObrassociales extends Migration {
+class CreateMedicalinsurances extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,7 +11,7 @@ class CreateObrassociales extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('obrassociales', function($newtable)
+		Schema::create('medicalinsurances', function($newtable)
         {
 		   $newtable->increments('id');
 		   $newtable->string('name', 100);
