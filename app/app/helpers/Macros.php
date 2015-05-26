@@ -5,7 +5,7 @@
             //$areas  = Area::lists('area','id');
             $value  = Form::getValueAttribute($name);
 
-            $profiles     = Profiles::lists('profile','id');
+            $profiles     = Profile::lists('profile','id');
 
             $input  = Form::select($name , $profiles , $value , array('class'=>'form-control')); 
 
@@ -35,7 +35,7 @@
     });
     Form::macro('providers', function($name, $label)
         {
-            $prov   = Providers::lists('name','id');
+            $prov   = Provider::lists('name','id');
             $input  = Form::select($name , array('Ninguno') + $prov ,null, array('class'=>'form-control')); 
 
             return buildInput($input,$label);  
@@ -142,10 +142,10 @@
             
                     <ul class="list-group">';
         
-        foreach(Categories::orderBy('name','ASC')->get() as $category)
+        foreach(Category::orderBy('name','ASC')->get() as $category)
         {
 
-            if($itemscategories = ItemsCategories::where('items_id','=',$id)->where('categories_id','=',$category->id)->first())
+            if($itemscategories = ItemCategory::where('items_id','=',$id)->where('categories_id','=',$category->id)->first())
             {
                $checked = "checked";
             }else{

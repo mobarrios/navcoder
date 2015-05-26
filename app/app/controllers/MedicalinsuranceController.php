@@ -1,6 +1,6 @@
 <?php
 
-class ObrasController extends BaseController
+class MedicalinsuranceController extends BaseController
 {
 	protected $data 		= array();
 	protected $search_by 	=  array();

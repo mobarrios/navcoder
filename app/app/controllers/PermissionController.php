@@ -1,6 +1,6 @@
 <?php
 
-class PermissionsController extends BaseController
+class PermissionController extends BaseController
 {
 	public function getEdit($profiles_id = null)
 	{

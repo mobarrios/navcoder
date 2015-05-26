@@ -1,6 +1,6 @@
 <?php
 
-class ClientsController extends BaseController
+class ClientController extends BaseController
 {
 	protected $data		 = array();
 	protected $search_by =  array();

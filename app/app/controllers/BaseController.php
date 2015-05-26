@@ -19,25 +19,13 @@ class BaseController extends Controller {
 	//inicio
 	public function getIndex( $model= null , $search = null )
 	{
-		$model 						= $this->data['model'];
-		$this->data['seccion']		= 'Inicio';
+
+		$model 	= $this->data['model'];		
 
 		if(isset($search))
 		{
-			/*
-			$model	= array();//$model::where('id' ,'like','%'.$search.'%')->orderBy('id' ,'ASC')->paginate('10');
-
-			foreach($this->search_by  as $columns)
-			{
-				//array_push($model , $model::where($columns ,'like','%'.$search.'%'));	
-				->where($columns,'like','%'.$search.'%');
-			}
-			*/
-			//$this->data['model'] 	= $model::where('id' ,'like','%'.$search.'%')->orderBy('id' ,'ASC')->paginate('10');
-			
 			
 			$mod  = $model::where('id','like','%'.$search.'%');
-			//$b 	  = array('code','name');
 			
 			foreach($this->search_by as $col)
 			{
@@ -45,8 +33,6 @@ class BaseController extends Controller {
 			}
 			
 			$mod  = $mod->paginate('10');
-		
-
 
 			$this->data['model'] = $mod;
 			
@@ -55,10 +41,8 @@ class BaseController extends Controller {
 		{
 			$this->data['model'] 	= $model::orderBy('id' ,'ASC')->paginate('10');
 		}
-
 			
 		return View::make('view')->with($this->data);
-
 
 	}
 

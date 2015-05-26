@@ -1,6 +1,6 @@
 <?php
 
-class CategoriesController extends BaseController
+class CategoryController extends BaseController
 {
 	protected $data  	 	= array();
 	protected $search_by 	= array();

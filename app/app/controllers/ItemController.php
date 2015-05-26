@@ -1,31 +1,16 @@
 <?php
 
-class ItemsController extends BaseController
+class ItemController extends BaseController
 {
 	protected $data 	 =  array();
 	protected $img_path ;
 	protected $search_by =  array();
 
 	public function __construct()
-	{
-		
-		if(Session::get('company') == 'aclv')
-		{
-			$this->data['modal'] = 'items_aclv';
-		}
-		elseif(Session::get('company') == 'laregaleria')
-		{
-			$this->data['modal'] = 'items_laregaleria';
-		}
-		else
-		{
-			$this->data['modal'] 		= 'items';
-		}
-
-		$this->data['ruta'] 		= 'items';
-		$this->data['model'] 		= 'Items';
-		$this->data['modulo'] 		= 'Articulos';
-		$this->data['seccion']		= '';
+	{		
+		$this->data['module'] 		= Config::get('constants.ITEM_MODULE_NAME');
+		$this->data['path'] 		= Config::get('constants.ITEM_MODULE_PATH');
+		$this->data['model'] 		= Config::get('constants.ITEM_MODEL_NAME');
 
 		//columnas de busqueda
 		$this->search_by =  array('code','name','description');
@@ -59,25 +44,8 @@ class ItemsController extends BaseController
 				unset($input['chk_category']);
 
 
-		// Create the objet
-			
-
-			//$item 		=  new Items();
-
-			// Input Image
-
-				
-				
-		// Save the object
-						
-
-			//$item->fill($input);
-			//$item->save();
-		
-
 			$model::create($input);
 
-			//$item->categories()->sync($categories);
 
 			return Redirect::back();
 	
@@ -120,40 +88,7 @@ class ItemsController extends BaseController
 				{
 					$input['image'] = $item->image;
 				}
-
-			// Input Image
-				/*
-				if (Input::hasFile('image'))
-				{					
-					if($item->image != null)
-					{
-						$up->del($item->image);	
-
-						return "aa".$item->image;
-					}
-
-					$up_file = $up->up($input['image'] , $this->img_path);
-
-					if( $up_file != false )
-					{					
-						
-
-						$input['image'] =  $this->img_path.$up_file;
-
-						$item->image    =  $input['image'];
-					}
-					else
-					{
-						$item['image'] = $item->image;
-					}
-
-				}
-				else
-				{
-					$item['image'] = $item->image;
-				}
-				*/
-				
+		
 		// Save the object
 
 			$item->fill($input);

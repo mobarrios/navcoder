@@ -1,51 +1,32 @@
 <?php
-class SalesController extends BaseController
+
+class PurchaseController extends BaseController
 {
 	protected $data 	= array();
-
+	protected $module 	= 'purchase';
     //protected $moduleId ;
-	protected $search_by 	=  array();
+    protected $search_by 	=  array();
 
 	public function __construct()
 	{
-		$this->data['modal'] 		= 'sales';
-		$this->data['ruta'] 		= 'sales';
-		$this->data['model'] 		= 'Sales';
-		$this->data['modulo'] 		= 'Ventas';
+		$this->data['modal'] 		= 'purchases';
+		$this->data['ruta'] 		= 'purchases';
+		$this->data['model'] 		= 'Purchases';
+		$this->data['modulo'] 		= 'Compras';
 		$this->data['seccion']		= '';
 
-		$this->search_by = array('sales_date','clients_id');
-	}
-
-	public function getCancel()
-	{
-		Session::forget('array_items');
-		Session::forget('array_total');
-		Session::forget('data');
-
-		return Redirect::back()->with('success',"Venta Cancelada");
+		$this->search_by = array('purchases_date','providers_id');
 	}
 
 	public function getList($model= null , $search = null)
 	{
 		$model 						= $this->data['model'];
+		
 		$this->data['seccion']		= 'Inicio';
 
 		if(isset($search))
 		{
-			
-			$mod  = $model::where('id','like','%'.$search.'%');
-			
-			foreach($this->search_by as $col)
-			{
-				$mod = $mod->orWhere($col,'like','%'.$search.'%');
-			
-			}
-
-			$mod  = $mod->paginate('10');
-
-			$this->data['model'] = $mod;
-			
+			$this->data['model'] 	= $model::where('id' ,'like','%'.$search.'%')->orderBy('id' ,'ASC')->paginate('10');
 		}
 		else
 		{
@@ -53,8 +34,7 @@ class SalesController extends BaseController
 		}
 
 			
-		//return View::make('view')->with($this->data);		
-		return View::make('sales.sales_view')->with($this->data);
+		return View::make('view')->with($this->data);		
 	}
 
 	public function getProcess()
@@ -64,35 +44,34 @@ class SalesController extends BaseController
 		$total = Session::get('array_total');
 		$items = Session::get('array_items');
 
-		$sale 			  		= new Sales();
-		$sale->sales_date  		= $datos['date'];
-		$sale->amount	  		= $total;
-		$sale->clients_id  		= $datos['client_id'];
-		$sale->save();
+		$purchase 			  		= new Purchases();
+		$purchase->purchases_date  	= $datos['date'];
+		$purchase->amount	  		= $total;
+		$purchase->providers_id  	= $datos['provider_id'];
+		$purchase->save();
 
 		foreach($items as $item => $key)
 		{
-			$items 					= new SalesItems();
+			$items 					= new PurchasesItems();
 			$items->quantity 		= $key['cantidad'];	
-			$items->observations 	= $key['observations'];
-			$items->price_per_unit  = $key['$'];
-			$items->sales_id 		= $sale->id;
-			$items->items_id 		= $key['item_id'];
+			$items->discount 		= $key['dto'];
+			$items->purchases_id 	= $purchase->id;
+			$items->items_id 		=  $key['item_id'];
 			$items->save();
 
-
-			// resta la cantidad del stock del articulo
+			// suma la cantidad del stock del articulo
 			$item_stock 			= Items::find($key['item_id']);
-			$item_stock->stock 		= $item_stock->stock - $key['cantidad'];
+			$item_stock->stock 		= $item_stock->stock + $key['cantidad'];
 			$item_stock->save() ;
 
-		}	
+		}
 
 		Session::forget('array_items');
 		Session::forget('array_total');
 		Session::forget('data');
 
-		return Response::json($sale->id);
+		return Response::json($purchase->id);
+
 	}
 
 
@@ -100,12 +79,12 @@ class SalesController extends BaseController
 	{	
 		$purchase_id = $id;
 
-		$data['sales'] 		= Sales::find($id);
+		$data['purchase'] 	= Purchases::find($id);
 		$data['company']	= Company::all()->first();
 		$data['total']		= 0;
 		$data['totaltotal'] = 0;
 
-		$pdf = PDF::loadView('remito.remito_sale',$data)->stream('remito.pdf');
+		$pdf = PDF::loadView('remito.remito',$data)->stream('remito.pdf');
 
 		return $pdf;
 
@@ -155,30 +134,27 @@ class SalesController extends BaseController
 		}
 		*/
 		
-		return View::make('sales.sales_new')->with($this->data);
+		return View::make('purchases.purchases_new')->with($this->data);
 	}
 
 
 	public function postAdditem()
 	{
-		$date_sales		 = Input::get('date');
-		$client_id_sales = Input::get('client_id');
+
+		$date_purchases 		= Input::get('date');
+		$provider_id_purchases 	= Input::get('provider_id');
 
 		//datos del remito
 			if(!Session::has('data'))
 			{	
-				$client 	= Clients::find($client_id_sales);
-				$data 		= array('date'			=> $date_sales,
-									'client_id'		=> $client_id_sales, 
-									'client_name'	=> $client->name.' '. $client->last_name .' - '.$client->company_name
-									);
+				$provider 	= Providers::find($provider_id_purchases);
+				$data 		= array('date'=>$date_purchases,'provider_id'=> $provider_id_purchases, 'provider_name'=> $provider->company_name);
 
 				Session::put('data',$data);
 			}
 			
 
-			//items de remito
-			
+		//items de remito
 			$item 			= Items::find(Input::get('item_id'));
 
 			if(!Session::has('array_items'))
@@ -191,14 +167,7 @@ class SalesController extends BaseController
 			}
 
 
-			$item 	= array('item_id'		=> Input::get('item_id'),
-							'code'			=> $item->code, 
-							'description' 	=> $item->name .' '.$item->description, 
-							'$' 			=> Input::get('price_per_unit'),
-							'cantidad' 		=> Input::get('cantidad'), 
-							'observations'	=> Input::get('observations'), 
-							'subtotal' 		=> Input::get('price_per_unit') * Input::get('cantidad')
-							);
+			$item 	= array('item_id' => Input::get('item_id'),'code' => $item->code, 'description' => $item->description, '$' => $item->sell_price, 'cantidad' => Input::get('cantidad'), 'dto'=>Input::get('dto'), 'subtotal' => $item->sell_price * Input::get('cantidad'));
 
 			array_push($array_items, $item);
 
@@ -279,20 +248,20 @@ class SalesController extends BaseController
 		$input 			= Input::all();
 		$item_id		= Crypt::decrypt($input['item_id']);
 
-		SalesItems::find($item_id)->delete();
+		PurchasesItems::find($item_id)->delete();
 
 		$data['module'] = $this->module;
 		$data['total']  = null;
 
-		return View::make('stock.sales.new')->with($data);
+		return View::make('stock.purchase.new')->with($data);
 	}
 
 
-	public function postNewsales()
+	public function postNewpurchase()
 	{
 
 
-		$sales_temporal_id		= Session::get('purchase_temporal_id');
+		$purchase_temporal_id	= Session::get('purchase_temporal_id');
 		$purchasesitems 		= PurchasesItems::where('purchase_temporal_id','=',$purchase_temporal_id)->get();
 		
 		$amount 	 	 		 = 0;
@@ -347,7 +316,7 @@ class SalesController extends BaseController
 		$data['module'] = $this->module;
 		$data['total']  = null;
 
-		return View::make('stock.sales.view')->with($data);
+		return View::make('stock.purchase.view')->with($data);
 	}
 
 

@@ -1,17 +1,17 @@
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h4 class="modal-title">{{$modulo}} : {{$seccion}}</h4>
+		<h4 class="modal-title">{{ Lang::get("module.$module") }} : {{$seccion}}</h4>
 	</div>
 
 	<div class="modal-body">
 		@if(isset($model_edit))
 
-			{{Form::model($model_edit,  array('route' => array($ruta.'_post_edit', $model_edit->id) , 'enctype' => 'multipart/form-data','id'=>'form'))  }}
+			{{Form::model($model_edit,  array('route' => array($path.'_post_edit', $model_edit->id) , 'enctype' => 'multipart/form-data','id'=>'form'))  }}
 		@else
-			{{Form::open(array('route'=> ($ruta.'_post_new') ,'class'=>'form-horizontal', 'enctype' => 'multipart/form-data','id'=>'form'))}}
+			{{Form::open(array('route'=> ($path.'_post_new') ,'class'=>'form-horizontal', 'enctype' => 'multipart/form-data','id'=>'form'))}}
 		@endif
 
-			@include($ruta.'/'.$modal.'_form')
+			@include($path.'/'.$module.'_form')
 			
 		<hr>
 		

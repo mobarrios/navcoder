@@ -7,14 +7,14 @@
 
 		<div class="panel panel-default">
 			  <div class="panel-heading">
-					<h3 class="panel-title">{{$modulo}} : {{$seccion}}</h3>
+					<h3 class="panel-title">{{ Lang::get("module.$module")}}</h3>
 			  </div>
 			  <div class="panel-body">				
 				<div class="row">
 					{{Form::open(array('url'=> 'buscar'))}}
 						<div class="col-xs-3">
 							<div class="input-group input-group-sm">
-								<input type='hidden' name='model' value='{{$ruta}}'>
+								<input type='hidden' name='model' value='{{$path}}'>
 								<input type="text" class="form-control" placeholder="Buscar" name="buscar">
 								<span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>	
 							</div>
@@ -26,14 +26,14 @@
 					<div class="col-xs-2 pull-right text-center">
 						
 						@if(Roles::validate('items','add'))
-							<a aria-label="Left Align" href="{{route($ruta.'_new_form')}}" class="btn  btn-warning btn-sm" data-toggle=	"modal" data-target="#myModal" data-backdrop="false"> <span class="fa fa-plus" aria-hidden="true"></span> agregar
+							<a aria-label="Left Align" href="{{route($path.'_new_form')}}" class="btn  btn-warning btn-sm" data-toggle=	"modal" data-target="#myModal" data-backdrop="false"> <span class="fa fa-plus" aria-hidden="true"></span> agregar
 							</a>
 						@endif
 
 					</div>
 				</div>
 				<hr>
-				@include($ruta.'/'.$ruta.'_list')
+				@include($module.'/'.$module.'_list')
 			  </div>
 		</div>
 

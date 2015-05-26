@@ -1,6 +1,6 @@
 <?php
 
-class ProvidersController extends BaseController
+class ProviderController extends BaseController
 {
 	protected $data = array();
 	protected $search_by 	=  array();

@@ -36,8 +36,7 @@
 	}
 
 	public static function del($file = null, $path = null)
-	{
-		//File::delete($path.$file);	
+	{	
 		File::delete(public_path($file));			
 	}
 }

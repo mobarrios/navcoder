@@ -1,6 +1,6 @@
 <?php
 
-class ProfilesController extends BaseController
+class ProfileController extends BaseController
 {
 	protected $data = array();
 

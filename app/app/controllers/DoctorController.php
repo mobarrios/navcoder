@@ -1,6 +1,6 @@
 <?php
 
-class DoctorsController extends BaseController
+class DoctorController extends BaseController
 {
 	protected $data = array();
 	protected $search_by =  array();
