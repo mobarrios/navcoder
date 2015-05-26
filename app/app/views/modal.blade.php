@@ -1,6 +1,6 @@
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h4 class="modal-title">{{ Lang::get("module.$module") }} : {{$seccion}}</h4>
+		<h4 class="modal-title">{{ Lang::get("module.$module") }} : {{ Lang::get("action.$action") }}</h4>
 	</div>
 
 	<div class="modal-body">

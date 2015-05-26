@@ -2,7 +2,7 @@
   {{Form::texto('code','Codigo')}}
   {{Form::texto('name','Nombre')}}
   {{Form::texto('description','Descripcion')}}
-  {{Form::providers('providers_id','Proveedor')}}
+  {{Form::providers('provider_id','Proveedor')}}
 
   {{ Form::texto('cost_price','Precio de compra','0.01', '0') }}      
   {{ Form::texto('sell_price','Precio de venta','0.01', '0') }} 

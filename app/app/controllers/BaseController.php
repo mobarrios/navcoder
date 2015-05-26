@@ -53,11 +53,11 @@ class BaseController extends Controller {
 	{
 		$model 					= $this->data['model'];
 
-		$this->data['seccion']	= 'Nuevo';
+		$this->data['action']	= Config::get('constants.ACTION_ADD');
 
 		if(!is_null($id))
 		{
-			$this->data['seccion']	= 'Editar';
+			$this->data['action']	= Config::get('constants.ACTION_EDIT');
 
 			$this->data['model_edit'] 	= $model::find($id);
 			
