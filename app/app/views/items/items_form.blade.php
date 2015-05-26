@@ -39,7 +39,7 @@
               {{ Form::texto('color',Lang::get("item.color")) }}
               {{ Form::texto('size',Lang::get("item.size")) }}
               {{ Form::texto('stock',Lang::get("item.stock"),'1', '0') }}
-              {{ Form::um('um',Lang::get("item.measure"))}}
+              {{ Form::measure('measure',Lang::get("item.measure"))}}
         </div>
       </div>
     </div>

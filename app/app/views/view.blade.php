@@ -7,7 +7,7 @@
 
 		<div class="panel panel-default">
 			  <div class="panel-heading">
-					<h3 class="panel-title">{{ Lang::get("module.$module")}}</h3>
+					<h3 class="panel-title">{{ Lang::get("module.$module") }}</h3>
 			  </div>
 			  <div class="panel-body">				
 				<div class="row">
@@ -26,8 +26,7 @@
 					<div class="col-xs-2 pull-right text-center">
 						
 						@if(Roles::validate('items','add'))
-							<a aria-label="Left Align" href="{{route($path.'_new_form')}}" class="btn  btn-warning btn-sm" data-toggle=	"modal" data-target="#myModal" data-backdrop="false"> <span class="fa fa-plus" aria-hidden="true"></span> agregar
-							</a>
+							<a aria-label="Left Align" href="{{route($path.'_new_form')}}" class="btn  btn-warning btn-sm" data-toggle=	"modal" data-target="#myModal" data-backdrop="false"> <span class="fa fa-plus" aria-hidden="true"></span> agregar </a>
 						@endif
 
 					</div>

@@ -54,14 +54,14 @@
             return Form::select($name,$areas,array('class'=>'form-control')); 
         });
 
-     Form::macro('um', function($name, $label)
+     Form::macro('measure', function($name, $label)
         {
             //$areas  = Area::lists('area','id');
             $value  = Form::getValueAttribute($name);
 
-            $um     = array('0'=>'Ninguno', '1'=>'Unidad','2'=>'Caja x 50','3'=>'Cm3','4'=>'Mt2');
+            $measure     = array('0'=>'Ninguno', '1'=>'Unidad','2'=>'Caja x 50','3'=>'Cm3','4'=>'Mt2');
 
-            $input  = Form::select($name , $um , $value , array('class'=>'form-control')); 
+            $input  = Form::select($name , $measure , $value , array('class'=>'form-control')); 
 
             return buildInput($input,$label);
         });

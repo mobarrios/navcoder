@@ -39,6 +39,6 @@ class CreateMedicalinsurances extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('obrassociales');
+		Schema::drop('medicalinsurances');
 	}
 }

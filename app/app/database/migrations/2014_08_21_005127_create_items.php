@@ -27,14 +27,13 @@ class CreateItems extends Migration {
 		   $newtable->float('maximun_weight');
 		   $newtable->string('color', 100);
 		   $newtable->string('size', 100);
-		   $newtable->string('dimensions', 100);
-		   $newtable->string('presentation', 100);
+		   $newtable->string('measure', 100);
 		   $newtable->integer('provider_id')->nullable()->unsigned();
 
 		   $newtable->timestamps();
 		   $newtable->softDeletes();
 		   
-		   $newtable->foreign('provider_id')->references('id')->on('profiles');
+		   $newtable->foreign('provider_id')->references('id')->on('providers');
         });
 	}
 
