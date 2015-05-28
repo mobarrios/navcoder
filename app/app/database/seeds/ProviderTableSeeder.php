@@ -10,6 +10,17 @@ class ProviderTableSeeder extends Seeder {
 	public function run()
 	{
 		Provider::create(array(
+			'name' 		=> 'Ninguno',
+			'last_name' => 'Ninguno',
+			'dni' 		=> '0000000',
+			'email' 	=> '',
+			'phone' 	=> '',
+			'cell_phone' 	=> '',
+			'company_name' 	=> '',
+			'cuit' 			=> '',
+		));
+
+		Provider::create(array(
 			'name' 		=> 'provider name 1',
 			'last_name' => 'provider last name 1',
 			'dni' 		=> '1111111',

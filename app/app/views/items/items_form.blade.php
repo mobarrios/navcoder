@@ -1,12 +1,11 @@
-  
   {{Form::texto('code', Lang::get("item.code"))}}
   {{Form::texto('name', Lang::get("item.name"))}}
-  {{Form::texto('description', Lang::get("item.description"))}}
+  {{Form::CustomTextarea('description', Lang::get("item.description"))}}
   {{Form::providers('provider_id', Lang::get("item.provider"))}}
 
-  {{ Form::texto('cost_price',Lang::get("item.cost_price"),'0.01', '0') }}      
-  {{ Form::texto('sell_price', Lang::get("item.sell_price"),'0.01', '0') }} 
-  {{ Form::texto('rent_price_per_day',Lang::get("item.rent_price_per_day"),'0.01', '0') }} 
+  {{Form::numeric('cost_price', Lang::get("item.cost_price"), '0.01', '0') }}      
+  {{Form::numeric('sell_price', Lang::get("item.sell_price"), '0.01', '0') }} 
+  {{Form::numeric('rent_price_per_day', Lang::get("item.rent_price_per_day"), '0.01', '0') }} 
 
   <br/>
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

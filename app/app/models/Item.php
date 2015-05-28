@@ -14,16 +14,15 @@ class Item extends Eloquent
 	//use SoftDeletingTrait;
   	//protected $dates 		= ['deleted_at'];
 
-
 		
 	public function PurchasesItems()
 	{
 		return $this->hasMany('PurchasesItems');
 	}
 
-	public function categories()
+	public function category()
 	{
-		return $this->belongsToMany('Categories','items_categories','items_id','categories_id');
+		return $this->belongsToMany('Category','items_categories','item_id','category_id');
 	}
 
 	public function getUmAttribute($val)

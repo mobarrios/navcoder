@@ -14,14 +14,14 @@ class CreateItemsCategories extends Migration {
 		Schema::create('items_categories', function($newtable)
         {		   
            $newtable->increments('id');
-           $newtable->integer('items_id')->nullable()->unsigned();
-		   $newtable->integer('categories_id')->nullable()->unsigned();
+           $newtable->integer('item_id')->nullable()->unsigned();
+		   $newtable->integer('category_id')->nullable()->unsigned();
 		   		   
 		   $newtable->timestamps();
 		   $newtable->softDeletes();
 		   
-		   $newtable->foreign('items_id')->references('id')->on('items')->onDelete('cascade');
-		   $newtable->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
+		   $newtable->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+		   $newtable->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
 	}
 

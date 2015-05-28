@@ -16,39 +16,41 @@ class ItemController extends BaseController
 		$this->search_by =  array('code','name','description');
 
 		$this->img_path = Session::get('company')."/uploads/items/images/";
-
 	}
 
 
 	public function postNew()
 	{
+		//Receive data
+		$input 		= Input::all();
+		
+		//Store categories
+		$categories = Input::has('chk_category') ? Input::get('chk_category') : array();
+		
+		//Image
+		$image 		= $input['image'];
+		
+		//Clear the input
+		unset($input['chk_category']);
+		unset($input['image']);
 
+		// Create the objet
+		$item 		= new Item($input);
+		$item->save();
+		// Input Categories
+		$item->category()->sync($categories);
 
-			$model = $this->data['model'];
-
-			$validator = Validator::make(Input::all(),array('code'=>'required|unique:items'));
-
-			if ($validator->fails())
-			{
-				return Redirect::back()->withErrors($validator)->withInput(Input::all());
-			}
-
-		// Receive data
-
-				$input 		= Input::all();
-
-				$categories = Input::has('chk_category') ? Input::get('chk_category') : array();
-
-				//$up 		= new upload();
-			
-				unset($input['chk_category']);
-
-
-			$model::create($input);
-
-
-			return Redirect::back();
-	
+		// Input Image
+		if(isset($input['image']))
+		{
+			$up 	= Upload::up($input['image'] , $this->img_path);
+			$up 	= $this->img_path.$up;
+		}
+				
+		// Save the object
+		$item->save();
+		
+		return Redirect::back();	
 	}
 
 
@@ -61,13 +63,13 @@ class ItemController extends BaseController
 
 			$categories = Input::has('chk_category') ? Input::get('chk_category') : array();
 
-			$up 		= new upload();
+			$up 		= new Upload();
 			
 			unset($input['chk_category']);
 
-			$item 		= Items::find($id);
+			$item 		= Item::find($id);
 
-			$item->categories()->sync($categories);
+			$item->category()->sync($categories);
 
 
 				if (Input::hasFile('image'))
@@ -100,16 +102,14 @@ class ItemController extends BaseController
 
 	public function getDel($id = null)
 	{
-		$model 	= $this->data['model'];
-		$mod  	= $model::find($id);
-		$up 	= new upload();
+		$item  	= Item::find($id);
 
-		if($mod->image != NULL)
+		if($item->image != NULL)
 		{
-			$up->del($mod->image);
+			Upload::del($item->image);
 		} 
 
-		$mod->delete();
+		$item->delete();
 
 		return Redirect::back();
 	}
