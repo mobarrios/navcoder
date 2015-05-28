@@ -52,4 +52,8 @@ return [
     'MEDICAL_INSURANCE_MODULE_NAME' => 'medicalinsurances',
     'MEDICAL_INSURANCE_MODULE_PATH' => 'medicalinsurances',
     'MEDICAL_INSURANCE_MODEL_NAME'  => 'Medicalinsurance',
+
+    'MEASUREMENTUNIT_MODULE_NAME' => 'measurementunits',
+    'MEASUREMENTUNIT_MODULE_PATH' => 'measurementunits',
+    'MEASUREMENTUNIT_MODEL_NAME' => 'Measurementunit',
 ];

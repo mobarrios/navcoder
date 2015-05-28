@@ -18,6 +18,7 @@ require(__DIR__ . '/routes/purchases.php');
 require(__DIR__ . '/routes/categories.php');
 require(__DIR__ . '/routes/providers.php');
 require(__DIR__ . '/routes/medicalinsurances.php');
+require(__DIR__ . '/routes/measurementunits.php');
 require(__DIR__ . '/routes/sales.php');
 require(__DIR__ . '/routes/caja.php');
 

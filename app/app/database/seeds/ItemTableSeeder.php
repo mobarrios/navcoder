@@ -23,7 +23,7 @@ class ItemTableSeeder extends Seeder {
 			'maximun_weight'	=>  60,
 			'color' 			=> 'red',
 			'size' 				=> 'XL',
-			'measure' 			=> 'Unidad',
+			'measurementunit_id'=> 1,
 			'provider_id'		=> '1',
 		));
 
@@ -41,7 +41,7 @@ class ItemTableSeeder extends Seeder {
 			'maximun_weight'	=>  60,
 			'color' 			=> 'blue',
 			'size' 				=> 'L',
-			'measure' 			=> 'Box x 50',
+			'measurementunit_id'=> 2,
 			'provider_id'		=> '2',
 		));
 
@@ -59,7 +59,7 @@ class ItemTableSeeder extends Seeder {
 			'maximun_weight'	=>  60,
 			'color' 			=> 'orange',
 			'size' 				=> 'M',
-			'measure' 			=> 'cm3',
+			'measurementunit_id'=> 3,
 			'provider_id'		=> '3',
 		));
 

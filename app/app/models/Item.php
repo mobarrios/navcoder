@@ -8,12 +8,6 @@ class Item extends Eloquent
 	protected $table 		= 'items';
 	protected $guarded 		= array('');
 
-	/** 
-     * Soft Delete
-	 */
-	//use SoftDeletingTrait;
-  	//protected $dates 		= ['deleted_at'];
-
 		
 	public function PurchasesItems()
 	{
@@ -41,6 +35,11 @@ class Item extends Eloquent
 					return 'Mt2';
 				break;	
 		}
+	}
+
+	public function measurementunit()
+	{
+		return $this->hasOne('Measurementunit');
 	}
 
 }

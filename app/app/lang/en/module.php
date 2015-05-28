@@ -23,5 +23,6 @@ return array(
 	'purchases' => 'purchases',
 	'doctors' => 'doctors',
 	'medicalinsurances' => 'medical insurances',
+	'measurementunits' => 'Measurement Units',
 
 );

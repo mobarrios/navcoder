@@ -51,6 +51,10 @@ class ModuleTableSeeder extends Seeder {
 							"name" => Config::get('constants.MEDICAL_INSURANCE_MODULE_NAME'),
 							"path" => Config::get('constants.MEDICAL_INSURANCE_MODULE_PATH')
 						),
+						array(
+							"name" => Config::get('constants.MEASUREMENTUNIT_MODULE_NAME'),
+							"path" => Config::get('constants.MEASUREMENTUNIT_MODULE_PATH')
+						),
 					);
 
 		foreach($modules as $module)

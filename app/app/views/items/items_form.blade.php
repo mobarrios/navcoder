@@ -33,12 +33,12 @@
       </div>
       <div id="4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
         <div class="panel-body">
-              {{ Form::texto('total_weight',Lang::get("item.total_weight"),'0.01', '0') }}  
-              {{ Form::texto('maximun_weight',Lang::get("item.maximun_weight"),'0.01', '0') }}  
+              {{ Form::numeric('total_weight',Lang::get("item.total_weight"),'0.01', '0') }}  
+              {{ Form::numeric('maximun_weight',Lang::get("item.maximun_weight"),'0.01', '0') }}  
               {{ Form::texto('color',Lang::get("item.color")) }}
               {{ Form::texto('size',Lang::get("item.size")) }}
-              {{ Form::texto('stock',Lang::get("item.stock"),'1', '0') }}
-              {{ Form::measure('measure',Lang::get("item.measure"))}}
+              {{ Form::numeric('stock',Lang::get("item.stock"),'1', '0') }}
+              {{ Form::measurementunits('measurementunit_id',Lang::get("item.measure"))}}
         </div>
       </div>
     </div>

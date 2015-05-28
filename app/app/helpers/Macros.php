@@ -34,6 +34,14 @@ Form::macro('pay_method',function($name,$label)
 
 });
 
+Form::macro('measurementunits', function($name, $label)
+{
+    $prov   = Measurementunit::lists('name','id');
+    $input  = Form::select($name , $prov ,null, array('class'=>'form-control')); 
+
+    return buildInput($input,$label);  
+});
+
 Form::macro('providers', function($name, $label)
 {
     $prov   = Provider::lists('name','id');
@@ -57,7 +65,6 @@ Form::macro('areas', function($name)
 
  Form::macro('measure', function($name, $label)
 {
-    //$areas  = Area::lists('area','id');
     $value  = Form::getValueAttribute($name);
 
     $measure     = array('0'=>'Ninguno', '1'=>'Unidad','2'=>'Caja x 50','3'=>'Cm3','4'=>'Mt2');

@@ -23,5 +23,6 @@ return array(
 	'purchases' => 'compras',
 	'doctors' => 'Medicos',
 	'medicalinsurances' => 'obras sociales',
+	'measurementunits' => 'unidades de medida',
 
 );

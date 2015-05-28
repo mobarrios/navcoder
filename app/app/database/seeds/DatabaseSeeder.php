@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
+		$this->call('MeasurementunitTableSeeder');
 		$this->call('ModuleTableSeeder');
 		$this->call('ProfileTableSeeder');
 		$this->call('UserTableSeeder');
