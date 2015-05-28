@@ -59,44 +59,39 @@ class ItemController extends BaseController
 	{	
 		// Receive data
 
-			$input 		= Input::all();
+		$input 		= Input::all();
 
-			$categories = Input::has('chk_category') ? Input::get('chk_category') : array();
-
-			$up 		= new Upload();
-			
-			unset($input['chk_category']);
-
-			$item 		= Item::find($id);
-
-			$item->category()->sync($categories);
-
-
-				if (Input::hasFile('image'))
-				{	
-					if($item->image != NULL)
-					{
-						$up->del($item->image);
-					}
-						$up_file = $up->up($input['image'] , $this->img_path );
-					
-					if( $up_file != false)
-					{
-						$input['image']  = $up_file;
-					}
-
-				}
-				else
-				{
-					$input['image'] = $item->image;
-				}
+		$categories = Input::has('chk_category') ? Input::get('chk_category') : array();
 		
-		// Save the object
+		unset($input['chk_category']);
 
-			$item->fill($input);
-			$item->save();
+		$item 		= Item::find($id);
+
+		$item->category()->sync($categories);
+
+
+		if (Input::hasFile('image'))
+		{	
+			if($item->image != NULL)
+			{
+				Upload::del($item->image);
+			}
 			
-			return Redirect::back();
+			$up_file = Upload::up($input['image'] , $this->img_path );
+			$input['image']  = $up_file;			
+		}
+		else
+		{
+			//$input['image'] = $item->image;
+			unset($input['image']);
+		}
+	
+	// Save the object
+
+		$item->fill($input);
+		$item->save();
+		
+		return Redirect::back();
 
 	}
 

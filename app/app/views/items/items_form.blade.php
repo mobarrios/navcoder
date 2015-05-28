@@ -1,5 +1,5 @@
-  {{Form::texto('code', Lang::get("item.code"))}}
-  {{Form::texto('name', Lang::get("item.name"))}}
+  {{Form::texto('code', Lang::get("item.code"), array('required'))}}
+  {{Form::texto('name', Lang::get("item.name"), array('required'))}}
   {{Form::CustomTextarea('description', Lang::get("item.description"))}}
   {{Form::providers('provider_id', Lang::get("item.provider"))}}
 
