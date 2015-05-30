@@ -7,11 +7,15 @@ class ClientController extends BaseController
 
 	public function __construct()
 	{
-		$this->data['modal'] 		= 'clients';
-		$this->data['ruta'] 		= 'clients';
-		$this->data['model'] 		= 'Clients';
-		$this->data['modulo'] 		= 'Clientes';
-		$this->data['seccion']		= '';
+		$modelUpperCase 					= Config::get('constants.CLIENT_MODEL_NAME_UPPER_CASE');
+		$this->data['model'] 				= Config::get('constants.'.$modelUpperCase.'_MODEL_NAME');
+		$this->data['module'] 				= Config::get('constants.'.$modelUpperCase.'_MODULE_NAME');
+		$this->data['path'] 				= Config::get('constants.'.$modelUpperCase.'_MODULE_PATH');
+		$this->data['newPathMethodGet'] 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_GET');
+		$this->data['editPathMethodGet']	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_GET');
+		$this->data['deletePathMethodGet']	= Config::get('constants.'.$modelUpperCase.'_DELETE_PATH_METHOD_GET');
+		$this->data['newPathMethodPost']	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_POST');
+		$this->data['editPathMethodPost']	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_POST');
 
 		$this->search_by = array('name','last_name','dni','company_name','cuit');
 	}

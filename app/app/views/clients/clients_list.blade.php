@@ -2,14 +2,13 @@
 	<table class="table table-hover table-striped">
 		<thead>
 			<tr>
-				<th>Empresa</th>
-				<th>Nombre</th>
-				<th>Apellido</th>
-				<th>Mail</th>
-				<th>Tel.</th>
-				<th>Cel.</th>
-				<th>CUIT</th>
-				<th>C.C.</th>
+				<th>{{Lang::get('client.company')}}</th>
+				<th>{{Lang::get('client.name')}}</th>
+				<th>{{Lang::get('client.lastName')}}</th>
+				<th>{{Lang::get('client.email')}}</th>
+				<th>{{Lang::get('client.phoneNumber')}}</th>
+				<th>{{Lang::get('client.cellPhoneNumber')}}</th>
+				<th>{{Lang::get('client.cuit')}}</th>
 				<th class="action_row"></th>
 			</tr>
 		</thead>
@@ -23,12 +22,11 @@
 					<td>{{$models->email}}</td>
 					<td>{{$models->phone}}</td>
 					<td>{{$models->cell_phone}}</td>
-					<td>{{$models->ciut}}</td>
-					<td><a href="{{route('clients_cc', $models->id)}}" class="btn btn-xs btn-warning"><i class="fa fa-money"></i></a></td>
+					<td>{{$models->cuit}}</td>
 					<td>
 						<div class="btn-group btn-group-xs">
-							<a href="{{route($ruta.'_edit_form',$models->id)}}" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a>
-							<a href="{{route($ruta.'_delete',$models->id)}}"type="button" class="del_confirm btn btn-danger"><i class="fa fa-remove"></i></a>
+							<a href="{{route($editPathMethodGet,$models->id)}}" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a>
+							<a href="{{route($deletePathMethodGet,$models->id)}}"type="button" class="del_confirm btn btn-danger"><i class="fa fa-remove"></i></a>
 						</div>
 					</td>
 				</tr>

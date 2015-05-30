@@ -17,6 +17,7 @@ class CreateClients extends Migration {
 		   $newtable->string('name', 100);
 		   $newtable->string('last_name', 100);
 		   $newtable->string('dni', 20);
+		   $newtable->string('address', 200);
 		   $newtable->string('email', 100);
 		   $newtable->string('phone', 100);
 		   $newtable->string('cell_phone', 100);

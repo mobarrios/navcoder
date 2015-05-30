@@ -1,9 +1,9 @@
-{{Form::texto('name','Nombre Cliente')}}
-{{Form::texto('last_name','Apellido Cliente')}}
-{{Form::texto('dni','DNI (Documento Nacional de Identidad)')}}
-{{Form::texto('address','Dirección')}}
-{{Form::texto('email','Email')}}
-{{Form::texto('phone','Tel. Cliente')}}
-{{Form::texto('cell_phone','Cel. Cliente')}}
-{{Form::texto('company_name','Empresa')}}
-{{Form::texto('cuit','CUIT Cliente')}}
+{{Form::texto('name', 		Lang::get('client.name'))}}
+{{Form::texto('last_name', 	Lang::get('client.lastName'))}}
+{{Form::texto('dni', 		Lang::get('client.document'))}}
+{{Form::texto('address', 	Lang::get('client.address'))}}
+{{Form::texto('email', 		Lang::get('client.email'))}}
+{{Form::texto('phone', 		Lang::get('client.phoneNumber'))}}
+{{Form::texto('cell_phone', Lang::get('client.cellPhoneNumber'))}}
+{{Form::texto('company_name', 	Lang::get('client.company'))}}
+{{Form::texto('cuit', 			Lang::get('client.cuit'))}}
