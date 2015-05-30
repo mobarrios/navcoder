@@ -1,11 +1,25 @@
 <?php
+	//Measurementunits Routes	
+	
+	$modelUpperCase = Config::get('constants.MEASUREMENTUNIT_MODEL_NAME_UPPER_CASE');
+	$controller 	= Config::get('constants.'.$modelUpperCase.'_MODEL_NAME').'Controller';
+	$module 		= Config::get('constants.'.$modelUpperCase.'_MODULE_NAME');
+
+	//variables
+	$moduleNewPathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_GET');
+	$moduleEditPathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_GET');
+	$moduleDeletePathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_DELETE_PATH_METHOD_GET');
+
+	$moduleNewPathMethodPOST 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_POST');
+	$moduleEditPathMethodPOST 	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_POST');
+
 
 	//GET
-	Route::get('measurementunits/{model?}/{search?}', array('as' => 'measurementunits', 		'uses'  => 'MeasurementunitController@getIndex'));
-	Route::get('measurementunits_nuevo', 				array('as' => 'measurementunits_new_form', 	'uses'  => 'MeasurementunitController@formModal'));
-	Route::get('measurementunits_editar/{id?}', 		array('as' => 'measurementunits_edit_form',	'uses'	=> 'MeasurementunitController@formModal'));
-	Route::get('measurementunits_borrar/{id?}', 		array('as' => 'measurementunits_delete',		'uses'	=> 'MeasurementunitController@getDel'));
+	Route::get($module.'/{model?}/{search?}', 		array('as' => $module, 						'uses'  => $controller.'@getIndex'));
+	Route::get($moduleNewPathMethodGET, 			array('as' => $moduleNewPathMethodGET,		'uses'  => $controller.'@formModal'));
+	Route::get($moduleEditPathMethodGET.'/{id?}',	array('as' => $moduleEditPathMethodGET,		'uses'	=> $controller.'@formModal'));
+	Route::get($moduleDeletePathMethodGET.'/{id?}',	array('as' => $moduleDeletePathMethodGET,	'uses'	=> $controller.'@getDel'));
+	
 	//POST
-	Route::post('measurementunits_nuevo', 			array('as' => 'measurementunits_post_new', 	'uses' 	=> 'MeasurementunitController@postNew'));
-	Route::post('measurementunits_editar/{id?}', 		array('as' => 'measurementunits_post_edit', 	'uses' 	=> 'MeasurementunitController@postEdit'));
-?>
+	Route::post($moduleNewPathMethodPOST, 			array('as' => $moduleNewPathMethodPOST, 	'uses' 	=> $controller.'@postNew'));
+	Route::post($moduleEditPathMethodPOST.'/{id?}', array('as' => $moduleEditPathMethodPOST, 	'uses' 	=> $controller.'@postEdit'));

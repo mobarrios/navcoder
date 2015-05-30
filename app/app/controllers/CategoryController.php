@@ -7,14 +7,16 @@ class CategoryController extends BaseController
 
 	public function __construct()
 	{
-		$this->data['modal'] 		= 'categories';
-		$this->data['ruta'] 		= 'categories';
-		$this->data['model'] 		= 'Categories';
-		$this->data['modulo'] 		= 'Categorias';
-		$this->data['seccion']		= '';
-
+		$modelUpperCase 					= Config::get('constants.CATEGORY_MODEL_NAME_UPPER_CASE');
+		$this->data['model'] 				= Config::get('constants.'.$modelUpperCase.'_MODEL_NAME');
+		$this->data['module'] 				= Config::get('constants.'.$modelUpperCase.'_MODULE_NAME');
+		$this->data['path'] 				= Config::get('constants.'.$modelUpperCase.'_MODULE_PATH');
+		$this->data['newPathMethodGet'] 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_GET');
+		$this->data['editPathMethodGet']	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_GET');
+		$this->data['deletePathMethodGet']	= Config::get('constants.'.$modelUpperCase.'_DELETE_PATH_METHOD_GET');
+		$this->data['newPathMethodPost']	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_POST');
+		$this->data['editPathMethodPost']	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_POST');
+		
 		$this->search_by =  array('name');
 	}
 }
-
-?>

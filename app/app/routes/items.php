@@ -1,14 +1,25 @@
 <?php
 	//items
-
-	Route::get('items/{model?}/{search?}', 	array('as' => 'items', 	'uses'  => 'ItemController@getIndex'));
-
 	
+	$modelUpperCase = Config::get('constants.ITEM_MODEL_NAME_UPPER_CASE');
+	$controller 	= Config::get('constants.'.$modelUpperCase.'_MODEL_NAME').'Controller';
+	$module 		= Config::get('constants.'.$modelUpperCase.'_MODULE_NAME');
 
-	Route::get('articulos_editar/{id?}', 		array('as' => 'items_edit_form','uses'	=> 'ItemController@formModal'));
-	Route::post('articulos_editar/{id?}', 		array('as' => 'items_post_edit','uses' 	=> 'ItemController@postEdit'));	
+	//variables
+	$moduleNewPathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_GET');
+	$moduleEditPathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_GET');
+	$moduleDeletePathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_DELETE_PATH_METHOD_GET');
 
-	Route::get('articulos_borrar/{id?}', 		array('as' => 'items_delete',	'uses'	=> 'ItemController@getDel'));
+	$moduleNewPathMethodPOST 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_POST');
+	$moduleEditPathMethodPOST 	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_POST');
 
-	Route::get('items_new_form', 				array('as' => 'items_new_form', 'uses'  => 'ItemController@formModal'));
-	Route::post('articulos_nuevo', 				array('as' => 'items_post_new', 'uses' 	=> 'ItemController@postNew'));
+
+	//GET
+	Route::get($module.'/{model?}/{search?}', 		array('as' => $module, 						'uses'  => $controller.'@getIndex'));
+	Route::get($moduleNewPathMethodGET, 			array('as' => $moduleNewPathMethodGET,		'uses'  => $controller.'@formModal'));
+	Route::get($moduleEditPathMethodGET.'/{id?}',	array('as' => $moduleEditPathMethodGET,		'uses'	=> $controller.'@formModal'));
+	Route::get($moduleDeletePathMethodGET.'/{id?}',	array('as' => $moduleDeletePathMethodGET,	'uses'	=> $controller.'@getDel'));
+	
+	//POST
+	Route::post($moduleNewPathMethodPOST, 			array('as' => $moduleNewPathMethodPOST, 	'uses' 	=> $controller.'@postNew'));
+	Route::post($moduleEditPathMethodPOST.'/{id?}', array('as' => $moduleEditPathMethodPOST, 	'uses' 	=> $controller.'@postEdit'));

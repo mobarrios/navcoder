@@ -1,11 +1,25 @@
 <?php
-	//categories
+	//Categories Routes	
+	
+	$modelUpperCase = Config::get('constants.CATEGORY_MODEL_NAME_UPPER_CASE');
+	$controller 	= Config::get('constants.'.$modelUpperCase.'_MODEL_NAME').'Controller';
+	$module 		= Config::get('constants.'.$modelUpperCase.'_MODULE_NAME');
+
+	//variables
+	$moduleNewPathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_GET');
+	$moduleEditPathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_GET');
+	$moduleDeletePathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_DELETE_PATH_METHOD_GET');
+
+	$moduleNewPathMethodPOST 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_POST');
+	$moduleEditPathMethodPOST 	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_POST');
+
+
 	//GET
-	Route::get('categorias/{model?}/{search?}', array('as' => 'categories', 		'uses'  => 'CategoriesController@getIndex'));
-	Route::get('categorias_nuevo', 				array('as' => 'categories_new_form', 	'uses'  => 'CategoriesController@formModal'));
-	Route::get('categorias_editar/{id?}', 		array('as' => 'categories_edit_form',	'uses'	=> 'CategoriesController@formModal'));
-	Route::get('categorias_borrar/{id?}', 		array('as' => 'categories_delete',		'uses'	=> 'CategoriesController@getDel'));
+	Route::get($module.'/{model?}/{search?}', 		array('as' => $module, 						'uses'  => $controller.'@getIndex'));
+	Route::get($moduleNewPathMethodGET, 			array('as' => $moduleNewPathMethodGET,		'uses'  => $controller.'@formModal'));
+	Route::get($moduleEditPathMethodGET.'/{id?}',	array('as' => $moduleEditPathMethodGET,		'uses'	=> $controller.'@formModal'));
+	Route::get($moduleDeletePathMethodGET.'/{id?}',	array('as' => $moduleDeletePathMethodGET,	'uses'	=> $controller.'@getDel'));
+	
 	//POST
-	Route::post('categorias_nuevo', 			array('as' => 'categories_post_new', 	'uses' 	=> 'CategoriesController@postNew'));
-	Route::post('categorias_editar/{id?}', 		array('as' => 'categories_post_edit', 	'uses' 	=> 'CategoriesController@postEdit'));
-?>
+	Route::post($moduleNewPathMethodPOST, 			array('as' => $moduleNewPathMethodPOST, 	'uses' 	=> $controller.'@postNew'));
+	Route::post($moduleEditPathMethodPOST.'/{id?}', array('as' => $moduleEditPathMethodPOST, 	'uses' 	=> $controller.'@postEdit'));

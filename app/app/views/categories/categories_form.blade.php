@@ -1,1 +1,1 @@
-{{Form::texto('name','Nombre Categoria')}}
+{{Form::texto('name', Lang::get('category.categoryName'))}}

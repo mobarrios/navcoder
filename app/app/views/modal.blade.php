@@ -6,9 +6,9 @@
 	<div class="modal-body">
 		@if(isset($model_edit))
 
-			{{Form::model($model_edit,  array('route' => array($path.'_post_edit', $model_edit->id) , 'enctype' => 'multipart/form-data','id'=>'form'))  }}
+			{{Form::model($model_edit,  array('route' => array($editPathMethodPost, $model_edit->id) , 'enctype' => 'multipart/form-data','id'=>'form'))  }}
 		@else
-			{{Form::open(array('route'=> ($path.'_post_new') ,'class'=>'form-horizontal', 'enctype' => 'multipart/form-data','id'=>'form'))}}
+			{{Form::open(array('route'=> $newPathMethodPost ,'class'=>'form-horizontal', 'enctype' => 'multipart/form-data','id'=>'form'))}}
 		@endif
 
 			@include($path.'/'.$module.'_form')
