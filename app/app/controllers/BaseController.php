@@ -39,6 +39,7 @@ class BaseController extends Controller {
 		}
 		else
 		{
+			error_log("modelo : " . $model);
 			$this->data['model'] 	= $model::orderBy('id' ,'ASC')->paginate('10');
 		}
 			
@@ -96,5 +97,23 @@ class BaseController extends Controller {
 	 	$model->save();
 	 
 	 	return Redirect::back();
+	}
+
+	//set data array for the constructors
+	public static function setDataArray($model)
+	{		
+		error_log("Modelo desde el controlador Base : ".$model);
+		$modelUpperCase 			= strtoupper($model);
+		$data 						= array();
+		$data['model'] 				= Config::get('constants.'.$modelUpperCase.'_MODEL_NAME');
+		$data['module'] 			= Config::get('constants.'.$modelUpperCase.'_MODULE_NAME');
+		$data['path'] 				= Config::get('constants.'.$modelUpperCase.'_MODULE_PATH');
+		$data['newPathMethodGet'] 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_GET');
+		$data['editPathMethodGet']	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_GET');
+		$data['deletePathMethodGet']= Config::get('constants.'.$modelUpperCase.'_DELETE_PATH_METHOD_GET');
+		$data['newPathMethodPost']	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_POST');
+		$data['editPathMethodPost']	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_POST');
+		error_log("Modelo Salida de	el controlador : ".$data['model']);
+		return $data;
 	}
 }

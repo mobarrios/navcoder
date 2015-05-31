@@ -7,14 +7,9 @@ class MedicalinsuranceController extends BaseController
 
 	public function __construct()
 	{
-		$this->data['modal'] 		= 'obras';
-		$this->data['ruta'] 		= 'obras';
-		$this->data['model'] 		= 'Obras';
-		$this->data['modulo'] 		= 'Obras';
-		$this->data['seccion']		= '';
+		error_log("Modelo desde el controlador : ".Config::get('constants.MEDICALINSURANCE_MODEL_NAME'));
+		$this->data = BaseController::setDataArray(Config::get('constants.MEDICALINSURANCE_MODEL_NAME'));
 
 		$this->search_by = array('name','cuit');
 	}
 }
-
-?>

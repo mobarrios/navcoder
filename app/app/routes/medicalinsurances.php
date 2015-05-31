@@ -1,12 +1,25 @@
 <?php
-	//medicalinsurances
+	//Measurementunits Routes	
 	
-	Route::get('medicalinsurances/{model?}/{search?}', 	array('as' => 'medicalinsurances', 				'uses'  => 'medicalinsurancesController@getIndex'));
-	Route::get('medicalinsurances_nuevo', 				array('as' => 'medicalinsurances_new_form', 	'uses'  => 'medicalinsurancesController@formModal'));
-	Route::get('medicalinsurances_editar/{id?}', 		array('as' => 'medicalinsurances_edit_form',	'uses'	=> 'medicalinsurancesController@formModal'));
-	Route::get('medicalinsurances_borrar/{id?}', 		array('as' => 'medicalinsurances_delete',		'uses'	=> 'medicalinsurancesController@getDel'));
+	$modelUpperCase = Config::get('constants.MEDICALINSURANCE_MODEL_NAME_UPPER_CASE');
+	$controller 	= Config::get('constants.'.$modelUpperCase.'_MODEL_NAME').'Controller';
+	$module 		= Config::get('constants.'.$modelUpperCase.'_MODULE_NAME');
 
-	Route::post('medicalinsurances_nuevo', 				array('as' => 'medicalinsurances_post_new', 	'uses' 	=> 'medicalinsurancesController@postNew'));
-	Route::post('medicalinsurances_editar/{id?}', 		array('as' => 'medicalinsurances_post_edit', 	'uses' 	=> 'medicalinsurancesController@postEdit'));
+	//variables
+	$moduleNewPathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_GET');
+	$moduleEditPathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_GET');
+	$moduleDeletePathMethodGET 	= Config::get('constants.'.$modelUpperCase.'_DELETE_PATH_METHOD_GET');
 
-?>
+	$moduleNewPathMethodPOST 	= Config::get('constants.'.$modelUpperCase.'_NEW_PATH_METHOD_POST');
+	$moduleEditPathMethodPOST 	= Config::get('constants.'.$modelUpperCase.'_EDIT_PATH_METHOD_POST');
+
+
+	//GET
+	Route::get($module.'/{model?}/{search?}', 		array('as' => $module, 						'uses'  => $controller.'@getIndex'));
+	Route::get($moduleNewPathMethodGET, 			array('as' => $moduleNewPathMethodGET,		'uses'  => $controller.'@formModal'));
+	Route::get($moduleEditPathMethodGET.'/{id?}',	array('as' => $moduleEditPathMethodGET,		'uses'	=> $controller.'@formModal'));
+	Route::get($moduleDeletePathMethodGET.'/{id?}',	array('as' => $moduleDeletePathMethodGET,	'uses'	=> $controller.'@getDel'));
+	
+	//POST
+	Route::post($moduleNewPathMethodPOST, 			array('as' => $moduleNewPathMethodPOST, 	'uses' 	=> $controller.'@postNew'));
+	Route::post($moduleEditPathMethodPOST.'/{id?}', array('as' => $moduleEditPathMethodPOST, 	'uses' 	=> $controller.'@postEdit'));

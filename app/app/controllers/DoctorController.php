@@ -7,12 +7,8 @@ class DoctorController extends BaseController
 
 	public function __construct()
 	{
-		$this->data['modal'] 		= 'doctors';
-		$this->data['ruta'] 		= 'doctors';
-		$this->data['model'] 		= 'Doctors';
-		$this->data['modulo'] 		= 'Doctores';
-		$this->data['seccion']		= '';
-
+		$this->data = BaseController::setDataArray(Config::get('constants.DOCTOR_MODEL_NAME'));
+		
 		$this->search_by = array('name','last_name','dni','license');
 	}
 }

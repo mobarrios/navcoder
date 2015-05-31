@@ -11,7 +11,7 @@
 			{{Form::open(array('route'=> $newPathMethodPost ,'class'=>'form-horizontal', 'enctype' => 'multipart/form-data','id'=>'form'))}}
 		@endif
 
-			@include($path.'/'.$module.'_form')
+			@include($path.'/form')
 			
 		<hr>
 		

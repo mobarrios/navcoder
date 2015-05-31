@@ -131,17 +131,17 @@ return [
     'DOCTOR_EDIT_PATH_METHOD_POST'    => 'doctors_edit_post',
     
     //Medical Insurance Constants
-    'MEDICAL_INSURANCE_MODULE_NAME' => 'medicalinsurances',
-    'MEDICAL_INSURANCE_MODULE_PATH' => 'medicalinsurances',
-    'MEDICAL_INSURANCE_MODEL_NAME'  => 'Medicalinsurance',
+    'MEDICALINSURANCE_MODULE_NAME' => 'medicalinsurances',
+    'MEDICALINSURANCE_MODULE_PATH' => 'medicalinsurances',
+    'MEDICALINSURANCE_MODEL_NAME'  => 'Medicalinsurance',
 
-    'MEDICAL_INSURANCE_MODEL_NAME_UPPER_CASE'    => 'MEDICAL_INSURANCE',
-    'MEDICAL_INSURANCE_NEW_PATH_METHOD_GET'      => 'medicalinsurances_new',
-    'MEDICAL_INSURANCE_EDIT_PATH_METHOD_GET'     => 'medicalinsurances_edit',
-    'MEDICAL_INSURANCE_DELETE_PATH_METHOD_GET'   => 'medicalinsurances_delete',
+    'MEDICALINSURANCE_MODEL_NAME_UPPER_CASE'    => 'MEDICALINSURANCE',
+    'MEDICALINSURANCE_NEW_PATH_METHOD_GET'      => 'medicalinsurances_new',
+    'MEDICALINSURANCE_EDIT_PATH_METHOD_GET'     => 'medicalinsurances_edit',
+    'MEDICALINSURANCE_DELETE_PATH_METHOD_GET'   => 'medicalinsurances_delete',
 
-    'MEDICAL_INSURANCE_NEW_PATH_METHOD_POST'     => 'medicalinsurances_new_post',
-    'MEDICAL_INSURANCE_EDIT_PATH_METHOD_POST'    => 'medicalinsurances_edit_post',
+    'MEDICALINSURANCE_NEW_PATH_METHOD_POST'     => 'medicalinsurances_new_post',
+    'MEDICALINSURANCE_EDIT_PATH_METHOD_POST'    => 'medicalinsurances_edit_post',
 
     //Measurementunit Constants
     'MEASUREMENTUNIT_MODULE_NAME' => 'measurementunits',

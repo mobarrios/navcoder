@@ -15,11 +15,12 @@ class CreateMedicalinsurances extends Migration {
         {
 		   $newtable->increments('id');
 		   $newtable->string('name', 100);
-		   $newtable->string('address', 100);
+		   $newtable->string('address', 200);
 		   $newtable->string('city', 100);
 		   $newtable->string('province', 100);
 		   $newtable->string('zip_code', 100);
-		   $newtable->string('telephone', 100);
+		   $newtable->string('phone', 100);
+		   $newtable->string('cell_phone', 100);
 		   $newtable->string('fax', 100);
 		   $newtable->string('email', 100);
 		   $newtable->string('cuit', 100);

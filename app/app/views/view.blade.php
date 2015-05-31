@@ -32,7 +32,7 @@
 					</div>
 				</div>
 				<hr>
-				@include($module.'/'.$module.'_list')
+				@include($module.'/list')
 			  </div>
 		</div>
 

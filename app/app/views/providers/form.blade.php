@@ -1,0 +1,9 @@
+{{Form::texto('name', 		Lang::get('provider.name'))}}
+{{Form::texto('last_name', 	Lang::get('provider.lastName'))}}
+{{Form::texto('dni', 		Lang::get('provider.document'))}}
+{{Form::texto('address', 	Lang::get('provider.address'))}}
+{{Form::texto('email', 		Lang::get('provider.email'))}}
+{{Form::texto('phone', 		Lang::get('provider.phoneNumber'))}}
+{{Form::texto('cell_phone', Lang::get('provider.cellPhoneNumber'))}}
+{{Form::texto('company_name', 	Lang::get('provider.company'))}}
+{{Form::texto('cuit', 			Lang::get('provider.cuit'))}}
