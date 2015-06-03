@@ -22,7 +22,7 @@ class ItemController extends BaseController
 		//columnas de busqueda
 		$this->search_by =  array('code','name','description');
 
-		$this->img_path = Session::get('company')."/uploads/items/images/";
+		$this->img_path = "uploads/items/images/";
 	}
 
 
