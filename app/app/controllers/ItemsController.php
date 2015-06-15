@@ -11,11 +11,15 @@ class ItemsController extends BaseController
 		
 		if(Session::get('company') == 'aclv')
 		{
-			$this->data['modal'] = 'items_aclv';
+			 $this->data['modal'] = 'items_aclv';
 		}
 		elseif(Session::get('company') == 'laregaleria')
 		{
 			$this->data['modal'] = 'items_laregaleria';
+		}
+		elseif(Session::get('company') == 'sancus')
+		{
+			$this->data['modal'] = 'items_sancus';	
 		}
 		else
 		{

@@ -7,8 +7,18 @@ class ClientsController extends BaseController
 
 	public function __construct()
 	{
+
+		if(Session::get('company') == 'sancus')
+		{
+			$this->data['modal'] 	= 'clients_sancus';	
+		}
+		else
+		{
+			$this->data['modal'] 	= 'clients';
+		}
+
 		$this->data['modules_id'] 	= 6;
-		$this->data['modal'] 		= 'clients';
+		//$this->data['modal'] 		= 'clients';
 		$this->data['ruta'] 		= 'clients';
 		$this->data['model'] 		= 'Clients';
 		$this->data['modulo'] 		= 'Clientes';
@@ -42,9 +52,9 @@ class ClientsController extends BaseController
 			$caja->in 			= $input['amount'];
 			$caja->save();
 		}
-		
-
 
 		return Redirect::back(); 
 	}
+
+
 }

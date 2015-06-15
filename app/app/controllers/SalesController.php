@@ -58,6 +58,51 @@ class SalesController extends BaseController
 		return View::make('sales.sales_view')->with($this->data);
 	}
 
+	//SANCUS
+	public function getProcessSancus()
+	{
+		//return Redirect::to('inicio');
+		$datos = Session::get('data');
+		$total = Session::get('array_total');
+		$items = Session::get('array_items');
+
+
+
+		$sale 			  		= new Sales();
+		$sale->sales_date  		= $datos['date'];
+		$sale->amount	  		= $total;
+		$sale->clients_id  		= $datos['client_id'];
+		$sale->doctors_id 		= $datos['doctor_id'];
+		$sale->save();
+
+		foreach($items as $item => $key)
+		{
+			$items 					= new SalesItems();
+			$items->quantity 		= $key['cantidad'];	
+			$items->observations 	= $key['observations'];
+			$items->price_per_unit  = $key['$'];
+			$items->sales_id 		= $sale->id;
+			$items->items_id 		= $key['item_id'];
+			$items->save();
+
+
+			// resta la cantidad del stock del articulo
+			$item_stock 			= Items::find($key['item_id']);
+			$item_stock->stock 		= $item_stock->stock - $key['cantidad'];
+			$item_stock->save() ;
+
+		}	
+
+		Session::forget('array_items');
+		Session::forget('array_total');
+		Session::forget('data');
+
+		return Response::json($sale->id);
+	}
+
+
+
+
 	public function getProcess()
 	{
 		//return Redirect::to('inicio');
@@ -155,10 +200,81 @@ class SalesController extends BaseController
 			Session::put('purchase_temporal_id',$purchase_temporal->id);
 		}
 		*/
-		
+			
+		if(Session::get('company') == 'sancus')
+		{
+			return View::make('sales.sales_sancus_new')->with($this->data);
+		}
+
 		return View::make('sales.sales_new')->with($this->data);
 	}
 
+
+	// SANCUS ADD ITEM
+	public function postAdditemSancus()
+	{
+		$date_sales		 = Input::get('date');
+		$client_id_sales = Input::get('client_id');
+		$doctor_id_sales = Input::get('doctor_id');
+
+		//datos del remito
+			if(!Session::has('data'))
+			{	
+				$client 	= Clients::find($client_id_sales);
+				$doctor 	= Doctors::find($doctor_id_sales);
+
+				$data 		= array('date'			=> $date_sales,
+									'client_id'		=> $client_id_sales, 
+									'doctor_id'		=> $doctor_id_sales, 
+									'client_name'	=> $client->name.' '. $client->last_name .' - '. $client->company_name,
+									'doctor_name'	=> $doctor->name.' '. $doctor->last_name .' - '. $doctor->company_name,
+									);
+
+				Session::put('data',$data);
+			}
+			
+
+			//items de remito
+			
+			$item 			= Items::find(Input::get('item_id'));
+
+			if(!Session::has('array_items'))
+			{	
+				$array_items 	= array();
+			}
+			else
+			{
+				$array_items 	= Session::get('array_items');
+			}
+
+
+			$item 	= array('item_id'		=> Input::get('item_id'),
+							'code'			=> $item->code, 
+							'description' 	=> $item->name .' '.$item->description, 
+							'$' 			=> Input::get('price_per_unit'),
+							'cantidad' 		=> Input::get('cantidad'), 
+							'observations'	=> Input::get('observations'), 
+							'subtotal' 		=> Input::get('price_per_unit') * Input::get('cantidad')
+							);
+
+			array_push($array_items, $item);
+
+			Session::put('array_items',$array_items);
+
+			$total = 0;
+
+			foreach($array_items as $item => $key) 
+			{
+				$total = $total + $key['subtotal'];
+			}
+		
+			Session::put('array_total',$total);
+
+		return Redirect::back()->withInput();
+
+
+
+	}
 
 	public function postAdditem()
 	{

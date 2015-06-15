@@ -5,22 +5,51 @@ class DBupdate
 	public static function update()
 	{	
 		/*
-		Schema::table('items',function($table)
-		{
-			$table->string('provider_code',200);
-		});
-		
+			$table 						= new Modules();
+			$table->id   				= 13;
+			$table->name 				= 'staff';
+			$table->save();
+
+			$menu  						= new Menus();
+			$menu->name 				= 'Staff';
+			$menu->routes   			= 'staff_list';
+			$menu->available 			= 1;
+			$menu->main 				= 0;
+			$menu->action   			= 'read';
+			$menu->modules_id 			= 13;
+			$menu->save();
+
+			$permissions 				= new Permissions();
+			$permissions->read 			= 1;
+			$permissions->edit 			= 1;
+			$permissions->delete 		= 1;
+			$permissions->add 			= 1;
+			$permissions->modules_id 	= 13;
+			$permissions->profiles_id 	= 1;
+			$permissions->save();
+
 		*/
-
-		
-		
-
 	}	
 
 
 	public static function create()
 	{
 	
+
+		Schema::create('staff', function($table)
+		{
+			$table->increments('id');
+			$table->softDeletes();
+			$table->timestamps();
+
+			$table->string('name','200');
+			$table->string('last_name','200');
+			$table->string('post','200');
+			$table->string('mail','200');
+			$table->string('phone','200');
+			$table->string('internal','200');
+			$table->string('image','200');
+		});
 
 		Schema::create('caja', function($table)
 		{

@@ -43,12 +43,27 @@ Route::group(array('prefix' => 'api/v1'), function()
  		 {
  			$item = Items::where('code','like','%'.$search.'%')->orWhere('name','like','%'.$search.'%')->orWhere('description','like','%'.$search.'%')->first();	 	
  		 }
-		
-	
-		
 
 		return Response::json($item);
 
+	});
+
+	Route::get('staff',function(){
+
+ 		header('Access-Control-Allow-Origin: *');	
+
+ 		$data = Staff::all();
+
+		return Response::json($data);
+	});
+
+	Route::get('obras',function(){
+
+ 		header('Access-Control-Allow-Origin: *');	
+
+ 		$data = Obras::all();
+
+		return Response::json($data);
 	});
 });
 
@@ -57,6 +72,7 @@ Route::get('empresa/{company}',function($company)
 
 	switch ($company) 
 	{
+		/*
 		case 'sancus':
 				Session::put('db','admin_sancus');
 				Session::put('company','sancus');
@@ -77,6 +93,20 @@ Route::get('empresa/{company}',function($company)
 
 				return Redirect::to('login');
 				break;
+		*/
+		case 'tala':
+				Session::put('db','admin_contenidos-tala');
+				Session::put('company','tala');
+
+				return Redirect::to('login');
+				break;
+		case 'app':
+				Session::put('db','admin_contenidos-app');
+				Session::put('company','app');
+
+				return Redirect::to('login');
+				break;
+		
 		
 		default:
 				Session::put('db','admin_stock');
@@ -129,6 +159,7 @@ Route::group(array('before'=>'switchDB'),function()
 				require(__DIR__ . '/routes/sales.php');
 				require(__DIR__ . '/routes/caja.php');
 				require(__DIR__ . '/routes/brands.php');
+				require(__DIR__ . '/routes/staff.php');
 
 				//config 
 				require(__DIR__ . '/routes/config/users.php');
@@ -286,7 +317,7 @@ Route::group(array('before'=>'switchDB'),function()
 	
 		// update database
 
-	Route::get('create',function()
+		Route::get('create',function()
 		{
 			DBupdate::create();
 				

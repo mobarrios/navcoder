@@ -2,14 +2,11 @@
 	<table class="table table-hover table-striped">
 		<thead>
 			<tr>
-				<th>Cuit</th>
-				<th>Nombre/Sigla</th>
+				<th width="10%"></th>
+				<th>Nombre </th>
 				<th>Ubicación</th>
-				<th>cp</th>
-				<th>Tel/Fax</th>
-				<th>Mail</th>
-				<th>Cond.</th>
 				<th>Obs.</th>	
+				<th>Estado</th>	
 				<th></th>
 			</tr>
 		</thead>
@@ -17,23 +14,33 @@
 			
 				@foreach($model  as $models)
 				<tr>
-					<td>{{$models->cuit}}</td>
+					<td>						
+							@if(!is_null($models->image) && $models->image != "")
+								<a href="{{ $models->image }}" target="_blank" class="thumbnail">
+									<img src="{{ $models->image }}" width="100%">	
+								</a>
+							@else
+								<a href="no_image.png" target="_blank">
+									<img src="no_image.png" width="100%">	
+								</a>
+							@endif						
+					</td>
 					<td>{{$models->name}}</td>
-					<td>{{$models->address}} {{$models->city}}  {{$models->province}} </td>
-					<td>{{$models->zip_code}}</td>
-					<td>{{$models->telephone}} / {{$models->fax}}</td>
-					<td>{{$models->email}}</td>
-					<td>{{$models->iva_conditions}}</td>
+					<td>{{$models->place}}</td>
 					<td>{{$models->observations}}</td>
+					<td>{{$models->status}}</td>
 					
 					<td>
 						<div class="btn-group btn-group-xs">
-						@if(Roles::validate($modules_id,'edit'))
-							<a href="{{route($ruta.'_edit_form',$models->id)}}" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-edit"></i></a>
-						@endif
-						@if(Roles::validate($modules_id,'delete'))
-							<a href="{{route($ruta.'_delete',$models->id)}}"type="button" class="del_confirm btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i></a>
-						@endif
+						
+								@if(Roles::validate($modules_id,'edit'))
+									<a href="{{route($ruta.'_edit_form',$models->id)}}" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a>
+								@endif
+
+								@if(Roles::validate($modules_id,'delete'))
+									<a href="{{route($ruta.'_delete',$models->id)}}" type="button" class="del_confirm btn btn-danger"><i class="fa fa-remove"></i></a>
+								@endif
+							
 						</div>
 					</td>
 				</tr>

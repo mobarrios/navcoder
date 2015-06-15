@@ -23,7 +23,7 @@
 <div class="container">
 
 	<div class="row">
-
+		<div class="col-xs-9">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -31,30 +31,64 @@
 						<th></th>
 						<th></th>
 						<th></th>
-						<th></th>
-						<th></th>
+
+
 					</tr>
 				</thead>
 				<tbody>
 
-					@foreach($availables as $available)
-						@if($types == $available->Types->name || $available->quantity != 0)
-						<tr>
-							<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-								<a href="booking/habitacion.jpg" class="thumbnail">
-									<img src="booking/habitacion.jpg" alt="" width="200px">  
-								</a>
-							</td>
-							<td>disponibles : {{$available->quantity}}</td>
-							<td>{{$available->Types->name}}</td>
-							<td>{{$available->currency}} {{$available->price}}</td>
-							<th><a href="api/reservation_form/{{$available->id}}" class="btn btn-xs btn-success">Reservar</a></th>
-						</tr>
-						@endif
-					@endforeach
+					<tr>
+						<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+							<a href="booking/habitacion.jpg" class="thumbnail">
+								<img src="booking/habitacion.jpg" alt="" width="200px">  
+							</a>
+						</td>
+						<td>{{$availables->Types->name}}</td>
+						<td>{{$availables->currency}} {{$availables->price}}</td>
+						<td><a href="api/reservation_form/{{$availables->id}}" class="btn btn-xs btn-success">Reservar</a></td>
+					</tr>			
 				</tbody>
 			</table>
+		</div>
+
+		{{--
+		<div class="col-xs-3">
+		
+			<div class="panel panel-primary">
+				  <div class="panel-heading">
+						<h4 class="panel-title">Extras Services</h4>
+				  </div>
+				  <div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th><input type="checkbox"></th>
+									<td>Transfer in/out</td>
+									<td>$200</td>
+								</tr>
+								<tr>
+									<th><input type="checkbox"></th>
+									<td>City Tour</td>
+									<td>$500</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				  </div>
+			</div>
+			--}}
+
+		</div>
 	</div>
+
 
 </div>
 		<!-- jQuery -->

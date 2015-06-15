@@ -20,6 +20,7 @@
 	{
 		Route::get('obrassociales_nuevo', 				array('as' => 'obras_new_form', 	'uses'  => 'ObrasController@formModal'));
 		Route::post('obrassociales_nuevo', 				array('as' => 'obras_post_new', 	'uses' 	=> 'ObrasController@postNew'));
+
 	});
 
 	

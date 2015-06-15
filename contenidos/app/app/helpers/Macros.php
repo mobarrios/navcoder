@@ -21,9 +21,19 @@
         });
 
 
-    Form::macro('caja_type',function($name,$label)
+    Form::macro('obras_status',function($name,$label)
     {
-             $method = array('0' => 'Ninguno', '1'=>'Gastos Varios','2'=>'Ingresos Varios','3'=>'Retiro de Caja','4'=>'Gastos Fijos');
+             $method = array('Ninguno' => 'Ninguno', 'Iniciado'=>'Iniciado','Finalizado'=>'Finalizado','En Contrucción'=>'En Construcción');
+
+             $input = Form::select($name, $method, null , array('class'=>'form-control')); 
+
+             return buildInput($input, $label);
+
+    });
+
+     Form::macro('caja_type',function($name,$label)
+    {
+             $method = array('0' => 'Ninguno', '1'=>'Efectivo','2'=>'Tarjeta de Credito','3'=>'Desposito','4'=>'Transferencia','5'=>'Cheque');
 
              $input = Form::select($name, $method, null , array('class'=>'form-control')); 
 
@@ -106,7 +116,7 @@
      });
     
 
-    Form::macro('edit', function($name)
+    Form::macro('edit', function($name, $label)
         {
             $value = Form::getValueAttribute($name);
             return '<div class="form-control">

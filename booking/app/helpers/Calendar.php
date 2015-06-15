@@ -3,6 +3,25 @@
 class Calendar
 {
 
+	public static function days_array($startTime = null, $endTime = null)
+	{
+	    $day 		= 86400;
+	    $format 	= 'Y-m-d';
+	    $startTime 	= strtotime($startTime);
+	    $endTime 	= strtotime($endTime);
+	    //$numDays 	= round(($endTime - $startTime) / $day) + 1;
+	    $numDays 	= round(($endTime - $startTime) / $day); // remove increment 
+
+	    $days 		= array();
+
+		    for ($i = 0; $i <= $numDays; $i++) 
+		    { //change $i to 1
+		    	$days[] = date($format, ($startTime + ($i * $day)));
+		    }
+
+	    return $days;
+	}
+
 	public static function draw_calendar($month,$year){
 
 		/* draw table */

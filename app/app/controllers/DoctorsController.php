@@ -16,6 +16,26 @@ class DoctorsController extends BaseController
 
 		$this->search_by = array('name','last_name','dni','license');
 	}
+
+	public function postNew()
+	{
+		$plan  = Input::get('planes_id');
+		$input = Input::except('planes_id');
+
+
+		$doctor = new Doctors();
+		$doctor = $doctor::create($input);
+
+		foreach($plan as $p => $k)
+		{
+			$doctors_planes 							= new DoctorsObrasSocialesPlanes();
+			$doctors_planes->doctors_id  				= $doctor->id;
+			$doctors_planes->obras_sociales_planes_id 	= $p;
+			$doctors_planes->save();
+		}
+		
+		return Redirect::back();
+	}		
 }
 
 ?>

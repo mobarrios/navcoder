@@ -1,7 +1,7 @@
 
 <?php 
 	
-	$month = 10;
+	$month = 5;
 	$year  = 2015;
 
 	$dias = array('Do','Lu','Ma','Mi','Ju','Vi','Sa');
@@ -50,18 +50,22 @@
 		</thead>
 		<tbody>
 
-			@foreach(Rooms::OrderBy('types_id','ASC')->get() as $room) 
+			@foreach(Types::OrderBy('name','ASC')->get() as $type) 
 				<tr>
-					<td><strong>{{$room->name}}</strong> {{$room->Types->name}}</td>
-
+					<td><strong>{{$type->name}}</strong> </td>
 					@foreach(Calendar::draw_calendar($month,$year) as $num => $day) 
-						
-						@if($room->AvailablesDay($year, $month , $num , $room->id))
-							<th style="background-color: #D9831F" class="day" id="{{$room->id}}-{{$day}}{{$month}}{{$year}}"></th>
-						@else 
-							<th class="day" id="{{$room->id}}-{{$day}}{{$month}}{{$year}}"></th>
+						<?php  
+							$av  = Availables::where('from','=',$year.'-'.$month.'-'.$num)->where('types_id','=',$type->id)->first() 
+						?>
+						@if($av )
+							@if($av->quantity != 0)
+								<th style="background-color: #D9831F" class="day" id="{{$av->id}}-{{$day}}{{$month}}{{$year}}" title="{{$av->currency}} {{$av->price}}">{{$av->quantity}}</th>
+							@else
+								<th style="background-color: #469408" class="day" id="{{$type->id}}-{{$day}}{{$month}}{{$year}}"></th>
+							@endif
+						@else
+							<th class="day" id="{{$type->id}}-{{$day}}{{$month}}{{$year}}"></th>
 						@endif
-
 					@endforeach		
 				</tr>
 			@endforeach			
@@ -72,6 +76,7 @@
 
 </div>
 	<div class="label label-danger" >Disponible Web</div>
+	<div class="label label-success" >Reservado Web</div>
 
 
 

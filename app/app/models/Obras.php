@@ -11,5 +11,10 @@ class Obras extends Eloquent
 
 	protected $table 	= 'obras_sociales';
 	protected $guarded 	= array('');
+
+	public function Planes()
+	{
+		return $this->hasMany('Planes','obras_sociales_id');
+	}
 }
 ?>

@@ -11,50 +11,6 @@
 |I
 */
 
-Route::get('excel/{a}/{b}/{c}',function($a = null , $b = null, $c = null)
-{
-		$arr = Excel::load('public/lista.xls')->get();
-
-		foreach($arr as $ar => $val)
-		{
-			  echo "codigo : ".$val[$a] ." Precio : ". $val[$b]." publico :".$val[$c]." <br>";
-
-		}
-
-		/*
-		Excel::create('Filename', function($excel) {
-
-		$excel->sheet('Sheetname', function($sheet) {
-
-		$sheet->fromArray(array(
-		    array('data1', 'data2'),
-		    array('data3', 'data4')
-		));
-
-		});
-
-		})->export('xls');
-		*/
-
-
-});
-
-Route::get('image', function()
-{
-    $img = Image::make('assets/images/logo_aclv.png');
-
-    return $img->response('jpg');
-});
-
-
-Route::get('barcode',function(){
-
-echo DNS1D::getBarcodeHTML("444511111111", "EAN13");
-echo DNS2D::getBarcodeHTML("alejandro", "QRCODE");
-
-return ;
-});
-
 /// WEB SERVICE API REST FULL
 Route::group(array('prefix' => 'api/v1'), function()
 {
@@ -157,6 +113,8 @@ Route::group(array('before'=>'switchDB'),function()
 				require(__DIR__ . '/routes/sales.php');
 				require(__DIR__ . '/routes/caja.php');
 				require(__DIR__ . '/routes/brands.php');
+				require(__DIR__ . '/routes/planes.php');
+				require(__DIR__ . '/routes/rentals.php');
 
 				//config 
 				require(__DIR__ . '/routes/config/users.php');
@@ -262,11 +220,33 @@ Route::group(array('before'=>'switchDB'),function()
 				return Response::json($res);
 		});
 
+		Route::post('doctor_search',function()
+		{
+				$data = Input::get('search');
+
+				$resp = Doctors::where('name','like','%'.$data.'%')
+						->orWhere('last_name','like','%'.$data.'%')
+						->orWhere('dni','like','%'.$data.'%')
+						->get();
+
+				$res  = array();
+
+				foreach($resp as $r)
+				{
+					//array_push($res, $r->last_name.' , '.$r->name );
+					$res[] = array('id' => $r->id , 'label' => $r->name .' '.$r->last_name);
+					//$res[] = array('id'=>$r->id, 'name'=>$r->company_name );
+				}
+
+				return Response::json($res);
+		});
+
 
 		Route::post('item_search',function()
 		{
 				$data 			= Input::get('search');
 				$purchase 		= Input::get('purchase');
+				$rentals 		= Input::get('rentals');
 				$providers_id 	= Input::get('providers_id');
 
 				$resp 		= Items::where('code','like','%'.$data.'%')
@@ -296,6 +276,14 @@ Route::group(array('before'=>'switchDB'),function()
 										'label' => $r->name .'$ ' . $cost , 
 										'value' => $r->name ,
 										'cost_price' => $cost
+									);
+					}
+					elseif($rentals)
+					{
+						$res[] = array(	'id' => $r->id , 
+										'label' => $r->name .'$ ' . $r->rent_price_15_days , 
+										'value' => $r->name ,
+										'rental_price' => $r->rent_price_15_days
 									);
 					}
 					else
@@ -332,5 +320,50 @@ Route::group(array('before'=>'switchDB'),function()
 
 	});
 
+
+
+Route::get('excel/{a}/{b}/{c}',function($a = null , $b = null, $c = null)
+{
+		$arr = Excel::load('public/lista.xls')->get();
+
+		foreach($arr as $ar => $val)
+		{
+			  echo "codigo : ".$val[$a] ." Precio : ". $val[$b]." publico :".$val[$c]." <br>";
+
+		}
+
+		/*
+		Excel::create('Filename', function($excel) {
+
+		$excel->sheet('Sheetname', function($sheet) {
+
+		$sheet->fromArray(array(
+		    array('data1', 'data2'),
+		    array('data3', 'data4')
+		));
+
+		});
+
+		})->export('xls');
+		*/
+
+
+});
+
+Route::get('image', function()
+{
+    $img = Image::make('assets/images/logo_aclv.png');
+
+    return $img->response('jpg');
+});
+
+
+Route::get('barcode',function(){
+
+echo DNS1D::getBarcodeHTML("444511111111", "EAN13");
+echo DNS2D::getBarcodeHTML("alejandro", "QRCODE");
+
+return ;
+});
 
 

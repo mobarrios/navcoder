@@ -17,7 +17,37 @@ class AvailablesController extends BaseController
 		$this->search_by =  array('form','to');
 	}
 
+
+
+	public function postNew()
+	{
+		
+		$days  = Calendar::days_array(Input::get('from'),Input::get('to'));
+
+
+		foreach($days as $day )
+		{
+			$date = date('d-m-Y',strtotime($day));
+
+			$av 			= new Availables();
+			$av->from 		= $date;
+			$av->types_id 	= Input::get('types_id');
+			$av->quantity 	= Input::get('quantity');
+			$av->currency 	= Input::get('currency');
+			$av->price 		= Input::get('price');
+			$av->save();
+
+		}
+
+		return;
+
+	}
+
+
 	
+
+	/// Avalables HAB x HAB
+	/*
 	public function postNew()
 	{
 		$input = Input::all();
@@ -72,9 +102,9 @@ class AvailablesController extends BaseController
 
 
 		return Redirect::back()->withErrors(array('success'=>'Disponibilidad Cargada Correctamente'));
-}
+	}
 
-		
+		*/
 
 }
 

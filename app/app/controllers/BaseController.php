@@ -33,9 +33,7 @@ class BaseController extends Controller {
 			}
 			
 			$mod  = $mod->paginate('10');
-		
-
-
+	
 			$this->data['model'] = $mod;
 			
 		}
@@ -120,6 +118,7 @@ class BaseController extends Controller {
 	//post edit
 	public function postEdit($id = null)
 	{	
+	
 		$model = $this->data['model'];
 	 	$model = $model::find($id);
 	 	$input = Input::all();

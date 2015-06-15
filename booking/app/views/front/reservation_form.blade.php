@@ -29,12 +29,34 @@
 	<div class="panel-heading">Reservation Data</div>
 		<div class="panel-body">
 
-		<strong>Llegada : </strong> {{Session::get('from')}} <br>
-		<strong>Salida : </strong> {{Session::get('to')}} <br> 
+		<table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Habitación</td>
+					<td>{{$id->Types->name}}</td>
+				</tr>
+				<tr>
+					<td>Llegada</td>
+					<td>{{Session::get('from')}}</td>
+				</tr>
+				<tr>
+					<td>Salida</td>
+					<td>{{Session::get('to')}}</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td>{{$id->currency}} {{Session::get('total_days') * $id->price }} </td>
+				</tr>
+			</tbody>
+		</table>
 
-		<strong>Habitación : </strong> {{$id->Types->name}} <br> 
 
-		<strong>Total : </strong> {{$id->currency}} {{Session::get('total_days') * $id->price }} <br> 
 		
 		</div>
 	</div>
@@ -44,42 +66,54 @@
 
 	<div class="row">
 
-		<form action="" method="POST" role="form">
-		<legend>Resevation Form</legend>
+		<form action="{{route('post_process_reservation')}}" method="POST" role="form">
+		
+		<input type="hidden" name="from" value="{{Session::get('from')}}">
+		<input type="hidden" name="to" value="{{Session::get('to')}}">
+		<input type="hidden" name="types_id" value="{{$id->Types->id}}">
+		<input type="hidden" name="currency" value="{{$id->currency}}">
+		<input type="hidden" name="total" value="{{Session::get('total_days') * $id->price }}">
+
+
+
 		<div class="form-group">
 			<label for="">Apellido</label>
-			<input type="text" class="form-control" id="" placeholder="Input field">
+			<input name="last_name" type="text" class="form-control" id="" placeholder="Input field">
 			<label for="">Nombre</label>
-			<input type="text" class="form-control" id="" placeholder="Input field">
+			<input name="name" type="text" class="form-control" id="" placeholder="Input field">
 			<label for="">Tel.</label>
-			<input type="text" class="form-control" id="" placeholder="Input field">
+			<input name="phone"  type="text" class="form-control" id="" placeholder="Input field">
 			<label for="">e-Mail</label>
-			<input type="text" class="form-control" id="" placeholder="Input field">
+			<input name="mail" type="text" class="form-control" id="" placeholder="Input field">
+			<label for="">Cant. Pax</label>
+				<select name="pax_quantity" id="input" class="form-control" required="required">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
 
 			<hr>
 			<h3>Garantía</h3>
 			<label for="">Tarjeta de Crédito</label>i
-			<select name="" id="input" class="form-control" required="required">
-				<option value="">Visa</option>
-				<option value="">Amex</option>
-				<option value="">Master Card</option>
-				<option value="">Diners</option>
+			<select name="cc" id="input" class="form-control" required="required">
+				<option value="1">Visa</option>
+				<option value="2">Amex</option>
+				<option value="3">Master Card</option>
+				<option value="4">Diners</option>
 			</select>
 			<label for="">Número</label>
-			<input type="text" class="form-control" id="" placeholder="Input field">
+			<input name="cc_number" type="text" class="form-control" id="" placeholder="Input field">
 			<label for="">Cod. Seg.</label>
-			<input type="text" class="form-control" id="" placeholder="Input field">
+			<input name="cc_code" type="text" class="form-control" id="" placeholder="Input field">
 			<label for="">Vto.</label>
-			<input type="text" class="form-control" id="" placeholder="Input field">
+			<input name="cc_vto" type="text" class="form-control" id="" placeholder="Input field">
 		</div>
 
-
-
-		<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	
-
-		
 	</div>
 
 </div>

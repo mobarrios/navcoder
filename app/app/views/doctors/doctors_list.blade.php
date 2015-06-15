@@ -5,10 +5,9 @@
 				<th>DNI</th>
 				<th>Nombre</th>
 				<th>Apellido</th>
-				<th>Mail</th>
-				<th>Tel.</th>
-				<th>Cel.</th>
-				<th>Matricula</th>
+				<th>Contactos</th>
+				<th>Matriculas</th>
+				<th>Obra Social ( Plan )</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -19,20 +18,38 @@
 					<td>{{$models->dni}}</td>
 					<td>{{$models->name}}</td>
 					<td>{{$models->last_name}}</td>
-					<td>{{$models->email}}</td>
-					<td>{{$models->phone}}</td>
-					<td>{{$models->cell_phone}}</td>
-					<td>{{$models->license}}</td>
+					<td>
+					@. : {{$models->email}} <br>
+					Te. :{{$models->phone}} <br>
+					cel. :{{$models->cell_phone}}
+					</td>
+					<td> 
+					Nac : {{$models->matricula_nacional}}<br>
+					Prov : {{$models->matricula_provincial}}
+					</td>
+
+					<td>
+						<ul>
+	
+							@foreach($models->DoctorPlanes as $p)
+								 <li>{{$p->Obras->name}}
+								({{$p->name}})</li>
+							@endforeach 
+						
+						
+						</ul>
+					</td>
 					<td>
 						<div class="btn-group btn-group-xs">
 						@if(Roles::validate($modules_id,'edit'))
-							<a href="{{route($ruta.'_edit_form',$models->id)}}" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-edit"></i></a>
+							<a href="{{route($ruta.'_edit_form',$models->id)}}" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a>
 						@endif
 						@if(Roles::validate($modules_id,'delete'))
-							<a href="{{route($ruta.'_delete',$models->id)}}"type="button" class="del_confirm btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i></a>
+							<a href="{{route($ruta.'_delete',$models->id)}}"type="button" class="del_confirm btn btn-danger"><i class="fa fa-remove"></i></a>
 						@endif
 						</div>
 					</td>
+
 				</tr>
 				@endforeach
 

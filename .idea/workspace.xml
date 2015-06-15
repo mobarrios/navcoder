@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a72843ce-8f02-42a6-87c8-9fd9c4aedd39" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking/app/controllers/AvailablesController.php" afterPath="$PROJECT_DIR$/booking/app/controllers/AvailablesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/controllers/BaseController.php" afterPath="$PROJECT_DIR$/app/app/controllers/BaseController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking/app/helpers/Calendar.php" afterPath="$PROJECT_DIR$/booking/app/helpers/Calendar.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/controllers/ClientsController.php" afterPath="$PROJECT_DIR$/app/app/controllers/ClientsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contenidos/app/app/helpers/DBupdate.php" afterPath="$PROJECT_DIR$/contenidos/app/app/helpers/DBupdate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/models/Doctors.php" afterPath="$PROJECT_DIR$/app/app/models/Doctors.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/controllers/DoctorsController.php" afterPath="$PROJECT_DIR$/app/app/controllers/DoctorsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/controllers/ItemsController.php" afterPath="$PROJECT_DIR$/app/app/controllers/ItemsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contenidos/app/app/helpers/Macros.php" afterPath="$PROJECT_DIR$/contenidos/app/app/helpers/Macros.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/models/Obras.php" afterPath="$PROJECT_DIR$/app/app/models/Obras.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contenidos/app/app/controllers/ObrasController.php" afterPath="$PROJECT_DIR$/contenidos/app/app/controllers/ObrasController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking/app/models/Reservations.php" afterPath="$PROJECT_DIR$/booking/app/models/Reservations.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking/app/controllers/ReservationsController.php" afterPath="$PROJECT_DIR$/booking/app/controllers/ReservationsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/controllers/SalesController.php" afterPath="$PROJECT_DIR$/app/app/controllers/SalesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking/app/models/Types.php" afterPath="$PROJECT_DIR$/booking/app/models/Types.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking/app/views/availables/availables_list.blade.php" afterPath="$PROJECT_DIR$/booking/app/views/availables/availables_list.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking.html" afterPath="$PROJECT_DIR$/booking.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contenidos/app/app/config/database.php" afterPath="$PROJECT_DIR$/contenidos/app/app/config/database.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contenidos/app/app/config/nav/database.php" afterPath="$PROJECT_DIR$/contenidos/app/app/config/nav/database.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/views/doctors/doctors_form.blade.php" afterPath="$PROJECT_DIR$/app/app/views/doctors/doctors_form.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/views/doctors/doctors_list.blade.php" afterPath="$PROJECT_DIR$/app/app/views/doctors/doctors_list.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/routes/obras.php" afterPath="$PROJECT_DIR$/app/app/routes/obras.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contenidos/app/app/routes/obras.php" afterPath="$PROJECT_DIR$/contenidos/app/app/routes/obras.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/views/obras/obras_form.blade.php" afterPath="$PROJECT_DIR$/app/app/views/obras/obras_form.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contenidos/app/app/views/obras/obras_form.blade.php" afterPath="$PROJECT_DIR$/contenidos/app/app/views/obras/obras_form.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/views/obras/obras_list.blade.php" afterPath="$PROJECT_DIR$/app/app/views/obras/obras_list.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contenidos/app/app/views/obras/obras_list.blade.php" afterPath="$PROJECT_DIR$/contenidos/app/app/views/obras/obras_list.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/views/remito/remito_sale.blade.php" afterPath="$PROJECT_DIR$/app/app/views/remito/remito_sale.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking/app/views/front/reservation_form.blade.php" afterPath="$PROJECT_DIR$/booking/app/views/front/reservation_form.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking/app/views/reservations/reservations_list.blade.php" afterPath="$PROJECT_DIR$/booking/app/views/reservations/reservations_list.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/routes.php" afterPath="$PROJECT_DIR$/app/app/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking/app/routes.php" afterPath="$PROJECT_DIR$/booking/app/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contenidos/app/app/routes.php" afterPath="$PROJECT_DIR$/contenidos/app/app/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app/routes/sales.php" afterPath="$PROJECT_DIR$/app/app/routes/sales.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/booking/app/views/front/search_result.blade.php" afterPath="$PROJECT_DIR$/booking/app/views/front/search_result.blade.php" />
+    </list>
+    <ignored path="navcoder.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="navcoder" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/booking/app/routes.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="navcoder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="navcoder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="navcoder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="100" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="116" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="120" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="914" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="111" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="113" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="116" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="910" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a72843ce-8f02-42a6-87c8-9fd9c4aedd39" name="Default" comment="" />
+      <created>1433370034740</created>
+      <option name="number" value="Default" />
+      <updated>1433370034740</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32934928" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/booking/app/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5835">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking/app/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="5970">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

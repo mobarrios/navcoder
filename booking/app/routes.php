@@ -32,12 +32,19 @@ Route::group(array('prefix' => 'api'), function()
 {
 	Route::get('search/types',function()
 	{
+
+		Config::set('database.connections.mysql.database','admin_booking_loshelechos');
+		DB::setDefaultConnection('mysql');
+
+
  		 header('Access-Control-Allow-Origin: *');	
 
  		 $types = Types::all();
  	
 		 return Response::json($types);
 	});
+
+	Route::post('process',array('as'=>'post_process_reservation', 'uses'=>'FrontReservationController@process'));
 
 	Route::get('reservation_form/{id}',function($id){
 
@@ -53,8 +60,14 @@ Route::group(array('prefix' => 'api'), function()
 		return View::make('front.reservation_form')->with($data);
 	});
 
-	Route::post('search/availables',function()
+	Route::post('search/availables/{company}',function($company = null)
 	{		
+
+		
+		Config::set('database.connections.mysql.database','admin_booking_loshelechos');
+		DB::setDefaultConnection('mysql');
+
+		
  		header('Access-Control-Allow-Origin: *');	
 
  		$from 	= Input::get('from');
@@ -68,11 +81,48 @@ Route::group(array('prefix' => 'api'), function()
  		//$data['rooms'] 	= Rooms::where('types_id','=',$type)->get();
  		$data['types']			= $type;
 
- 		$data['availables'] 	= Availables::where('from','<=',date("Y-m-d",strtotime($from)))->where('to','>=',date("Y-m-d",strtotime($to)))->get();
+ 		$dispo = array();
 
- 		//$a = Availables::join('rooms','availables.rooms_id','=',1)->get();
+ 		foreach (Calendar::days_array($from, $to) as $key ) 
+ 		{ 
+ 			$av  = Availables::where('from','=',$key)->where('types_id','=',$type)->where('quantity','!=',0)->first() ;
+
+			if($av)
+			{
+				//array_push($dispo, array($key => true));
+				$dispo = true;	
+				$data['availables']  = $av;
+
+		//		echo $key . "si";		
+			
+			}
+			else
+			{
+				//array_push($dispo, array($key => false));
+				$dispo = false;
+				echo $key . "no";
+				return " sin dispo";	
+
+			}
+ 		}
 
 
+ 		/*return;
+
+ 		$data['dispo'] 		= $dispo;
+
+ 		echo $dispo;
+ 		return ;
+
+ 		if($dispo != false)
+ 		{
+ 			$data['availables'] = Availables::where('types_id','=',$type)
+ 									->where('from','<=',date("Y-m-d",strtotime($from)))
+ 									->get();
+ 		}
+ 		*/
+
+ 	
  		return View::make('front.search_result')->with($data);
  	
 
@@ -81,12 +131,13 @@ Route::group(array('prefix' => 'api'), function()
 });
 
 
-/*
+
 Route::get('empresa/{company}',function($company)
 {
 
 	switch ($company) 
 	{
+		/*
 		case 'sancus':
 				Session::put('db','admin_sancus');
 				Session::put('company','sancus');
@@ -107,6 +158,14 @@ Route::get('empresa/{company}',function($company)
 
 				return Redirect::to('login');
 				break;
+		*/
+
+		case 'loshelechos':
+				Session::put('db','admin_booking_loshelechos');
+				Session::put('company','aclv');
+
+				return Redirect::to('login');
+				break;
 		
 		default:
 				Session::put('db','admin_stock');
@@ -116,12 +175,12 @@ Route::get('empresa/{company}',function($company)
 				break;
 	}
 });
-*/
+
 
 Route::get('login',function()
 {
-	Session::put('db','admin_booking');
-	Session::put('company','booking');
+	//Session::put('db','admin_booking');
+	//Session::put('company','booking');
 
 	return View::make('login');
 });
@@ -132,9 +191,10 @@ Route::get('login',function()
 Route::group(array('before'=>'switchDB'),function()
 {
 
-			Route::get('table',function(){
+		Route::get('table',function()
+		{
 			return View::make('table');
-			});
+		});
 
 
 		//postea el login 

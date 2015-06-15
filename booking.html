@@ -1,64 +1,36 @@
-<!DOCTYPE html>
-<html lang="">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- Bootstrap CSS -->
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-
-  		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	</head>
-	<body>
 
-<div class="content">
 
-	<div class="row">
-	<div class="col-xs-12">
-		<form action="booking/public/api/search/availables" method="POST" role="form">	
-		<div class="col-xs-2 form-group">
 
-				<label for="">Desde</label>
-				<input name="from" type="text" class="form-control" id="date_from" placeholder="Input field">
 
-		</div>
-		<div class="col-xs-2 form-group">
+			<h4>Disponibilidad On-Line</h4>
+			<hr>
 
-				<label for="">Hasta</label>
-				<input name="to" type="text" class="form-control" id="date_to" placeholder="Input field">
+		<form action="booking/public/api/search/availables/ht001" method="POST" role="form">	
+		
+					<input name="from" type="text" class="date" id="date_from" placeholder="Entrada">
 
-		</div>
-		<div class="col-xs-2 form-group">
-			<label for="">Tipo de Habitacion</label>
-			<select id="type" name="type" id="input" class="form-control" required="required">
-				<option value="">Seleccionar</option>
-			</select>
-		</div>
 
-		<div class="col-xs-12">
-			<button type="submit" id="search" class="btn btn-primary">Buscar</button>
-		</div>
+					<input name="to" type="text" class="date" id="date_to" placeholder="Salida">
 
+		
+					<select id="type" name="type" id="input"required="required">
+						<option value="">Tipo de Habitacion</option>
+					</select>
+				</div>
+			<button type="submit" id="search" >Buscar</button>
+		
 		</form>
-		</div>
-	</div>
 
-</div>
+
+	
 		<!-- jQuery -->
 	  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   
-		<!-- Bootstrap JavaScript -->
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+	
 		<script>
 
 		/*
@@ -85,7 +57,7 @@
 		});
 		*/
 
-
+ 			
 			// completa select de tipos
 			$.ajax({
 			
@@ -95,7 +67,7 @@
 
 						$.each(datas, function(i, item) 
 						{
-								$('#type').append('<option>'+item['name']+'</option>');
+								$('#type').append('<option value='+item['id']+'>'+item['name']+'</option>');
 						});
 			});
 
